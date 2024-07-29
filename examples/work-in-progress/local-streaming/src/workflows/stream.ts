@@ -8,7 +8,7 @@ interface Input {
 
 export async function stream({ name, streamUpdate }: Input) {
   await step<typeof functions>({
-    tool: `openai`,
+    podName: `openai`,
     scheduleToCloseTimeout: "1 minute",
   }).stream({ name, streamUpdate });
 }

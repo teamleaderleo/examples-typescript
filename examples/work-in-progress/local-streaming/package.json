@@ -6,6 +6,7 @@
   "scripts": {
     "start.watch": "nodemon src/index.ts",
     "dev": "pnpm start.watch",
+    "workflow": "ts-node ./scheduleWorkflow.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "nodemonConfig": {

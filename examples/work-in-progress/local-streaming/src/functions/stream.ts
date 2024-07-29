@@ -1,5 +1,5 @@
 import { FunctionFailure, log } from "restack-sdk-ts-local/function";
-import { openaiClient } from "../tools/openai/client";
+import { openaiClient } from "./openai/client";
 
 export async function stream({
   name,

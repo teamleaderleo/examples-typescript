@@ -11,16 +11,14 @@ async function main() {
   }
 
   try {
-    // start all your tools
-
     const restack = new Restack();
 
     await Promise.all([
-      restack.tool({
+      restack.pod({
         name: "restack",
         workflowsPath,
       }),
-      restack.tool({
+      restack.pod({
         name: "openai",
         functions: { stream },
         streaming: true,
@@ -31,9 +29,9 @@ async function main() {
       }),
     ]);
 
-    console.log("Tools started successfully.");
+    console.log("Started successfully.");
   } catch (e) {
-    console.error("Failed to start tools:", e);
+    console.error("Failed to start:", e);
   }
 }
 

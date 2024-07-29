@@ -11,30 +11,29 @@ async function main() {
   }
 
   try {
-    // start all your tools
-
     const restack = new Restack();
 
     await Promise.all([
-      restack.tool({
+      restack.pod({
         name: "restack",
         workflowsPath,
         functions: { goodbye },
       }),
-      restack.tool({
+
+      // Create a separate pod for all openAI functions and rate limit them
+
+      restack.pod({
         name: "openai",
         functions: { greet },
-        streaming: true,
-
         // rate limit allows you to control the number of requests per second for all your function associated to this tool
 
         rateLimit: calculateRpmToSecond(5000),
       }),
     ]);
 
-    console.log("Tools started successfully.");
+    console.log("Pods running successfully.");
   } catch (e) {
-    console.error("Failed to start tools:", e);
+    console.error("Failed to run pod", e);
   }
 }
 

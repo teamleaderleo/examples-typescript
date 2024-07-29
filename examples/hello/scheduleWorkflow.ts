@@ -1,10 +1,10 @@
 import Restack from "@restackio/restack-sdk-ts";
 
-async function triggerExampleWorkflow() {
+async function scheduleWorkflow() {
   try {
     const restack = new Restack();
 
-    const handle = await restack.start({
+    const handle = await restack.schedule({
       workflowName: "example",
       workflowId: `${Date.now()}-exampleWorkflow`,
       input: [
@@ -14,7 +14,7 @@ async function triggerExampleWorkflow() {
       ],
     });
 
-    console.log("Workflow started successfully:", handle.firstExecutionRunId);
+    console.log("Workflow scheduled successfully:", handle.firstExecutionRunId);
 
     handle.result().then((result) => {
       console.log("Workflow result:", result);
@@ -22,10 +22,9 @@ async function triggerExampleWorkflow() {
 
     process.exit(0); // Exit the process successfully
   } catch (error) {
-    console.error("Error starting workflow:", error);
+    console.error("Error scheduling workflow:", error);
     process.exit(1); // Exit the process with an error code
   }
 }
 
-// Trigger the workflow
-triggerExampleWorkflow();
+scheduleWorkflow();

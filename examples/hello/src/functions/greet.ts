@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { UsageOutput, openaiChat } from "../tools/openai/chat";
+import { UsageOutput, openaiChat } from "./openai/chat";
 
 const zodSchema = z.object({
   message: z.string().describe("The greeting message."),
