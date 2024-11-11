@@ -24,6 +24,17 @@ const main = async () => {
     name: "services",
     dockerFilePath: "examples/get-started/Dockerfile",
     dockerBuildContext: "examples/get-started",
+    // Target will always be 443
+    ports: [
+      {
+        source: 8080,
+        path: "/page1",
+      },
+      {
+        source: 8081,
+        path: "/page2",
+      },
+    ],
     environmentVariables: [
       {
         name: "OPENAI_API_KEY",
