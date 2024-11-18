@@ -21,19 +21,15 @@ const main = async () => {
   ];
 
   const servicesApp = {
-    name: "services",
+    name: "services-now",
     dockerFilePath: "examples/get-started/Dockerfile",
     dockerBuildContext: "examples/get-started",
-    // Target will always be 443
-    ports: [
+    portMapping: [
       {
-        source: 8080,
-        path: "/page1",
-      },
-      {
-        source: 8081,
-        path: "/page2",
-      },
+        name: "backend",
+        port: 8080,
+        path: "/",
+      }
     ],
     environmentVariables: [
       {

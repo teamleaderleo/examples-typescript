@@ -1,28 +1,27 @@
-# Use the official nginx image
-FROM nginx:alpine
+# Use Node.js base image for WebSocket server
+FROM node:18-alpine
 
-# Create two demo pages
-RUN echo "<h1>Demo Page 1</h1>" > /usr/share/nginx/html/index1.html && \
-    echo "<h1>Demo Page 2</h1>" > /usr/share/nginx/html/index2.html
+# Create app directory
+WORKDIR /app
 
-# Configure nginx to serve pages on different ports
-RUN echo 'server { \
-            listen 8080; \
-            location / { \
-                root /usr/share/nginx/html; \
-                index index1.html; \
-            } \
-        } \
-        server { \
-            listen 8081; \
-            location / { \
-                root /usr/share/nginx/html; \
-                index index2.html; \
-            } \
-        }' > /etc/nginx/conf.d/default.conf
+# Install dependencies
+RUN npm init -y && \
+    npm install ws
 
-# Expose both ports
-EXPOSE 8080 8081
+# Create WebSocket server file
+RUN echo 'const WebSocket = require("ws"); \
+    const wss = new WebSocket.Server({ port: 8080 }); \
+    console.log("WebSocket server running on port 8080"); \
+    wss.on("connection", ws => { \
+        console.log("Client connected"); \
+        ws.on("message", msg => { \
+            console.log("Received:", msg.toString()); \
+            ws.send("Server received: " + msg); \
+        }); \
+    });' > server.js
 
-# Start nginx in foreground
-CMD ["nginx", "-g", "daemon off;"]
+# Expose port for WebSocket server
+EXPOSE 8080
+
+# Start WebSocket server
+CMD ["node", "server.js"]
