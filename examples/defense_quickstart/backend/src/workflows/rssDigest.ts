@@ -2,16 +2,14 @@ import { step } from "@restackio/ai/workflow";
 import * as functions from "../functions";
 
 
-export async function rssWorkflow({ url = "https://www.pravda.com.ua/rss/", count = 2 }: { url: string, count: number }) {
+export async function rssDigest({ url = "https://www.pravda.com.ua/rss/", count = 2 }: { url: string, count: number }) {
 
     // Step 1: Fetch RSS feed
-
     const rssResponse: functions.RssItem[] = await step<typeof functions>({
     }).rssPull({
         url,
         count,
     });
-
 
     // Step 2: Crawl website content
     let websiteContent: { result: string }[] = [];
@@ -24,31 +22,36 @@ export async function rssWorkflow({ url = "https://www.pravda.com.ua/rss/", coun
         websiteContent.push(response);
     }));
 
-    console.log(websiteContent);
-
-    // Step 3: Split content into chunks because LLM has a token limit of 4096
-
-    // Step 4: LLM translation
-    let translatedContent: { result: string }[] = [];
+    // Step 3: Very basic character split because OpenBabylon model has a token limit of 4096
+    let splittedContent: string[] = [];
     await Promise.all(websiteContent.map(async (item) => {
+        const response: { result: string[] } = await step<typeof functions>({
+        }).splitContent({
+            content: item.result,
+        });
+
+        splittedContent.push(...response.result);
+    }));
+
+    // // Step 4: LLM translation
+    let translatedContent: { result: string }[] = [];
+    await Promise.all(splittedContent.map(async (item) => {
         const response: { result: string } = await step<typeof functions>({
             taskQueue: 'llm',
         }).llmChat({
-            userContent: item.result,
+            userContent: `Only return the translated content string, no other text. Translate the following content to English!!: ${item}.`,
         });
 
         translatedContent.push(response);
     }));
 
-    console.log(translatedContent);
-
-    // Step 5: LLM summarization
+    // // Step 5: LLM summarization per translated chunk
     let summarizedContent: { result: string }[] = [];
     await Promise.all(translatedContent.map(async (item) => {
         const response: { result: string } = await step<typeof functions>({
             taskQueue: 'llm',
         }).llmChat({
-            userContent: item.result,
+            userContent: `Summarize the following content in maximum 1 sentence: ${item.result}.`,
         });
 
         summarizedContent.push(response);

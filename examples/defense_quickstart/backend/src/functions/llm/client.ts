@@ -15,6 +15,7 @@ export const llmClient = ({
     if (!openaiInstance) {
         openaiInstance = new OpenAI({
             baseURL,
+            apiKey: `non-existent`,
         });
     }
     return openaiInstance;

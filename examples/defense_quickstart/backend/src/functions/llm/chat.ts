@@ -6,7 +6,7 @@ export const llmChat = async ({
 }: { userContent: string }): Promise<{ result: string }> => {
     try {
         const llm = llmClient({
-            baseURL: `${process.env.OPENBABYLON_API_URL}`
+            baseURL: `${process.env.OPENBABYLON_API_URL}`,
         });
 
         const response = await llm.chat.completions.create({

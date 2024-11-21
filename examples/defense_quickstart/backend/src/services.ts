@@ -1,6 +1,6 @@
 // Simple example to start two services in the same file
 import { config } from 'dotenv';
-import { rssPull, llmChat, crawlWebsite } from "./functions";
+import { rssPull, llmChat, crawlWebsite, splitContent } from "./functions";
 import { client } from "./client";
 
 config();
@@ -15,6 +15,7 @@ export async function services() {
                 functions: {
                     rssPull,
                     crawlWebsite,
+                    splitContent,
                 },
             }),
             client.startService({

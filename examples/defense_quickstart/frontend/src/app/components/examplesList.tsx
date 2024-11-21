@@ -8,17 +8,10 @@ export type Example = {
 
 export const examples = [
   {
-    name: "Chat Completion Example",
-    description: "Example workflow to generate greeting and farewell messages",
-    integrations: ["together"],
-    workflowName: "chatCompletionBasic",
-    input: { name: "test" },
-  },
-  {
-    name: "LlamaIndex Together Example",
-    description: "Example workflow to query a model with the LlamaIndex and Together integration",
-    integrations: ["together"],
-    workflowName: "llamaindexTogetherSimple",
-    input: { query: "What is the meaning of life?" },
+    name: "RSS Digest Example",
+    description: "Example workflow to generate a daily digest from an RSS feed",
+    integrations: ["openbabylon"],
+    workflowName: "rssDigest",
+    input: { url: "https://www.pravda.com.ua/rss/" },
   },
 ];

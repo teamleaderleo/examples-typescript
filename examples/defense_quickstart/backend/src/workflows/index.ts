@@ -1,1 +1,1 @@
-export * from './rss';
+export * from './rssDigest';
