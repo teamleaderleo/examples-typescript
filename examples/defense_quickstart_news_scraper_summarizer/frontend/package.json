@@ -1,5 +1,5 @@
 {
-  "name": "nextjs",
+  "name": "frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,9 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "clean": "rm -rf node_modules",
-    "docker:build": "docker build -t restack-nextjs-together-llamaindex-frontend .",
-    "docker:run": "docker run -p 3000 restack-nextjs-together-llamaindex-frontend",
-    "docker:stop": "docker stop restack-nextjs-together-llamaindex-frontend"
+    "docker:build": "docker build -t restack-defense-quickstart-news-scraper-summarizer-frontend .",
+    "docker:run": "docker run -p 3000 restack-defense-quickstart-news-scraper-summarizer-frontend",
+    "docker:stop": "docker stop restack-defense-quickstart-news-scraper-summarizer-frontend"
   },
   "dependencies": {
     "@restackio/ai": "^0.0.84",

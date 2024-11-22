@@ -5,16 +5,16 @@ const main = async () => {
 
   const restackEngineEnvs = [
     {
-      name: "RESTACK_ENGINE_ENV_ID",
-      value: process.env.RESTACK_ENGINE_ENV_ID,
+      name: "RESTACK_ENGINE_ID",
+      value: process.env.RESTACK_ENGINE_ID,
     },
     {
-      name: "RESTACK_ENGINE_ENV_ADDRESS",
-      value: process.env.RESTACK_ENGINE_ENV_ADDRESS,
+      name: "RESTACK_ENGINE_ADDRESS",
+      value: process.env.RESTACK_ENGINE_ADDRESS,
     },
     {
-      name: "RESTACK_ENGINE_ENV_API_KEY",
-      value: process.env.RESTACK_ENGINE_ENV_API_KEY,
+      name: "RESTACK_ENGINE_API_KEY",
+      value: process.env.RESTACK_ENGINE_API_KEY,
     },
   ];
 
@@ -35,27 +35,23 @@ const main = async () => {
     ],
   };
 
-  const frontendNextJs = {
-    name: "nextjs",
+  const frontend = {
+    name: "frontend",
     dockerFilePath: "examples/defense_quickstart_news_scraper_summarizer/frontend/Dockerfile",
     dockerBuildContext: "examples/defense_quickstart_news_scraper_summarizer/frontend",
     environmentVariables: [
       ...restackEngineEnvs,
-      {
-        name: "NEXT_PUBLIC_API_HOSTNAME",
-        link: [backendNodeJs],
-      },
     ],
-    'portMapping': [
+    portMapping: [
       {
-          'port': 80,
-          'path': '/',
-          'name': 'frontend',
+        port: 3000,
+        path: '/',
+        name: 'frontend',
       }
-  ],
+    ]
   };
-
-  const backendNodeJs = {
+  
+  const backend = {
     name: "backend",
     dockerFilePath: "examples/defense_quickstart_news_scraper_summarizer/backend/Dockerfile",
     dockerBuildContext: "examples/defense_quickstart_news_scraper_summarizer/backend",
@@ -66,19 +62,19 @@ const main = async () => {
         value: process.env.OPENBABYLON_API_URL,
       },
     ],
-    'portMapping': [
-        {
-            'port': 3000,
-            'path': '/',
-            'name': 'backend',
-        }
-    ],
+    portMapping: [
+      {
+        port: 3000,
+        path: '/',
+        name: 'backend',
+      }
+    ]
   };
 
   await restackCloudClient.stack({
     name: "ts-defense_quickstart_news_scraper_summarizer",
     previewEnabled: false,
-    applications: [frontendNextJs, backendNodeJs, engine],
+    applications: [frontend, backend, engine],
   });
 
   await restackCloudClient.up();
