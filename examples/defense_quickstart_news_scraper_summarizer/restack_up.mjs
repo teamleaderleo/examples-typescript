@@ -18,10 +18,27 @@ const main = async () => {
     },
   ];
 
+  const engine = {
+    'name': 'restack_engine',
+    'image': 'ghcr.io/restackio/restack:main',
+    'portMapping': [
+        {
+            'port': 5233,
+            'path': '/',
+            'name': 'engine-frontend',
+        },
+        {
+            'port': 6233,
+            'path': '/api',
+            'name': 'engine-api',
+        }
+    ],
+  };
+
   const frontendNextJs = {
     name: "nextjs",
-    dockerFilePath: "examples/nextjs-together-llamaindex/frontend/Dockerfile",
-    dockerBuildContext: "examples/nextjs-together-llamaindex/frontend",
+    dockerFilePath: "examples/defense_quickstart_news_scraper_summarizer/frontend/Dockerfile",
+    dockerBuildContext: "examples/defense_quickstart_news_scraper_summarizer/frontend",
     environmentVariables: [
       ...restackEngineEnvs
     ],
@@ -29,13 +46,13 @@ const main = async () => {
 
   const backendNodeJs = {
     name: "backend",
-    dockerFilePath: "examples/nextjs-together-llamaindex/backend/Dockerfile",
-    dockerBuildContext: "examples/nextjs-together-llamaindex/backend",
+    dockerFilePath: "examples/defense_quickstart_news_scraper_summarizer/backend/Dockerfile",
+    dockerBuildContext: "examples/defense_quickstart_news_scraper_summarizer/backend",
     environmentVariables: [
       ...restackEngineEnvs,
       {
-        name: "TOGETHER_API_KEY",
-        value: process.env.TOGETHER_API_KEY,
+        name: "OPENBABYLON_API_URL",
+        value: process.env.OPENBABYLON_API_URL,
       },
     ],
   };
@@ -43,7 +60,7 @@ const main = async () => {
   await restackCloudClient.stack({
     name: "development environment",
     previewEnabled: false,
-    applications: [nextjsApp],
+    applications: [frontendNextJs, backendNodeJs, engine],
   });
 
   await restackCloudClient.up();
