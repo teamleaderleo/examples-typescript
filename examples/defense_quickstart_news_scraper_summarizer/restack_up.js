@@ -34,7 +34,18 @@ const main = async () => {
         }
     ],
     environmentVariables: [
-      ...restackEngineEnvs,
+      {
+        name: "RESTACK_ENGINE_ID",
+        value: process.env.RESTACK_ENGINE_ID,
+      },
+      {
+        name: "RESTACK_ENGINE_ADDRESS",
+        value: process.env.RESTACK_ENGINE_ADDRESS_WITHOUT_PORT,
+      },
+      {
+        name: "RESTACK_ENGINE_API_KEY",
+        value: process.env.RESTACK_ENGINE_API_KEY,
+      },
     ],
   };
 
