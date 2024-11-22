@@ -1,7 +1,11 @@
-FROM node:20-alpine
+FROM node:20-bullseye-slim
 
 # Install required system libraries
-RUN apk add --no-cache libc6-compat
+RUN apt-get update && apt-get install -y \
+    libc6 \
+    libgcc1 \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -15,4 +19,4 @@ COPY . .
 RUN pnpm run build
 
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD ["pnpm", "start"]
