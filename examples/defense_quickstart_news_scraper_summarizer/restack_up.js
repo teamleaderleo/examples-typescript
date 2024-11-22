@@ -33,6 +33,9 @@ const main = async () => {
             'name': 'engine-api',
         }
     ],
+    environmentVariables: [
+      ...restackEngineEnvs,
+    ],
   };
 
   const frontend = {
