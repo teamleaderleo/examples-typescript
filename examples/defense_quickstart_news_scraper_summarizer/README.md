@@ -35,7 +35,7 @@ cd backend
 2. Install dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 3. Create a `.env` file with your credentials:
@@ -52,7 +52,7 @@ RESTACK_ENGINE_API_KEY=your_engine_api_key
 4. Start the backend service:
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 ### 3. Set Up Frontend
@@ -66,7 +66,7 @@ cd frontend
 2. Install dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 3. (Optional) Create a `.env` file:
@@ -81,7 +81,7 @@ RESTACK_ENGINE_API_KEY=your_engine_api_key
 4. Start the development server:
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 Visit [http://localhost:3000](http://localhost:3000) to see the application.
@@ -109,12 +109,12 @@ This will:
 
 To deploy this application on Restack:
 
-1. Ensure you have Restack Cloud credentials
+1. Ensure you have Restack Cloud credentials 
 2. Set up required environment variables
 3. Run the deployment script:
 
 ```bash
-node restack_up.mjs
+pnpm restack:up
 ```
 
 For detailed deployment information, see the [Restack Cloud documentation](https://docs.restack.io/restack-cloud/deployrepo).

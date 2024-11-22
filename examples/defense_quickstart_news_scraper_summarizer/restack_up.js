@@ -1,4 +1,4 @@
-import { RestackCloud } from "@restackio/restack-sdk-cloud-ts";
+import { RestackCloud } from "@restackio/cloud";
 
 const main = async () => {
   const restackCloudClient = new RestackCloud(process.env.RESTACK_CLOUD_TOKEN);
@@ -40,8 +40,19 @@ const main = async () => {
     dockerFilePath: "examples/defense_quickstart_news_scraper_summarizer/frontend/Dockerfile",
     dockerBuildContext: "examples/defense_quickstart_news_scraper_summarizer/frontend",
     environmentVariables: [
-      ...restackEngineEnvs
+      ...restackEngineEnvs,
+      {
+        name: "NEXT_PUBLIC_API_HOSTNAME",
+        link: [backendNodeJs],
+      },
     ],
+    'portMapping': [
+      {
+          'port': 80,
+          'path': '/',
+          'name': 'frontend',
+      }
+  ],
   };
 
   const backendNodeJs = {
@@ -55,10 +66,17 @@ const main = async () => {
         value: process.env.OPENBABYLON_API_URL,
       },
     ],
+    'portMapping': [
+        {
+            'port': 3000,
+            'path': '/',
+            'name': 'backend',
+        }
+    ],
   };
 
   await restackCloudClient.stack({
-    name: "development environment",
+    name: "ts-defense_quickstart_news_scraper_summarizer",
     previewEnabled: false,
     applications: [frontendNextJs, backendNodeJs, engine],
   });

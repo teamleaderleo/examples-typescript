@@ -6,8 +6,8 @@
     "dev": "dotenv -e .env tsx watch --include src src/services.ts",
     "clean": "rm -rf node_modules",
     "build": "tsc --build",
-    "docker:build": "docker build -t restack-nextjs-together-llamaindex-backend .",
-    "docker:run": "docker run -p 8000:8000 --network restack-net --env-file .env --env RESTACK_ENGINE_ADDRESS=http://localhost:6233 restack-express-together-llamaindex",
+    "docker:build": "docker build -t restack-def-qs-news-scraper-summarizer-backend .",
+    "docker:run": "docker run -p 8000:8000 --network restack-net --env-file .env --env RESTACK_ENGINE_ADDRESS=http://localhost:6233 restack-def-qs-news-scraper-summarizer-backend",
     "docker:dev": "pnpm docker:build && pnpm docker:run"
   },
   "dependencies": {
@@ -26,7 +26,6 @@
     "zod-to-json-schema": "^3.23.5"
   },
   "devDependencies": {
-    "@restackio/restack-sdk-cloud-ts": "^1.0.16",
     "@types/express": "^5.0.0",
     "@types/jsdom": "^21.1.7",
     "@types/node": "^20.16.9",

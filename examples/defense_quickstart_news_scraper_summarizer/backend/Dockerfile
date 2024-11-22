@@ -37,6 +37,16 @@ COPY --from=builder /app/dist ./dist
 # Install production dependencies only
 RUN pnpm install --prod
 
+# Define environment variables
+ARG RESTACK_ENGINE_ID
+ENV RESTACK_ENGINE_ID=${RESTACK_ENGINE_ID}
+
+ARG RESTACK_ENGINE_ADDRESS 
+ENV RESTACK_ENGINE_ADDRESS=${RESTACK_ENGINE_ADDRESS}
+
+ARG RESTACK_ENGINE_API_KEY
+ENV RESTACK_ENGINE_API_KEY=${RESTACK_ENGINE_API_KEY}
+
 EXPOSE 3000
 
 CMD ["pnpm", "tsx", "dist/services.js"]
