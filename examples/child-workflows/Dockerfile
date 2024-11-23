@@ -1,44 +1,52 @@
-# ------- Image ----------
-
-FROM node:20-bullseye-slim AS installer
-
-RUN apt-get update \
-  && apt-get install -y ca-certificates \
-  && rm -rf /var/lib/apt/lists/*
-
-COPY ./package.json ./app/package.json
-COPY ./tsconfig.json ./app/tsconfig.json
-
+# Build stage
+FROM node:20-bullseye AS builder
 
 WORKDIR /app
 
-RUN npm install
+# Install pnpm
+RUN npm install -g pnpm
 
-# ------- Builder ----------
+# Copy package files and env file if it exists
+COPY package*.json .env* ./
 
-FROM node:20-bullseye-slim AS builder
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies including TypeScript
+RUN pnpm install
+RUN pnpm add -D typescript
+
+# Copy source code
+COPY . .
+
+# Build TypeScript code
+RUN pnpm run build
+
+# Production stage
+FROM node:20-bullseye
+
 WORKDIR /app
-COPY --from=installer /app .
-COPY ./src ./src
 
-RUN npm run build
+# Install pnpm
+RUN npm install -g pnpm
 
-# ------- Runner ----------
+# Copy package files and built code
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/dist ./dist
 
-FROM node:20-bullseye-slim AS runner
+# Install production dependencies only
+RUN pnpm install --prod
 
-RUN apt-get update \
-  && apt-get install -y ca-certificates \
-  && rm -rf /var/lib/apt/lists/*
+# Define environment variables
+ARG RESTACK_ENGINE_ID
+ENV RESTACK_ENGINE_ID=${RESTACK_ENGINE_ID}
 
-RUN addgroup --system --gid 1001 service
-RUN adduser --system --uid 1001 service
-USER service
+ARG RESTACK_ENGINE_ADDRESS 
+ENV RESTACK_ENGINE_ADDRESS=${RESTACK_ENGINE_ADDRESS}
 
-WORKDIR /app
+ARG RESTACK_ENGINE_API_KEY
+ENV RESTACK_ENGINE_API_KEY=${RESTACK_ENGINE_API_KEY}
 
-COPY --from=builder /app .
+EXPOSE 3000
 
-ENV NODE_OPTIONS=”--max-old-space-size=4096″
-
-CMD ["node", "dist/services"]
+CMD ["node", "dist/services.js"]

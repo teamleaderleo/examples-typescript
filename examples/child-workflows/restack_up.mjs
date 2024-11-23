@@ -2,7 +2,7 @@ import { RestackCloud } from "@restackio/cloud";
 
 // Deploy on Restack Cloud
 const main = async () => {
-  const restackCloudClient = new RestackCloud(process.env.RESTACK_CLOUD_TOKEN!);
+  const restackCloudClient = new RestackCloud(process.env.RESTACK_CLOUD_TOKEN);
 
   const restackEngineEnvs = [
     {
