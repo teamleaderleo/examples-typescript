@@ -62,8 +62,11 @@ First, install the Restack Web UI and Engine using Docker:
 docker run -d --pull always --name studio -p 5233:5233 -p 6233:6233 -p 7233:7233 ghcr.io/restackio/restack:main
 ```
 
-- Required for any function and workflow to run as the orchestration layer
-- The UI See all your workflow runs
+- Required for any function and workflow execution as the orchestration layer
+- Access the Web UI at http://localhost:5233 to monitor workflow runs, view logs, and manage functions
+
+![Restack Engine UI](./restack-engine-ui.png)
+
 
 ### 2. Set Up Backend with Restack AI
 
@@ -130,6 +133,8 @@ pnpm run dev
 
 Visit [http://localhost:3000](http://localhost:3000) to see the application.
 
+![Restack Engine UI](./frontend.png)
+
 ## Deploy on Restack Cloud
 
 To deploy the example on Restack Cloud, follow these steps:
@@ -182,11 +187,13 @@ For detailed deployment information, see the [Restack Cloud documentation](https
 
 6. Go back to [Restack Cloud](https://console.restack.io)
 
-You will see the following deployed:
+Your deployment will include:
 
-- frontend
-- backend
-- restack_engine (connected to your cloud engine)
+- A frontend application
+- A backend service 
+- A Restack Engine instance connected to your cloud engine
+
+![Restack Engine UI](./restack-cloud-overview.png)
 
 ## Contributing
 
