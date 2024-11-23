@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@restackio/cloud':
-        specifier: ^1.0.18
-        version: 1.0.18
+        specifier: ^1.0.19
+        version: 1.0.19
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
@@ -26,8 +26,8 @@ packages:
   '@kwsites/promise-deferred@1.1.1':
     resolution: {integrity: sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==}
 
-  '@restackio/cloud@1.0.18':
-    resolution: {integrity: sha512-1iXwDQg3u63582fVtfc7dBf3wa1PyIqTUYH5s627mFaYDlC22rvg4VP4AkY2qlXIz3I3aqxW7SfBBx5awu3pLQ==}
+  '@restackio/cloud@1.0.19':
+    resolution: {integrity: sha512-UJNfM4di6qGa3EqAZzUdcrGjK6tIj2YmQbGZouBZjpHDqG3kbzMZkgNPcW/UsCp0HYCKS36pUmDy6m1GkMFgNQ==}
     engines: {node: '>=18'}
 
   ansi-styles@4.3.0:
@@ -174,7 +174,7 @@ snapshots:
 
   '@kwsites/promise-deferred@1.1.1': {}
 
-  '@restackio/cloud@1.0.18':
+  '@restackio/cloud@1.0.19':
     dependencies:
       chalk: 4.1.2
       dotenv: 16.4.5

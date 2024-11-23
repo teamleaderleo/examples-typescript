@@ -12,8 +12,8 @@ importers:
         specifier: ^0.21.0
         version: 0.21.0
       '@restackio/ai':
-        specifier: ^0.0.82
-        version: 0.0.82
+        specifier: ^0.0.85
+        version: 0.0.85
       '@temporalio/workflow':
         specifier: ^1.11.2
         version: 1.11.3
@@ -22,8 +22,8 @@ importers:
         version: 16.4.5
     devDependencies:
       '@restackio/cloud':
-        specifier: ^1.0.18
-        version: 1.0.18
+        specifier: ^1.0.19
+        version: 1.0.19
       '@types/node':
         specifier: ^20.16.9
         version: 20.17.6
@@ -179,12 +179,12 @@ packages:
     resolution: {integrity: sha512-IlfnMo8c6qHBRag2K6OnUwP6OflQYuzDk1XlocpvnbwPwDnni8Zgzz1f4xRJvcfxpJETKIHCscWXSGMjVLNfvg==}
     engines: {node: '>=20'}
 
-  '@restackio/ai@0.0.82':
-    resolution: {integrity: sha512-PYdk0giSsejc3nfi16jHxIhlz56+ra7CpGvSfnt5uLCFvjqa+NeXhVaRcDjCGM95xPHKOwQcdqW2osjOry7nNA==}
+  '@restackio/ai@0.0.85':
+    resolution: {integrity: sha512-UWDcywhNjcTn7TbgqJL1ahzpf722RZV57rnR/b5s48eMgUHZNNxMJWDvCYIW5IZKEvzLp124iu0FNrV9UbKTpA==}
     engines: {node: '>=20'}
 
-  '@restackio/cloud@1.0.18':
-    resolution: {integrity: sha512-1iXwDQg3u63582fVtfc7dBf3wa1PyIqTUYH5s627mFaYDlC22rvg4VP4AkY2qlXIz3I3aqxW7SfBBx5awu3pLQ==}
+  '@restackio/cloud@1.0.19':
+    resolution: {integrity: sha512-UJNfM4di6qGa3EqAZzUdcrGjK6tIj2YmQbGZouBZjpHDqG3kbzMZkgNPcW/UsCp0HYCKS36pUmDy6m1GkMFgNQ==}
     engines: {node: '>=18'}
 
   '@swc/core-darwin-arm64@1.7.2':
@@ -1457,7 +1457,7 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@restackio/ai@0.0.82':
+  '@restackio/ai@0.0.85':
     dependencies:
       '@temporalio/activity': 1.11.3
       '@temporalio/client': 1.11.3
@@ -1469,7 +1469,7 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@restackio/cloud@1.0.18':
+  '@restackio/cloud@1.0.19':
     dependencies:
       chalk: 4.1.2
       dotenv: 16.4.5
