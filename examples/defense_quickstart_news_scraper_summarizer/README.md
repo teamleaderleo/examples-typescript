@@ -1,30 +1,71 @@
-# Next.js with Restack AI, OpenBabylon
+# Quickstart: War news scraper & summarizer - USS Hornet Defense Tech Hackathon 
 
-This project demonstrates how to build a Next.js application that integrates Together AI and LlamaIndex for AI-powered functionalities. The project consists of a frontend built with Next.js and a backend service handling AI operations.
+This project demonstrates how to build a Next.js application that scrapes and summarizes defense news articles using OpenBabylon AI. Built for the USS Hornet Defense Tech Hackathon, it features a Next.js frontend for displaying summarized news and a backend service that handles RSS feed scraping, content translation, and AI-powered summarization of defense-related articles.
+
+## OpenBabylon Credentials
+
+During the hackathon, OpenBabylon provides a public url. No API key is needeed.
+
+```
+OPENBABYLON_API_URL=64.139.222.109:80/v1
+```
+
+## Functions
+
+A core feature of Restack is the ability to build [TypeScript functions](https://docs.restack.io/libraries/typescript/reference/functions) that can be executed as workflow steps. Each function supports rate limiting, retries, error handling and replay capabilities.
+
+1. **rssPull**: Fetches and parses RSS feeds with encoding detection, supporting multiple RSS formats and character encodings
+2. **crawlWebsite**: Extracts clean article content from web pages using Mozilla's Readability
+3. **splitContent**: Splits large texts into manageable chunks (4096 token limit)
+4. **llmChat**: Integrates with OpenBabylon's Mistral model for translation and summarization
+
+## Example Workflow
+
+Functions can be executed as steps in a [workflow](https://docs.restack.io/features/workflows). The example includes one main workflow:
+
+**rssDigest**: Multi-stage workflow that:
+
+- Fetches RSS feeds from specified sources (default: pravda.com.ua)
+- Crawls full article content
+- Splits content into manageable chunks
+- Translates content to English
+- Generates per-chunk summaries
+- Creates a final consolidated digest
 
 ## Project Structure
 
-- `frontend/`: Next.js frontend application
-- `backend/`: Node.js backend service with Together AI and LlamaIndex integration
+- `frontend/`: Next.js frontend application with:
+
+  - Server Actions for workflow triggering
+  - Tailwind CSS styling
+  - Type-safe API integration to Restack Engine
+
+- `backend/`: Restack backend with Node.js featuring:
+  - `rssDigest` workflow
+  - `llmChat` function to OpenBabylon Endpoint
 
 ## Prerequisites
 
-- Node.js (LTS version)
+- Node.js
 - Docker
-- Together AI API key
-- Restack Engine setup
+- OpenBabylon AI API URL (No API KEY NEEDED)
+- Restack Engine local
+
 
 ## Getting Started
 
-### 1. Install Restack Web UI
+### 1. Install Restack Web UI & Engine on local
 
-First, install the Restack Web UI using Docker:
+First, install the Restack Web UI and Engine using Docker:
 
 ```bash
 docker run -d --pull always --name studio -p 5233:5233 -p 6233:6233 -p 7233:7233 ghcr.io/restackio/restack:main
 ```
 
-### 2. Set Up Backend
+- Required for any function and workflow to run as the orchestration layer
+- The UI See all your workflow runs
+
+### 2. Set Up Backend with Restack AI
 
 1. Navigate to the backend directory:
 
@@ -38,15 +79,18 @@ cd backend
 pnpm install
 ```
 
-3. Create a `.env` file with your credentials:
+3. Create a `.env` file with your credentials in the backend folder:
 
 ```
-TOGETHER_API_KEY=your_together_api_key
+# (Required) Example-specific environment variables
 
-# Optional:
-RESTACK_ENGINE_ID=your_engine_id
-RESTACK_ENGINE_ADDRESS=your_engine_address
-RESTACK_ENGINE_API_KEY=your_engine_api_key
+OPENBABYLON_API_URL=<OPENBABYLON_API_URL>
+
+# (Optional) Restack Cloud - You only need to set these if you are using Restack Cloud
+
+RESTACK_ENGINE_ID=<RESTACK_ENGINE_ID>
+RESTACK_ENGINE_ADDRESS=<RESTACK_ENGINE_ADDRESS:443>
+RESTACK_ENGINE_API_KEY=<RESTACK_ENGINE_API_KEY>
 ```
 
 4. Start the backend service:
@@ -86,69 +130,63 @@ pnpm run dev
 
 Visit [http://localhost:3000](http://localhost:3000) to see the application.
 
-## Available Features
+## Deploy on Restack Cloud
 
-1. **Chat Completion Example**: Demonstrates basic chat completion using Together AI's Llama models
-2. **LlamaIndex Integration**: Shows how to query models using LlamaIndex with Together AI integration
+To deploy the example on Restack Cloud, follow these steps:
 
-## Docker Deployment
+1. [Sign-up to restack cloud](https:console.restack.io)
+2. Go to `Workspace > Settings > Token` and generate an API token
+3. Create a new cloud engine
 
-You can deploy both frontend and backend using Docker Compose:
+--- Back in your IDE --- 4. Copy the env variables from `env.example` into your `.env` file at the root of the example folder.
+Ensure to set the values correctly.
 
-```bash
-docker-compose up -d
 ```
 
-This will:
+OPENBABYLON_API_URL=<OPENBABYLON_API_URL>
 
-- Build and start the frontend on port 3000
-- Build and start the backend on port 8000
-- Set up proper networking between services
+RESTACK_ENGINE_ID=<RESTACK_ENGINE_ID>
+RESTACK_ENGINE_ADDRESS=<RESTACK_ENGINE_ADDRESS:443>
+RESTACK_ENGINE_ADDRESS_WITHOUT_PORT=<RESTACK_ENGINE_ADDRESS_WITHOUT_PORT>
+RESTACK_ENGINE_API_KEY=<RESTACK_ENGINE_API_KEY>
 
-## Deploy on Restack
+RESTACK_CLOUD_TOKEN=<RESTACK_CLOUD_TOKEN>
 
-To deploy this application on Restack:
+```
 
-1. Ensure you have Restack Cloud credentials 
-2. Set up required environment variables
-3. Run the deployment script:
+5. At root of the folder `defense_quickstart_news_scraper_summarizer`, run:
+
+```bash
+pnpm install
+```
+
+It will install `restack/cloud` and other dependencies to deploy easily.
+
+6. Run the restack:up command
 
 ```bash
 pnpm restack:up
 ```
 
+Alternatively you can run:
+
+```bash
+EXPORT RESTACK_CLOUD_TOKEN=<TOKEN> && node restack_up.mjs
+```
+
+- Confirm the deployment plan
+
 For detailed deployment information, see the [Restack Cloud documentation](https://docs.restack.io/restack-cloud/deployrepo).
 
-## Project Components
+--- In Webbrowser ---
 
-### Frontend
+6. Go back to [Restack Cloud](https://console.restack.io)
 
-- Next.js 14 application
-- Server Actions for workflow triggering
-- Tailwind CSS for styling
-- Type-safe API integration
+You will see the following deployed:
 
-### Backend
-
-- Node.js backend service
-- Together AI integration for LLM operations
-- LlamaIndex for enhanced AI capabilities
-- Rate-limited API calls (60 RPM)
-
-## Example Workflows
-
-The application includes two main workflows:
-
-1. **Chat Completion Basic**: Generates greeting and farewell messages using Together AI models
-2. **LlamaIndex Together Simple**: Demonstrates LlamaIndex integration with Together AI for complex queries
-
-## Screenshots
-
-![Example UI](./restack-examples-ts-nextjs.png)
-_Main application interface_
-
-![Success Web UI](./restack-examples-ts-nextjs-web-ui.png)
-_Restack Web UI showing workflow execution_
+- frontend
+- backend
+- restack_engine (connected to your cloud engine)
 
 ## Contributing
 
