@@ -1,7 +1,6 @@
 # Restack Child workflow Example
 
-
-A sample repository, which demonstrates working with Restack Framework and optional Restack OpenAI integration.
+A sample repository, demonstrating how to use child workflows with Restack AI.
 
 For a full Typescript documentation refer to <https://docs.restack.io/libraries/typescript/reference>
 
@@ -31,8 +30,6 @@ docker run -d --pull always --name studio -p 5233:5233 -p 6233:6233 -p 7233:7233
 ```bash
 pnpm schedule-workflow
 ```
-
-This will trigger a demo Workflow - a _greeting_, which is a simple function and _goodbye_, which uses [@restackio/integration-openai](https://www.npmjs.com/package/@restackio/integrations-openai).
 
 ## Deploy on Restack Cloud
 

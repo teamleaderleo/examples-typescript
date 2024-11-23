@@ -7,7 +7,8 @@
     "build": "tsc --build",
     "schedule-workflow": "tsx scheduleWorkflow.ts",
     "restack-up": "tsx restackUp.ts",
-    "restack-studio": "docker run -d --pull always --name studio -p 5233:5233 -p 6233:6233 -p 7233:7233 ghcr.io/restackio/restack:main"
+    "restack-studio": "docker run -d --pull always --name studio -p 5233:5233 -p 6233:6233 -p 7233:7233 ghcr.io/restackio/restack:main",
+    "restack:up": "dotenv -e .env node restackUp.ts"
   },
   "dependencies": {
     "@restackio/ai": "0.0.85",
@@ -17,7 +18,9 @@
     "zod-to-json-schema": "3.23.3"
   },
   "devDependencies": {
-    "@restackio/cloud": "1.0.18",
+    "@restackio/cloud": "^1.0.18",
+
+    "dotenv-cli": "^7.4.2",
     "@types/node": "20.16.9",
     "prettier": "3.3.3",
     "tsx": "4.19.2",

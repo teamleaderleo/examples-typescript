@@ -1,5 +1,4 @@
 import { RestackCloud } from "@restackio/cloud";
-import "dotenv/config";
 
 // Deploy on Restack Cloud
 const main = async () => {
@@ -11,10 +10,6 @@ const main = async () => {
       value: process.env.RESTACK_ENGINE_ID,
     },
     {
-      name: "RESTACK_ENGINE_ADDRESS",
-      value: process.env.RESTACK_ENGINE_ADDRESS,
-    },
-    {
       name: "RESTACK_ENGINE_API_KEY",
       value: process.env.RESTACK_ENGINE_API_KEY,
     },
@@ -22,21 +17,52 @@ const main = async () => {
 
   const servicesApp = {
     name: "services",
-    dockerFilePath: "examples/get-started/Dockerfile",
-    dockerBuildContext: "examples/get-started",
+    dockerFilePath: "examples/child-workflows/Dockerfile",
+    dockerBuildContext: "examples/child-workflows",
+    environmentVariables: [
+      ...restackEngineEnvs,
+      {
+        name: "RESTACK_ENGINE_ADDRESS",
+        value: `${process.env.RESTACK_ENGINE_ADDRESS}:403`,
+      },
+    ],
+  };
+
+  const engine = {
+    name: "restack-engine",
+    image: "ghcr.io/restackio/restack:main",
+    portMapping: [
+      {
+        port: 5233,
+        path: "/",
+        name: "engine-frontend",
+      },
+      {
+        port: 6233,
+        path: "/api",
+        name: "engine-api",
+      }
+    ],
     environmentVariables: [
       {
-        name: "OPENAI_API_KEY",
-        value: process.env.OPENAI_API_KEY,
+        name: "RESTACK_ENGINE_ID",
+        value: process.env.RESTACK_ENGINE_ID,
       },
-      ...restackEngineEnvs,
+      {
+        name: "RESTACK_ENGINE_ADDRESS",
+        value: process.env.RESTACK_ENGINE_ADDRESS,
+      },
+      {
+        name: "RESTACK_ENGINE_API_KEY",
+        value: process.env.RESTACK_ENGINE_API_KEY,
+      },
     ],
   };
 
   await restackCloudClient.stack({
-    name: "development environment",
+    name: "child-workflows",
     previewEnabled: false,
-    applications: [servicesApp],
+    applications: [servicesApp, engine],
   });
 
   await restackCloudClient.up();
