@@ -18,7 +18,7 @@
   "license": "ISC",
   "dependencies": {
     "@deepgram/sdk": "^3.6.0",
-    "@restackio/ai": "^0.0.82",
+    "@restackio/ai": "^0.0.85",
     "@restackio/integrations-deepgram": "^0.0.13",
     "@restackio/integrations-openai": "^0.0.34",
     "@restackio/integrations-twilio": "^0.0.10",
@@ -36,7 +36,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@restackio/cloud": "^1.0.18",
+    "@restackio/cloud": "^1.0.19",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/node": "^22.5.4",

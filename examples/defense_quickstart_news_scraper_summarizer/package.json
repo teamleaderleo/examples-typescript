@@ -11,7 +11,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-      "@restackio/cloud": "^1.0.18",
+      "@restackio/cloud": "^1.0.19",
       "dotenv": "^16.4.5",
       "dotenv-cli": "^7.4.2"
     }

@@ -11,7 +11,7 @@
     "docker:dev": "pnpm docker:build && pnpm docker:run"
   },
   "dependencies": {
-    "@restackio/ai": "^0.0.82",
+    "@restackio/ai": "^0.0.85",
     "@temporalio/workflow": "^1.11.2",
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.4.1",
@@ -22,7 +22,7 @@
     "zod-to-json-schema": "^3.23.5"
   },
   "devDependencies": {
-    "@restackio/cloud": "^1.0.18",
+    "@restackio/cloud": "^1.0.19",
     "@types/express": "^5.0.0",
     "@types/node": "^20.16.9",
     "ts-node": "^10.9.2",
