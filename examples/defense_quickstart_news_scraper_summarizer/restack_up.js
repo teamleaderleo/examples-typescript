@@ -20,7 +20,7 @@ const main = async () => {
   ];
 
   const engine = {
-    name: 'restack_engine',
+    name: 'restack_engine', // IMPORTANT: This must match the name of the engine in the Restack Cloud console.
     image: 'ghcr.io/restackio/restack:main',
     portMapping: [
       {
