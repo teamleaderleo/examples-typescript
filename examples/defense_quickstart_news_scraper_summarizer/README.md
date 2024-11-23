@@ -89,11 +89,13 @@ pnpm install
 
 OPENBABYLON_API_URL=<OPENBABYLON_API_URL>
 
-# (Optional) Restack Cloud - You only need to set these if you are using Restack Cloud
+# (Optional) Restack Cloud - You only need to set these if you are using Restack Cloud.
 
+# Do not forget to add the port :433
+RESTACK_ENGINE_ADDRESS=<RESTACK_ENGINE_ADDRESS:443>  
 RESTACK_ENGINE_ID=<RESTACK_ENGINE_ID>
-RESTACK_ENGINE_ADDRESS=<RESTACK_ENGINE_ADDRESS:443>
 RESTACK_ENGINE_API_KEY=<RESTACK_ENGINE_API_KEY>
+RESTACK_CLOUD_TOKEN=<RESTACK_CLOUD_TOKEN>
 ```
 
 4. Start the backend service:
@@ -116,15 +118,21 @@ cd frontend
 pnpm install
 ```
 
-3. (Optional) Create a `.env` file:
+3. Create a `.env` file:
 
 ```
-# Optional:
-RESTACK_ENGINE_ID=your_engine_id
-RESTACK_ENGINE_ADDRESS=your_engine_address
-RESTACK_ENGINE_API_KEY=your_engine_api_key
-```
+# (Required) Example-specific environment variables
 
+OPENBABYLON_API_URL=<OPENBABYLON_API_URL>
+
+# (Optional) Restack Cloud - You only need to set these if you are using Restack Cloud.
+
+# Do not forget to add the port :433
+RESTACK_ENGINE_ADDRESS=<RESTACK_ENGINE_ADDRESS:443>  
+RESTACK_ENGINE_ID=<RESTACK_ENGINE_ID>
+RESTACK_ENGINE_API_KEY=<RESTACK_ENGINE_API_KEY>
+RESTACK_CLOUD_TOKEN=<RESTACK_CLOUD_TOKEN>
+```
 4. Start the development server:
 
 ```bash
@@ -141,22 +149,24 @@ To deploy the example on Restack Cloud, follow these steps:
 
 1. [Sign-up to restack cloud](https:console.restack.io)
 2. Go to `Workspace > Settings > Token` and generate an API token
-3. Create a new cloud engine
+3. Create a new cloud engine. 
 
---- Back in your IDE --- 4. Copy the env variables from `env.example` into your `.env` file at the root of the example folder.
+--- Back in your IDE --- 
+4. Copy the env variables from `env.example` into your `.env` file at the root of the example folder.
 Ensure to set the values correctly.
 
 ```
+# (Required) Example-specific environment variables
 
 OPENBABYLON_API_URL=<OPENBABYLON_API_URL>
 
+# (Optional) Restack Cloud - You only need to set these if you are using Restack Cloud.
+
+# Do not forget to add the port :433
+RESTACK_ENGINE_ADDRESS=<RESTACK_ENGINE_ADDRESS:443>  
 RESTACK_ENGINE_ID=<RESTACK_ENGINE_ID>
-RESTACK_ENGINE_ADDRESS=<RESTACK_ENGINE_ADDRESS:443>
-RESTACK_ENGINE_ADDRESS_WITHOUT_PORT=<RESTACK_ENGINE_ADDRESS_WITHOUT_PORT>
 RESTACK_ENGINE_API_KEY=<RESTACK_ENGINE_API_KEY>
-
 RESTACK_CLOUD_TOKEN=<RESTACK_CLOUD_TOKEN>
-
 ```
 
 5. At root of the folder `defense_quickstart_news_scraper_summarizer`, run:
@@ -167,25 +177,25 @@ pnpm install
 
 It will install `restack/cloud` and other dependencies to deploy easily.
 
-6. Run the restack:up command
+6. Edit the restack_up.js file to point to your cloud engine.
+
+```js
+const engine = {
+  name: 'restack_engine', // IMPORTANT: This must match the name of the engine in the Restack Cloud console.
+  ...
+```
+7. Run the restack:up command
 
 ```bash
 pnpm restack:up
-```
-
-Alternatively you can run:
-
-```bash
-EXPORT RESTACK_CLOUD_TOKEN=<TOKEN> && node restack_up.mjs
 ```
 
 - Confirm the deployment plan
 
 For detailed deployment information, see the [Restack Cloud documentation](https://docs.restack.io/restack-cloud/deployrepo).
 
---- In Webbrowser ---
-
-6. Go back to [Restack Cloud](https://console.restack.io)
+--- In your browser ---
+8. Go back to [Restack Cloud](https://console.restack.io)
 
 Your deployment will include:
 
