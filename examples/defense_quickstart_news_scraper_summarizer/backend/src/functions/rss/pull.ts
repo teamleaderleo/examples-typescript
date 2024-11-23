@@ -51,7 +51,6 @@ export async function rssPull(input: RssInput): Promise<RssItem[]> {
         const maxCount = input.count ?? items.length;
         const limitedItems = items.slice(0, maxCount);
 
-        log.info("rssPull", { data: limitedItems });
         return limitedItems;
 
     } catch (error) {

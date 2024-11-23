@@ -39,7 +39,7 @@ export async function rssDigest({ url = "https://www.pravda.com.ua/rss/", count 
         const response: { result: string } = await step<typeof functions>({
             taskQueue: 'llm',
         }).llmChat({
-            userContent: `Only return the translated content string, no other text. Translate the following content to English!!: ${item}.`,
+            userContent: `Only return the translated content string, no other text!! Translate the following content to English!!: ${item}.`,
         });
 
         translatedContent.push(response);

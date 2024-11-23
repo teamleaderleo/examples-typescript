@@ -5,7 +5,7 @@ export const llmChat = async ({
     userContent
 }: { userContent: string }): Promise<{ result: string }> => {
     try {
-        const llm = llmClient({});
+        const llm = llmClient();
 
         const response = await llm.chat.completions.create({
             messages: [{ role: "user", content: userContent }],
@@ -18,6 +18,6 @@ export const llmChat = async ({
 
         return { result: response.choices[0].message.content || "" };
     } catch (error) {
-        throw FunctionFailure.nonRetryable(`Error LLM chat: ${error}`);
+        throw FunctionFailure.nonRetryable(`Error LLM chat: ${error}, llmClient: ${llmClient}`);
     }
 };

@@ -10,9 +10,13 @@ export const llmClient = (): OpenAI => {
         throw new Error("OPENBABYLON_API_URL is not set in environment variables.");
     }
 
+    const baseUrl = process.env.OPENBABYLON_API_URL.startsWith('http')
+        ? process.env.OPENBABYLON_API_URL
+        : `http://${process.env.OPENBABYLON_API_URL}`;
+
     if (!openaiInstance) {
         openaiInstance = new OpenAI({
-            baseURL: process.env.OPENBABYLON_API_URL!,
+            baseURL: baseUrl,
             apiKey: `non-existent`,
         });
     }
