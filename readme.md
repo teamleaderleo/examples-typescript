@@ -7,7 +7,7 @@ Restack is an open source framework for building autonomous AI applications in T
 Start the Restack Engine and Web UI using Docker:
 
 ```
-docker run -d --pull always --name studio -p 5233:5233 -p 6233:6233 -p 7233:7233 ghcr.io/restackio/engine:main
+docker run -d --pull always --name restack -p 5233:5233 -p 6233:6233 -p 7233:7233 ghcr.io/restackio/engine:main
 ```
 
 Or using Docker Compose:
@@ -27,22 +27,27 @@ The Restack Web UI will be available at http://localhost:5233
 
 [Find more autonomous examples](https://docs.restack.io/examples)
 
+## Examples of key Restack functionalities
+
+- [get-started](get-started) - Basic starter template
+- [child-workflows](child-workflows) - Example of parent-child workflow orchestration
+- [encryption](encryption) - Example of encrypted data handling in workflows
+- [human-loop](human-loop) - Example of human-in-the-loop workflows
+
 ### Examples with Service Provider (OpenAI, Gemini & more)
 
 - [openai](openai) - Basic OpenAI integration example
 - [gemini](gemini) - Example using Google's Gemini model
 - [composio](composio) - Calendar event creation with AI
+- [gotohuman](gotohuman) - Human-in-the-loop example using gotoHuman
 - [expresss-together-llamaindex](express-together-llamaindex) - Together AI and LlamaIndex integration with Express
 - [nextjs-together-llamaindex](nextjs-together-llamaindex) - Together AI and LlamaIndex integration with Next.js
 
 ### Framework Examples
-
-- [get-started](get-started) - Basic starter template
 - [nextjs](nextjs) - Integration with Next.js applications
 - [express](express) - Basic Express server to schedule restack workflows 
 - [swagger](swagger) - Express server with Swagger documentation to trigger restack workflow from Swagger UI
-- [human-loop](human-loop) - Example of human-in-the-loop workflows
-- [gotohuman](gotohuman) - Human-in-the-loop example using gotoHuman
+
 
 ## Documentation
 

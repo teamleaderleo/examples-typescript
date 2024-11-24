@@ -11,7 +11,7 @@ By default we retrieve all recodings from last 24 hours, so by scheduling the wo
 
 To install the Restack Web UI, you can use Docker.
 ```
-docker run -d --pull always --name studio -p 5233:5233 -p 6233:6233 -p 7233:7233 ghcr.io/restackio/restack:main
+docker run -d --pull always --name restack -p 5233:5233 -p 6233:6233 -p 7233:7233 ghcr.io/restackio/restack:main
 ```
 
 # Install dependencies

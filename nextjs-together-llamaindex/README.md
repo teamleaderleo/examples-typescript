@@ -21,7 +21,7 @@ This project demonstrates how to build a Next.js application that integrates Tog
 First, install the Restack Web UI using Docker:
 
 ```bash
-docker run -d --pull always --name studio -p 5233:5233 -p 6233:6233 -p 7233:7233 ghcr.io/restackio/restack:main
+docker run -d --pull always --name restack -p 5233:5233 -p 6233:6233 -p 7233:7233 ghcr.io/restackio/restack:main
 ```
 
 ### 2. Set Up Backend
