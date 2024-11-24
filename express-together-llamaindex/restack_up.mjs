@@ -21,8 +21,8 @@ const main = async () => {
 
   const expressServer = {
     name: "express",
-    dockerFilePath: "examples/express/Dockerfile",
-    dockerBuildContext: "examples/express",
+    dockerFilePath: "express/Dockerfile",
+    dockerBuildContext: "express",
     environmentVariables: [...restackEngineEnvs],
   };
 

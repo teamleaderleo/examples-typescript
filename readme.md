@@ -22,27 +22,27 @@ The Restack Web UI will be available at http://localhost:5233
 
 ### Autonomous AI Examples
 
-- [examples/posthog](examples/posthog) - Analyzes PostHog session recordings and creates Linear digests
-- [examples/voice](examples/voice) - Voice processing with Deepgram and OpenAI
+- [posthog](posthog) - Analyzes PostHog session recordings and creates Linear digests
+- [voice](voice) - Voice processing with Deepgram and OpenAI
 
 [Find more autonomous examples](https://docs.restack.io/examples)
 
 ### Examples with Service Provider (OpenAI, Gemini & more)
 
-- [examples/openai](examples/openai) - Basic OpenAI integration example
-- [examples/gemini](examples/gemini) - Example using Google's Gemini model
-- [examples/composio](examples/composio) - Calendar event creation with AI
-- [examples/expresss-together-llamaindex](examples/express-together-llamaindex) - Together AI and LlamaIndex integration with Express
-- [examples/nextjs-together-llamaindex](examples/nextjs-together-llamaindex) - Together AI and LlamaIndex integration with Next.js
+- [openai](openai) - Basic OpenAI integration example
+- [gemini](gemini) - Example using Google's Gemini model
+- [composio](composio) - Calendar event creation with AI
+- [expresss-together-llamaindex](express-together-llamaindex) - Together AI and LlamaIndex integration with Express
+- [nextjs-together-llamaindex](nextjs-together-llamaindex) - Together AI and LlamaIndex integration with Next.js
 
 ### Framework Examples
 
-- [examples/get-started](examples/get-started) - Basic starter template
-- [examples/nextjs](examples/nextjs) - Integration with Next.js applications
-- [examples/express](examples/express) - Basic Express server to schedule restack workflows 
-- [examples/swagger](examples/swagger) - Express server with Swagger documentation to trigger restack workflow from Swagger UI
-- [examples/human-loop](examples/human-loop) - Example of human-in-the-loop workflows
-- [examples/gotohuman](examples/gotohuman) - Human-in-the-loop example using gotoHuman
+- [get-started](get-started) - Basic starter template
+- [nextjs](nextjs) - Integration with Next.js applications
+- [express](express) - Basic Express server to schedule restack workflows 
+- [swagger](swagger) - Express server with Swagger documentation to trigger restack workflow from Swagger UI
+- [human-loop](human-loop) - Example of human-in-the-loop workflows
+- [gotohuman](gotohuman) - Human-in-the-loop example using gotoHuman
 
 ## Documentation
 

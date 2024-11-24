@@ -21,15 +21,15 @@ const main = async () => {
 
   const frontendNextJs = {
     name: "nextjs",
-    dockerFilePath: "examples/nextjs-together-llamaindex/frontend/Dockerfile",
-    dockerBuildContext: "examples/nextjs-together-llamaindex/frontend",
+    dockerFilePath: "nextjs-together-llamaindex/frontend/Dockerfile",
+    dockerBuildContext: "nextjs-together-llamaindex/frontend",
     environmentVariables: [...restackEngineEnvs],
   };
 
   const backendNodeJs = {
     name: "backend",
-    dockerFilePath: "examples/nextjs-together-llamaindex/backend/Dockerfile",
-    dockerBuildContext: "examples/nextjs-together-llamaindex/backend",
+    dockerFilePath: "nextjs-together-llamaindex/backend/Dockerfile",
+    dockerBuildContext: "nextjs-together-llamaindex/backend",
     environmentVariables: [
       ...restackEngineEnvs,
       {

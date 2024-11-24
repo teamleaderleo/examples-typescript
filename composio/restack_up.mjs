@@ -21,8 +21,8 @@ const main = async () => {
 
   const servicesApp = {
     name: "services",
-    dockerFilePath: "examples/composio/Dockerfile",
-    dockerBuildContext: "examples/composio",
+    dockerFilePath: "composio/Dockerfile",
+    dockerBuildContext: "composio",
     environmentVariables: [
       {
         name: "COMPOSIO_API_KEY",

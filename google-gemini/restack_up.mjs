@@ -21,8 +21,8 @@ const main = async () => {
 
   const servicesApp = {
     name: "services",
-    dockerFilePath: "examples/gemini/Dockerfile",
-    dockerBuildContext: "examples/gemini",
+    dockerFilePath: "gemini/Dockerfile",
+    dockerBuildContext: "gemini",
     environmentVariables: [
       {
         name: "GEMINI_API_KEY",

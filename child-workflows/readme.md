@@ -46,7 +46,7 @@ RESTACK_ENGINE_API_KEY=
 RESTACK_CLOUD_TOKEN=
 
 ```
-5. Now run the following command at the root of the folder `examples/childworkflows`
+5. Now run the following command at the root of the folder `childworkflows`
 
 ``` bash
 pnpm restack-up

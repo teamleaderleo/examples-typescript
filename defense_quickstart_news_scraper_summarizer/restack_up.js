@@ -53,9 +53,9 @@ const main = async () => {
   const frontend = {
     name: 'frontend',
     dockerFilePath:
-      'examples/defense_quickstart_news_scraper_summarizer/frontend/Dockerfile',
+      'defense_quickstart_news_scraper_summarizer/frontend/Dockerfile',
     dockerBuildContext:
-      'examples/defense_quickstart_news_scraper_summarizer/frontend',
+      'defense_quickstart_news_scraper_summarizer/frontend',
     environmentVariables: [...restackEngineEnvs],
     portMapping: [
       {
@@ -69,9 +69,9 @@ const main = async () => {
   const backend = {
     name: 'backend',
     dockerFilePath:
-      'examples/defense_quickstart_news_scraper_summarizer/backend/Dockerfile',
+      'defense_quickstart_news_scraper_summarizer/backend/Dockerfile',
     dockerBuildContext:
-      'examples/defense_quickstart_news_scraper_summarizer/backend',
+      'defense_quickstart_news_scraper_summarizer/backend',
     environmentVariables: [
       ...restackEngineEnvs,
       {

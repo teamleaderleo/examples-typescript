@@ -21,8 +21,8 @@ const main = async () => {
 
   const servicesApp = {
     name: "services",
-    dockerFilePath: "examples/posthog/Dockerfile",
-    dockerBuildContext: "examples/posthog",
+    dockerFilePath: "posthog/Dockerfile",
+    dockerBuildContext: "posthog",
     environmentVariables: [
       ...restackEngineEnvs,
       ...Object.keys(process.env).map((key) => ({

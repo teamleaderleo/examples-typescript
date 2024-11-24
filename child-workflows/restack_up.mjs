@@ -17,8 +17,8 @@ const main = async () => {
 
   const servicesApp = {
     name: "services",
-    dockerFilePath: "examples/child-workflows/Dockerfile",
-    dockerBuildContext: "examples/child-workflows",
+    dockerFilePath: "child-workflows/Dockerfile",
+    dockerBuildContext: "child-workflows",
     environmentVariables: [
       ...restackEngineEnvs,
       {

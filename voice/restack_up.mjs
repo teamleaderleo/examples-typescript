@@ -23,8 +23,8 @@ const main = async () => {
 
   const serverApp = {
     name: serverName,
-    dockerFilePath: "examples/voice/Dockerfile.server",
-    dockerBuildContext: "examples/voice",
+    dockerFilePath: "voice/Dockerfile.server",
+    dockerBuildContext: "voice",
     environmentVariables: [
       {
         name: "PORT",
@@ -40,8 +40,8 @@ const main = async () => {
 
   const servicesApp = {
     name: "services",
-    dockerFilePath: "examples/posthog/Dockerfile",
-    dockerBuildContext: "examples/posthog",
+    dockerFilePath: "posthog/Dockerfile",
+    dockerBuildContext: "posthog",
     environmentVariables: [
       {
         name: "OPENAI_API_KEY",

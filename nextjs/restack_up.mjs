@@ -21,8 +21,8 @@ const main = async () => {
 
   const nextjsApp = {
     name: "nextjs",
-    dockerFilePath: "examples/nextjs/Dockerfile",
-    dockerBuildContext: "examples/nextjs",
+    dockerFilePath: "nextjs/Dockerfile",
+    dockerBuildContext: "nextjs",
     environmentVariables: [...restackEngineEnvs],
   };
 

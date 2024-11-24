@@ -22,8 +22,8 @@ const main = async () => {
 
   const servicesApp = {
     name: "services",
-    dockerFilePath: "examples/get-started/Dockerfile",
-    dockerBuildContext: "examples/get-started",
+    dockerFilePath: "get-started/Dockerfile",
+    dockerBuildContext: "get-started",
     environmentVariables: [
       {
         name: "OPENAI_API_KEY",
