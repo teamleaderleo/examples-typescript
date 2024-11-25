@@ -1,10 +1,6 @@
 import { executeChild, step } from "@restackio/ai/workflow";
 import { recordingWorkflow } from "./recording";
 import * as functions from "../functions";
-import * as openaiFunctions from "@restackio/integrations-openai/functions";
-import { openaiTaskQueue } from "@restackio/integrations-openai/taskQueue";
-import * as linearFunctions from "@restackio/integrations-linear/functions";
-import { linearTaskQueue } from "@restackio/integrations-linear/taskQueue";
 
 export async function digestWorkflow({
   projectId,
@@ -60,8 +56,8 @@ export async function digestWorkflow({
 
   // Create a digest from all the chunks summaries
 
-  const { cost, result } = await step<typeof openaiFunctions>({
-    taskQueue: `${openaiTaskQueue}-beta`,
+  const { cost, result } = await step<typeof functions>({
+    taskQueue: `openai-beta`,
   }).openaiChatCompletionsBase({
     model: "o1-preview",
     userContent: `
@@ -88,8 +84,8 @@ export async function digestWorkflow({
   const digest = result.choices[0].message.content;
 
   if (linearTeamId) {
-    const linearResult = await step<typeof linearFunctions>({
-      taskQueue: linearTaskQueue,
+    const linearResult = await step<typeof functions>({
+      taskQueue: `linear`,
     }).linearCreateIssue({
       issue: {
         teamId: linearTeamId,

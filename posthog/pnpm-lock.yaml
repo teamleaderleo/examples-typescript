@@ -8,52 +8,52 @@ importers:
 
   .:
     dependencies:
+      '@linear/sdk':
+        specifier: 29.0.0
+        version: 29.0.0
       '@restackio/ai':
-        specifier: ^0.0.85
-        version: 0.0.85
-      '@restackio/integrations-linear':
-        specifier: ^0.0.8
-        version: 0.0.8
-      '@restackio/integrations-openai':
-        specifier: ^0.0.34
-        version: 0.0.34(zod@3.23.8)
+        specifier: 0.0.86
+        version: 0.0.86
       '@temporalio/workflow':
         specifier: 1.11.1
         version: 1.11.1
       dotenv:
-        specifier: ^16.4.5
+        specifier: 16.4.5
         version: 16.4.5
+      openai:
+        specifier: 4.71.1
+        version: 4.71.1(zod@3.23.8)
       typescript:
-        specifier: ^5.6.2
-        version: 5.6.3
+        specifier: 5.6.2
+        version: 5.6.2
       uuid:
-        specifier: ^10.0.0
+        specifier: 10.0.0
         version: 10.0.0
       zod:
-        specifier: ^3.23.8
+        specifier: 3.23.8
         version: 3.23.8
       zod-to-json-schema:
-        specifier: ^3.23.3
-        version: 3.23.5(zod@3.23.8)
+        specifier: 3.23.3
+        version: 3.23.3(zod@3.23.8)
     devDependencies:
       '@restackio/cloud':
-        specifier: ^1.0.19
+        specifier: 1.0.19
         version: 1.0.19
       '@types/node':
-        specifier: ^22.5.5
-        version: 22.9.1
+        specifier: 22.5.5
+        version: 22.5.5
       '@types/uuid':
-        specifier: ^10.0.0
+        specifier: 10.0.0
         version: 10.0.0
       nodemon:
-        specifier: ^3.1.4
-        version: 3.1.7
+        specifier: 3.1.4
+        version: 3.1.4
       ts-node:
-        specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.9.3)(@types/node@22.9.1)(typescript@5.6.3)
+        specifier: 10.9.2
+        version: 10.9.2(@swc/core@1.9.3)(@types/node@22.5.5)(typescript@5.6.2)
       ts-node-dev:
-        specifier: ^2.0.0
-        version: 2.0.0(@swc/core@1.9.3)(@types/node@22.9.1)(typescript@5.6.3)
+        specifier: 2.0.0
+        version: 2.0.0(@swc/core@1.9.3)(@types/node@22.5.5)(typescript@5.6.2)
 
 packages:
 
@@ -160,19 +160,13 @@ packages:
   '@protobufjs/utf8@1.1.0':
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
 
-  '@restackio/ai@0.0.85':
-    resolution: {integrity: sha512-UWDcywhNjcTn7TbgqJL1ahzpf722RZV57rnR/b5s48eMgUHZNNxMJWDvCYIW5IZKEvzLp124iu0FNrV9UbKTpA==}
+  '@restackio/ai@0.0.86':
+    resolution: {integrity: sha512-i4krGAb6mGRhk+5+H81uUK+mfu8DDBGtqb+HaSDq2uXDflrmbO+CrNbMfv5WMQKH6GMjM/RNw5CO7f6be48CsA==}
     engines: {node: '>=20'}
 
   '@restackio/cloud@1.0.19':
     resolution: {integrity: sha512-UJNfM4di6qGa3EqAZzUdcrGjK6tIj2YmQbGZouBZjpHDqG3kbzMZkgNPcW/UsCp0HYCKS36pUmDy6m1GkMFgNQ==}
     engines: {node: '>=18'}
-
-  '@restackio/integrations-linear@0.0.8':
-    resolution: {integrity: sha512-e27BeNtZ0MtYNTOJdX84u5f2Q+ei9n1j2L5KMQZ8IDi3h2LuPziid3e/1xwYt2InZG4GU0rfNXYcJOxOzRtvOg==}
-
-  '@restackio/integrations-openai@0.0.34':
-    resolution: {integrity: sha512-lXI9nHCDHZmSV52CFqVxpbO0egEQC4daLI9u+P8OxrUcCAfsPfgItO35hHi+orUubUGcQJAN4NdB3bTr2xqqeQ==}
 
   '@swc/core-darwin-arm64@1.9.3':
     resolution: {integrity: sha512-hGfl/KTic/QY4tB9DkTbNuxy5cV4IeejpPD4zo+Lzt4iLlDWIeANL4Fkg67FiVceNJboqg48CUX+APhDHO5G1w==}
@@ -310,8 +304,8 @@ packages:
   '@types/node@18.19.64':
     resolution: {integrity: sha512-955mDqvO2vFf/oL7V3WiUtiz+BugyX8uVbaT2H8oj3+8dRyH2FLiNdowe7eNqRM7IOIZvzDH76EoAT+gwm6aIQ==}
 
-  '@types/node@22.9.1':
-    resolution: {integrity: sha512-p8Yy/8sw1caA8CdRIQBG5tiLHmxtQKObCijiAa9Ez+d4+PRffM4054xbju0msf+cvhJpnFEeNjxmVT/0ipktrg==}
+  '@types/node@22.5.5':
+    resolution: {integrity: sha512-Xjs4y5UPO/CLdzpgR6GirZJx36yScjh73+2NlLlkFRSoQN8B0DpfXPdZGnvVmLRLOsqDpOfTNv7D9trgGhmOIA==}
 
   '@types/strip-bom@3.0.0':
     resolution: {integrity: sha512-xevGOReSYGM7g/kUBZzPqCrR/KYAo+F0yiPc85WFTJa0MSLtyFTVTU6cJu/aV4mid7IffDIWqo69THF2o4JiEQ==}
@@ -779,8 +773,8 @@ packages:
   node-releases@2.0.18:
     resolution: {integrity: sha512-d9VeXT4SJ7ZeOqGX6R5EM022wpL+eWPooLI+5UpWn2jCT1aosUQEhQP214x33Wkwx3JQMvIm+tIoVOdodFS40g==}
 
-  nodemon@3.1.7:
-    resolution: {integrity: sha512-hLj7fuMow6f0lbB0cD14Lz2xNjwsyruH251Pk4t/yIitCFJbmY1myuLlHm/q06aST4jg6EgAh74PIBBrRqpVAQ==}
+  nodemon@3.1.4:
+    resolution: {integrity: sha512-wjPBbFhtpJwmIeY2yP7QF+UKzPfltVGtfce1g/bB15/8vCGZj8uxD62b/b9M9/WVgme0NZudpownKN+c0plXlQ==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -795,8 +789,8 @@ packages:
     resolution: {integrity: sha512-mnkeQ1qP5Ue2wd+aivTD3NHd/lZ96Lu0jgf0pwktLPtx6cTZiH7tyeGRRHs0zX0rbrahXPnXlUnbeXyaBBuIaw==}
     engines: {node: '>=18'}
 
-  openai@4.73.0:
-    resolution: {integrity: sha512-NZstV77w3CEol9KQTRBRQ15+Sw6nxVTicAULSjYO4wn9E5gw72Mtp3fAVaBFXyyVPws4241YmFG6ya4L8v03tA==}
+  openai@4.71.1:
+    resolution: {integrity: sha512-C6JNMaQ1eijM0lrjiRUL3MgThVP5RdwNAghpbJFdW0t11LzmyqON8Eh8MuUuEZ+CeD6bgYl2Fkn2BoptVxv9Ug==}
     hasBin: true
     peerDependencies:
       zod: ^3.23.8
@@ -1040,8 +1034,8 @@ packages:
     resolution: {integrity: sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==}
     engines: {node: '>=12.20'}
 
-  typescript@5.6.3:
-    resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
+  typescript@5.6.2:
+    resolution: {integrity: sha512-NW8ByodCSNCwZeghjN3o+JX5OFH0Ojg6sadjEKY4huZ52TqbJTJnDo5+Tw98lSy63NZvi4n+ez5m2u5d4PkZyw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -1143,8 +1137,8 @@ packages:
   yup@1.4.0:
     resolution: {integrity: sha512-wPbgkJRCqIf+OHyiTBQoJiP5PFuAXaWiJK6AmYkzQAh5/c2K9hzSApBZG5wV9KoKSePF7sAxmNSvh/13YHkFDg==}
 
-  zod-to-json-schema@3.23.5:
-    resolution: {integrity: sha512-5wlSS0bXfF/BrL4jPAbz9da5hDlDptdEppYfe+x4eIJ7jioqKG9uUxOwPzqof09u/XeVdrgFu29lZi+8XNDJtA==}
+  zod-to-json-schema@3.23.3:
+    resolution: {integrity: sha512-TYWChTxKQbRJp5ST22o/Irt9KC5nj7CdBKYB/AosCRdj/wxEMvv4NNaj9XVUHDOIp53ZxArGhnw5HMZziPFjog==}
     peerDependencies:
       zod: ^3.23.3
 
@@ -1257,7 +1251,7 @@ snapshots:
 
   '@protobufjs/utf8@1.1.0': {}
 
-  '@restackio/ai@0.0.85':
+  '@restackio/ai@0.0.86':
     dependencies:
       '@temporalio/activity': 1.11.5
       '@temporalio/client': 1.11.5
@@ -1279,19 +1273,6 @@ snapshots:
       zod: 3.23.8
     transitivePeerDependencies:
       - supports-color
-
-  '@restackio/integrations-linear@0.0.8':
-    dependencies:
-      '@linear/sdk': 29.0.0
-    transitivePeerDependencies:
-      - encoding
-
-  '@restackio/integrations-openai@0.0.34(zod@3.23.8)':
-    dependencies:
-      openai: 4.73.0(zod@3.23.8)
-    transitivePeerDependencies:
-      - encoding
-      - zod
 
   '@swc/core-darwin-arm64@1.9.3':
     optional: true
@@ -1449,14 +1430,14 @@ snapshots:
 
   '@types/node-fetch@2.6.12':
     dependencies:
-      '@types/node': 22.9.1
+      '@types/node': 22.5.5
       form-data: 4.0.1
 
   '@types/node@18.19.64':
     dependencies:
       undici-types: 5.26.5
 
-  '@types/node@22.9.1':
+  '@types/node@22.5.5':
     dependencies:
       undici-types: 6.19.8
 
@@ -1833,7 +1814,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 22.9.1
+      '@types/node': 22.5.5
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -1886,7 +1867,7 @@ snapshots:
 
   node-releases@2.0.18: {}
 
-  nodemon@3.1.7:
+  nodemon@3.1.4:
     dependencies:
       chokidar: 3.6.0
       debug: 4.3.7(supports-color@5.5.0)
@@ -1912,7 +1893,7 @@ snapshots:
       is-inside-container: 1.0.0
       is-wsl: 3.1.0
 
-  openai@4.73.0(zod@3.23.8):
+  openai@4.71.1(zod@3.23.8):
     dependencies:
       '@types/node': 18.19.64
       '@types/node-fetch': 2.6.12
@@ -1952,7 +1933,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 22.9.1
+      '@types/node': 22.5.5
       long: 5.2.3
 
   pstree.remy@1.1.8: {}
@@ -2106,7 +2087,7 @@ snapshots:
 
   tree-kill@1.2.2: {}
 
-  ts-node-dev@2.0.0(@swc/core@1.9.3)(@types/node@22.9.1)(typescript@5.6.3):
+  ts-node-dev@2.0.0(@swc/core@1.9.3)(@types/node@22.5.5)(typescript@5.6.2):
     dependencies:
       chokidar: 3.6.0
       dynamic-dedupe: 0.3.0
@@ -2116,29 +2097,29 @@ snapshots:
       rimraf: 2.7.1
       source-map-support: 0.5.21
       tree-kill: 1.2.2
-      ts-node: 10.9.2(@swc/core@1.9.3)(@types/node@22.9.1)(typescript@5.6.3)
+      ts-node: 10.9.2(@swc/core@1.9.3)(@types/node@22.5.5)(typescript@5.6.2)
       tsconfig: 7.0.0
-      typescript: 5.6.3
+      typescript: 5.6.2
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
       - '@types/node'
 
-  ts-node@10.9.2(@swc/core@1.9.3)(@types/node@22.9.1)(typescript@5.6.3):
+  ts-node@10.9.2(@swc/core@1.9.3)(@types/node@22.5.5)(typescript@5.6.2):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 22.9.1
+      '@types/node': 22.5.5
       acorn: 8.14.0
       acorn-walk: 8.3.4
       arg: 4.1.3
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 5.6.3
+      typescript: 5.6.2
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     optionalDependencies:
@@ -2155,7 +2136,7 @@ snapshots:
 
   type-fest@2.19.0: {}
 
-  typescript@5.6.3: {}
+  typescript@5.6.2: {}
 
   undefsafe@2.0.5: {}
 
@@ -2268,7 +2249,7 @@ snapshots:
       toposort: 2.0.2
       type-fest: 2.19.0
 
-  zod-to-json-schema@3.23.5(zod@3.23.8):
+  zod-to-json-schema@3.23.3(zod@3.23.8):
     dependencies:
       zod: 3.23.8
 

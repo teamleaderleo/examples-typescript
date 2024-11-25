@@ -32,10 +32,41 @@ const main = async () => {
     ],
   };
 
+  const engine = {
+    name: 'restack_engine',
+    image: 'ghcr.io/restackio/restack:main',
+    portMapping: [
+      {
+        port: 5233,
+        path: '/',
+        name: 'engine-frontend',
+      },
+      {
+        port: 6233,
+        path: '/api',
+        name: 'engine-api',
+      },
+    ],
+    environmentVariables: [
+      {
+        name: 'RESTACK_ENGINE_ID',
+        value: process.env.RESTACK_ENGINE_ID,
+      },
+      {
+        name: 'RESTACK_ENGINE_ADDRESS',
+        value: process.env.RESTACK_ENGINE_ADDRESS_WITHOUT_PORT,
+      },
+      {
+        name: 'RESTACK_ENGINE_API_KEY',
+        value: process.env.RESTACK_ENGINE_API_KEY,
+      },
+    ],
+  };
+
   await restackCloudClient.stack({
     name: "posthog-example",
     previewEnabled: false,
-    applications: [servicesApp],
+    applications: [servicesApp, engine],
   });
 
   await restackCloudClient.up();
