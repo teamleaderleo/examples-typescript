@@ -47,20 +47,7 @@ const main = async () => {
         name: 'engine-api',
       },
     ],
-    environmentVariables: [
-      {
-        name: 'RESTACK_ENGINE_ID',
-        value: process.env.RESTACK_ENGINE_ID,
-      },
-      {
-        name: 'RESTACK_ENGINE_ADDRESS',
-        value: process.env.RESTACK_ENGINE_ADDRESS_WITHOUT_PORT,
-      },
-      {
-        name: 'RESTACK_ENGINE_API_KEY',
-        value: process.env.RESTACK_ENGINE_API_KEY,
-      },
-    ],
+    environmentVariables: [...restackEngineEnvs],
   };
 
   await restackCloudClient.stack({
