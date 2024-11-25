@@ -2,14 +2,12 @@ import { step, log, workflowInfo, condition } from "@restackio/ai/workflow";
 import * as functions from "../../functions";
 import { onEvent } from "@restackio/ai/event";
 import { streamEvent, toolCallEvent, conversationEndEvent } from "./events";
-import { openaiTaskQueue } from "@restackio/integrations-openai/taskQueue";
-import * as openaiFunctions from "@restackio/integrations-openai/functions";
 import { UserEvent, userEvent } from "../room/events";
 
 import {
   StreamEvent,
   ToolCallEvent,
-} from "@restackio/integrations-openai/types";
+} from "../../functions/openai/types";
 import { agentPrompt } from "../../functions/openai/prompt";
 import {
   ChatModel,
@@ -53,8 +51,8 @@ export async function conversationWorkflow({
       },
     };
 
-    const { result } = await step<typeof openaiFunctions>({
-      taskQueue: openaiTaskQueue,
+    const { result } = await step<typeof functions>({
+      taskQueue: "openai",
     }).openaiChatCompletionsStream({
       userName,
       newMessage: message,
@@ -69,8 +67,8 @@ export async function conversationWorkflow({
     // On user event, send it to AI chat with previous messages to continue conversation.
 
     onEvent(userEvent, async ({ message, userName }: UserEvent) => {
-      const { result } = await step<typeof openaiFunctions>({
-        taskQueue: openaiTaskQueue,
+      const { result } = await step<typeof functions>({
+        taskQueue: "openai",
       }).openaiChatCompletionsStream({
         newMessage: message,
         userName,
@@ -152,8 +150,8 @@ export async function conversationWorkflow({
           name: toolFunction.name,
         });
 
-        const { result } = await step<typeof openaiFunctions>({
-          taskQueue: openaiTaskQueue,
+        const { result } = await step<typeof functions>({
+          taskQueue: "openai",
         }).openaiChatCompletionsStream({
           messages: openaiChatMessages,
           ...commonOpenaiOptions,

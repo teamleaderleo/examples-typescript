@@ -1,5 +1,5 @@
 import { defineEvent } from "@restackio/ai/event";
-import { WebsocketEvent } from "@restackio/integrations-websocket/types";
+import { WebsocketEvent } from "../functions/websocket/types";
 
 export type RoomInfo = {
   streamSid: string;

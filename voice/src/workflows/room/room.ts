@@ -18,12 +18,8 @@ import {
   roomMessageEvent,
 } from "./events";
 import { streamEvent } from "../conversation/events";
-import { websocketTaskQueue } from "@restackio/integrations-websocket/taskQueue";
-import * as websocketFunctions from "@restackio/integrations-websocket/functions";
-import { deepgramTaskQueue } from "@restackio/integrations-deepgram/taskQueue";
-import * as deepgramFunctions from "@restackio/integrations-deepgram/functions";
-import { StreamEvent } from "@restackio/integrations-openai/types";
-import { WebsocketEvent } from "@restackio/integrations-websocket/types";
+import { StreamEvent } from "../../functions/openai/types";
+import { WebsocketEvent } from "../../functions/websocket/types";
 
 export async function roomWorkflow({ address }: { address?: string }) {
   try {
@@ -41,8 +37,8 @@ export async function roomWorkflow({ address }: { address?: string }) {
     // Start long running websocket and stream welcome message to websocket.
     onEvent(streamInfoEvent, async ({ streamSid }: RoomInfo) => {
       log.info(`Workflow update with streamSid: ${streamSid}`);
-      step<typeof websocketFunctions>({
-        taskQueue: websocketTaskQueue,
+      step<typeof functions>({
+        taskQueue: "websocket",
         scheduleToCloseTimeout: "1 hour",
         heartbeatTimeout: "2 minutes",
       }).websocketListen({
@@ -62,15 +58,15 @@ export async function roomWorkflow({ address }: { address?: string }) {
 
       const welcomeMessage = "Hello! I am Pete from Apple.";
 
-      const { media } = await step<typeof deepgramFunctions>({
-        taskQueue: deepgramTaskQueue,
+      const { media } = await step<typeof functions>({
+        taskQueue: "deepgram",
       }).deepgramSpeak({
         text: welcomeMessage,
         twilioEncoding: true,
       });
 
-      await step<typeof websocketFunctions>({
-        taskQueue: websocketTaskQueue,
+      await step<typeof functions>({
+        taskQueue: "websocket",
       }).websocketSend({
         name: "media",
         input: {
@@ -83,8 +79,8 @@ export async function roomWorkflow({ address }: { address?: string }) {
         address,
       });
 
-      await step<typeof websocketFunctions>({
-        taskQueue: websocketTaskQueue,
+      await step<typeof functions>({
+        taskQueue: "websocket",
       }).websocketSend({
         name: roomMessageEvent.name,
         input: {
@@ -105,8 +101,8 @@ export async function roomWorkflow({ address }: { address?: string }) {
 
       if (!media?.payload || media.trackId === assistantName) return;
 
-      const { result } = await step<typeof deepgramFunctions>({
-        taskQueue: deepgramTaskQueue,
+      const { result } = await step<typeof functions>({
+        taskQueue: "deepgram",
       }).deepgramListen({
         base64Payload: media?.payload,
         twilioEncoding: true,
@@ -137,8 +133,8 @@ export async function roomWorkflow({ address }: { address?: string }) {
 
       interactionCount += 1;
 
-      step<typeof websocketFunctions>({
-        taskQueue: websocketTaskQueue,
+      step<typeof functions>({
+        taskQueue: "websocket",
       }).websocketSend({
         name: userEvent.name,
         input: {
@@ -189,8 +185,8 @@ export async function roomWorkflow({ address }: { address?: string }) {
     onEvent(
       streamEvent,
       async ({ response, isLast, assistantName }: StreamEvent) => {
-        const { media } = await step<typeof deepgramFunctions>({
-          taskQueue: deepgramTaskQueue,
+        const { media } = await step<typeof functions>({
+          taskQueue: "deepgram",
         }).deepgramSpeak({
           text: response,
           twilioEncoding: true,
@@ -204,8 +200,8 @@ export async function roomWorkflow({ address }: { address?: string }) {
           while (audioQueue.length > 0) {
             const { audio } = audioQueue.shift()!;
 
-            await step<typeof websocketFunctions>({
-              taskQueue: websocketTaskQueue,
+            await step<typeof functions>({
+              taskQueue: "websocket",
             }).websocketSend({
               name: "media",
               input: {
@@ -219,8 +215,8 @@ export async function roomWorkflow({ address }: { address?: string }) {
             });
           }
 
-          await step<typeof websocketFunctions>({
-            taskQueue: websocketTaskQueue,
+          await step<typeof functions>({
+            taskQueue: "websocket",
           }).websocketSend({
             name: roomMessageEvent.name,
             input: {

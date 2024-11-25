@@ -4,11 +4,14 @@ import {
   erpPlaceOrder,
   erpCheckInventory,
   erpCheckPrice,
+  websocketSend,
+  websocketListen,
+  twilioCall,
+  openaiChatCompletionsBase,
+  openaiChatCompletionsStream,
+  deepgramListen,
+  deepgramSpeak,
 } from "./functions";
-import { websocketService } from "@restackio/integrations-websocket";
-import { twilioService } from "@restackio/integrations-twilio";
-import { openaiService } from "@restackio/integrations-openai";
-import { deepgramService } from "@restackio/integrations-deepgram";
 import { client } from "./client";
 
 export async function services() {
@@ -29,10 +32,34 @@ export async function services() {
           erpPlaceOrder,
         },
       }),
-      websocketService({ client }),
-      twilioService({ client }),
-      openaiService({ client }),
-      deepgramService({ client }),
+      client.startService({
+        taskQueue: "websocket",
+        functions: {
+          websocketSend,
+          websocketListen,
+        },
+      }),
+      client.startService({
+        taskQueue: "twilio",
+        functions: {
+          twilioCall,
+        },
+      }),
+      client.startService({
+        taskQueue: "openai",
+        functions: {
+          openaiChatCompletionsBase,
+          openaiChatCompletionsStream,
+        },
+      }),
+      client.startService({
+        taskQueue: "deepgram",
+        functions: {
+          deepgramListen,
+          deepgramSpeak,
+        },
+      }),
+
     ]);
 
     console.log("Services running successfully.");

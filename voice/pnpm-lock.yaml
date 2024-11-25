@@ -9,85 +9,73 @@ importers:
   .:
     dependencies:
       '@deepgram/sdk':
-        specifier: ^3.6.0
-        version: 3.9.0(bufferutil@4.0.8)
+        specifier: 3.6.0
+        version: 3.6.0(bufferutil@4.0.8)
       '@restackio/ai':
-        specifier: ^0.0.85
+        specifier: 0.0.85
         version: 0.0.85
-      '@restackio/integrations-deepgram':
-        specifier: ^0.0.13
-        version: 0.0.13(bufferutil@4.0.8)
-      '@restackio/integrations-openai':
-        specifier: ^0.0.34
-        version: 0.0.34(zod@3.23.8)
-      '@restackio/integrations-twilio':
-        specifier: ^0.0.10
-        version: 0.0.10
-      '@restackio/integrations-websocket':
-        specifier: ^0.0.17
-        version: 0.0.17(bufferutil@4.0.8)
       '@temporalio/workflow':
         specifier: 1.11.1
         version: 1.11.1
       cors:
-        specifier: ^2.8.5
+        specifier: 2.8.5
         version: 2.8.5
       dotenv:
-        specifier: ^16.4.5
+        specifier: 16.4.5
         version: 16.4.5
       express:
-        specifier: ^4.21.0
-        version: 4.21.1
+        specifier: 4.21.0
+        version: 4.21.0
       openai:
-        specifier: ^4.59.0
-        version: 4.73.0(zod@3.23.8)
+        specifier: 4.59.0
+        version: 4.59.0(zod@3.23.8)
       ts-node:
-        specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.9.3)(@types/node@22.9.1)(typescript@5.6.3)
+        specifier: 10.9.2
+        version: 10.9.2(@swc/core@1.9.3)(@types/node@22.5.4)(typescript@5.6.2)
       twilio:
-        specifier: ^5.3.0
-        version: 5.3.6
+        specifier: 5.3.0
+        version: 5.3.0
       typescript:
-        specifier: ^5.6.2
-        version: 5.6.3
+        specifier: 5.6.2
+        version: 5.6.2
       uuid:
-        specifier: ^10.0.0
+        specifier: 10.0.0
         version: 10.0.0
       ws:
-        specifier: ^8.18.0
+        specifier: 8.18.0
         version: 8.18.0(bufferutil@4.0.8)
       zod:
-        specifier: ^3.23.8
+        specifier: 3.23.8
         version: 3.23.8
     optionalDependencies:
       bufferutil:
-        specifier: ^4.0.8
+        specifier: 4.0.8
         version: 4.0.8
     devDependencies:
       '@restackio/cloud':
-        specifier: ^1.0.19
+        specifier: 1.0.19
         version: 1.0.19
       '@types/cors':
-        specifier: ^2.8.17
+        specifier: 2.8.17
         version: 2.8.17
       '@types/express':
-        specifier: ^4.17.21
+        specifier: 4.17.21
         version: 4.17.21
       '@types/node':
-        specifier: ^22.5.4
-        version: 22.9.1
+        specifier: 22.5.4
+        version: 22.5.4
       '@types/uuid':
-        specifier: ^10.0.0
+        specifier: 10.0.0
         version: 10.0.0
       '@types/ws':
-        specifier: ^8.5.12
-        version: 8.5.13
+        specifier: 8.5.12
+        version: 8.5.12
       nodemon:
-        specifier: ^3.1.4
-        version: 3.1.7
+        specifier: 3.1.4
+        version: 3.1.4
       ts-node-dev:
-        specifier: ^2.0.0
-        version: 2.0.0(@swc/core@1.9.3)(@types/node@22.9.1)(typescript@5.6.3)
+        specifier: 2.0.0
+        version: 2.0.0(@swc/core@1.9.3)(@types/node@22.5.4)(typescript@5.6.2)
 
 packages:
 
@@ -99,8 +87,8 @@ packages:
     resolution: {integrity: sha512-8B1C/oTxTxyHlSFubAhNRgCbQ2SQ5wwvtlByn8sDYZvdDtdn/VE2yEPZ4BvUnrKWmsbTQY6/ooLV+9Ka2qmDSQ==}
     engines: {node: '>=18.0.0'}
 
-  '@deepgram/sdk@3.9.0':
-    resolution: {integrity: sha512-X/7JzoYjCObyEaPb2Dgnkwk2LwRe4bw0FJJCLdkjpnFfJCFgA9IWgRD8FEUI6/hp8dW/CqqXkGPA2Q3DIsVG8A==}
+  '@deepgram/sdk@3.6.0':
+    resolution: {integrity: sha512-uErkoOyBjdk3u4UyowxN6LtjuLv8s1V/29WVeR2Y2M1wKGo93s8dlYFsF3R1SWeMaeJOimpCcwjWvMQbYrmS6Q==}
     engines: {node: '>=18.0.0'}
 
   '@grpc/grpc-js@1.12.2':
@@ -200,18 +188,6 @@ packages:
   '@restackio/cloud@1.0.19':
     resolution: {integrity: sha512-UJNfM4di6qGa3EqAZzUdcrGjK6tIj2YmQbGZouBZjpHDqG3kbzMZkgNPcW/UsCp0HYCKS36pUmDy6m1GkMFgNQ==}
     engines: {node: '>=18'}
-
-  '@restackio/integrations-deepgram@0.0.13':
-    resolution: {integrity: sha512-sg4dVbUo8Oba2Bvhc0GaOcJjA8k4l4hVoEMT23un4XYiusLGsGKEpbvAjB4lu9ABM+TMLHVGh28YPdy0x4T27w==}
-
-  '@restackio/integrations-openai@0.0.34':
-    resolution: {integrity: sha512-lXI9nHCDHZmSV52CFqVxpbO0egEQC4daLI9u+P8OxrUcCAfsPfgItO35hHi+orUubUGcQJAN4NdB3bTr2xqqeQ==}
-
-  '@restackio/integrations-twilio@0.0.10':
-    resolution: {integrity: sha512-Yx+vVBy31bKnttoq2rcyWrmSTMzi5wJCXKUEpyxCyhF4I66nbjuX+acCprhayVt4Gca0euj/mY7Acy6hMpVlCg==}
-
-  '@restackio/integrations-websocket@0.0.17':
-    resolution: {integrity: sha512-JLPW1rU+BAGHAw4GIw2HZtHgRbzaWzLZVpHnqkgU99M5mEUpu4bCT5sLHnwIc8tpWKm/vQZR0hbsFjTtOVBziw==}
 
   '@swc/core-darwin-arm64@1.9.3':
     resolution: {integrity: sha512-hGfl/KTic/QY4tB9DkTbNuxy5cV4IeejpPD4zo+Lzt4iLlDWIeANL4Fkg67FiVceNJboqg48CUX+APhDHO5G1w==}
@@ -370,8 +346,8 @@ packages:
   '@types/node@18.19.64':
     resolution: {integrity: sha512-955mDqvO2vFf/oL7V3WiUtiz+BugyX8uVbaT2H8oj3+8dRyH2FLiNdowe7eNqRM7IOIZvzDH76EoAT+gwm6aIQ==}
 
-  '@types/node@22.9.1':
-    resolution: {integrity: sha512-p8Yy/8sw1caA8CdRIQBG5tiLHmxtQKObCijiAa9Ez+d4+PRffM4054xbju0msf+cvhJpnFEeNjxmVT/0ipktrg==}
+  '@types/node@22.5.4':
+    resolution: {integrity: sha512-FDuKUJQm/ju9fT/SeX/6+gBzoPzlVCzfzmGkwKvRHQVxi4BntVbyIwf6a4Xn62mrvndLiml6z/UBXIdEVjQLXg==}
 
   '@types/qs@6.9.17':
     resolution: {integrity: sha512-rX4/bPcfmvxHDv0XjfJELTTr+iB+tn032nPILqHm5wbthUUUuVtNGGqzhya9XUxjTP8Fpr0qYgSZZKxGY++svQ==}
@@ -394,8 +370,8 @@ packages:
   '@types/uuid@10.0.0':
     resolution: {integrity: sha512-7gqG38EyHgyP1S+7+xomFtL+ZNHcKv6DwNaCZmJmo1vgMugyF3TCnXVg4t1uk89mLNwnLtnY3TpOpCOyp1/xHQ==}
 
-  '@types/ws@8.5.13':
-    resolution: {integrity: sha512-osM/gWBTPKgHV8XkTunnegTRIsvF6owmf5w+JtAfOw472dptdm0dlGv4xCt6GwQRcC2XVOvvRE/0bAoQcL2QkA==}
+  '@types/ws@8.5.12':
+    resolution: {integrity: sha512-3tPRkv1EtkDpzlgyKyI8pGsGZAGPEaXeu0DOj5DI25Ja91bdAYddYHbADRYVrZMRbfW+1l5YwXVDKohDJNQxkQ==}
 
   '@webassemblyjs/ast@1.14.1':
     resolution: {integrity: sha512-nuBEDgQfm1ccRp/8bCQrx1frohyufl4JlbMMZ4P1wpeOfDhF6FQkxZJ1b/e+PLwr6X1Nhw6OLme5usuBWYBvuQ==}
@@ -604,8 +580,8 @@ packages:
   cookie-signature@1.0.6:
     resolution: {integrity: sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==}
 
-  cookie@0.7.1:
-    resolution: {integrity: sha512-6DnInpx7SJ2AK3+CTUE/ZM0vWTUboZCegxhC2xiIydHR9jNuTAASBrfEpHhiGOZw/nX51bHt6YQl8jsGo4y/0w==}
+  cookie@0.6.0:
+    resolution: {integrity: sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==}
     engines: {node: '>= 0.6'}
 
   cors@2.8.5:
@@ -751,8 +727,8 @@ packages:
     resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
     engines: {node: '>=0.8.x'}
 
-  express@4.21.1:
-    resolution: {integrity: sha512-YSFlK1Ee0/GC8QaO91tHcDxJiE/X4FbpAyQWkxAvG6AXCuR65YzK8ua6D9hvi/TzUfZMpc+BwuM1IPw8fmQBiQ==}
+  express@4.21.0:
+    resolution: {integrity: sha512-VqcNGcj/Id5ZT1LZ/cfihi3ttTn+NJmkli2eZADigjq29qTlWi/hAQ43t/VLPq8+UX06FCEx3ByOYet6ZFblng==}
     engines: {node: '>= 0.10.0'}
 
   fast-deep-equal@3.1.3:
@@ -1075,8 +1051,8 @@ packages:
   node-releases@2.0.18:
     resolution: {integrity: sha512-d9VeXT4SJ7ZeOqGX6R5EM022wpL+eWPooLI+5UpWn2jCT1aosUQEhQP214x33Wkwx3JQMvIm+tIoVOdodFS40g==}
 
-  nodemon@3.1.7:
-    resolution: {integrity: sha512-hLj7fuMow6f0lbB0cD14Lz2xNjwsyruH251Pk4t/yIitCFJbmY1myuLlHm/q06aST4jg6EgAh74PIBBrRqpVAQ==}
+  nodemon@3.1.4:
+    resolution: {integrity: sha512-wjPBbFhtpJwmIeY2yP7QF+UKzPfltVGtfce1g/bB15/8vCGZj8uxD62b/b9M9/WVgme0NZudpownKN+c0plXlQ==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -1103,8 +1079,8 @@ packages:
     resolution: {integrity: sha512-mnkeQ1qP5Ue2wd+aivTD3NHd/lZ96Lu0jgf0pwktLPtx6cTZiH7tyeGRRHs0zX0rbrahXPnXlUnbeXyaBBuIaw==}
     engines: {node: '>=18'}
 
-  openai@4.73.0:
-    resolution: {integrity: sha512-NZstV77w3CEol9KQTRBRQ15+Sw6nxVTicAULSjYO4wn9E5gw72Mtp3fAVaBFXyyVPws4241YmFG6ya4L8v03tA==}
+  openai@4.59.0:
+    resolution: {integrity: sha512-3bn7FypMt2R1ZDuO0+GcXgBEnVFhIzrpUkb47pQRoYvyfdZ2fQXcuP14aOc4C8F9FvCtZ/ElzJmVzVqnP4nHNg==}
     hasBin: true
     peerDependencies:
       zod: ^3.23.8
@@ -1404,8 +1380,8 @@ packages:
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
-  twilio@5.3.6:
-    resolution: {integrity: sha512-izHce9sWpiIYyFeZ5pJb5KQeHQ6NDyGuCQ+BOTbBS64ZWq+0InWXvWjZsXbFwGFrhn5MQq0ulouLtYOXiEYY8g==}
+  twilio@5.3.0:
+    resolution: {integrity: sha512-bwveAxChPPFR2umttraRjUJdq/WY0OJCCgetzuKqLoGYqYSyYGsiFYYFAB5EOL/XnzCQNwAvq5622u+jqMTLOA==}
     engines: {node: '>=14.0'}
 
   type-fest@2.19.0:
@@ -1416,8 +1392,8 @@ packages:
     resolution: {integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==}
     engines: {node: '>= 0.6'}
 
-  typescript@5.6.3:
-    resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
+  typescript@5.6.2:
+    resolution: {integrity: sha512-NW8ByodCSNCwZeghjN3o+JX5OFH0Ojg6sadjEKY4huZ52TqbJTJnDo5+Tw98lSy63NZvi4n+ez5m2u5d4PkZyw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -1557,10 +1533,9 @@ snapshots:
     dependencies:
       dayjs: 1.11.13
 
-  '@deepgram/sdk@3.9.0(bufferutil@4.0.8)':
+  '@deepgram/sdk@3.6.0(bufferutil@4.0.8)':
     dependencies:
       '@deepgram/captions': 1.2.0
-      '@types/node': 18.19.64
       cross-fetch: 3.1.8
       deepmerge: 4.3.1
       events: 3.3.0
@@ -1680,35 +1655,6 @@ snapshots:
       zod: 3.23.8
     transitivePeerDependencies:
       - supports-color
-
-  '@restackio/integrations-deepgram@0.0.13(bufferutil@4.0.8)':
-    dependencies:
-      '@deepgram/sdk': 3.9.0(bufferutil@4.0.8)
-    transitivePeerDependencies:
-      - bufferutil
-      - encoding
-      - utf-8-validate
-
-  '@restackio/integrations-openai@0.0.34(zod@3.23.8)':
-    dependencies:
-      openai: 4.73.0(zod@3.23.8)
-    transitivePeerDependencies:
-      - encoding
-      - zod
-
-  '@restackio/integrations-twilio@0.0.10':
-    dependencies:
-      twilio: 5.3.6
-    transitivePeerDependencies:
-      - debug
-      - supports-color
-
-  '@restackio/integrations-websocket@0.0.17(bufferutil@4.0.8)':
-    dependencies:
-      ws: 8.18.0(bufferutil@4.0.8)
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
 
   '@swc/core-darwin-arm64@1.9.3':
     optional: true
@@ -1853,15 +1799,15 @@ snapshots:
   '@types/body-parser@1.19.5':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 22.9.1
+      '@types/node': 22.5.4
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 22.9.1
+      '@types/node': 22.5.4
 
   '@types/cors@2.8.17':
     dependencies:
-      '@types/node': 22.9.1
+      '@types/node': 22.5.4
 
   '@types/eslint-scope@3.7.7':
     dependencies:
@@ -1877,7 +1823,7 @@ snapshots:
 
   '@types/express-serve-static-core@4.19.6':
     dependencies:
-      '@types/node': 22.9.1
+      '@types/node': 22.5.4
       '@types/qs': 6.9.17
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
@@ -1897,14 +1843,14 @@ snapshots:
 
   '@types/node-fetch@2.6.12':
     dependencies:
-      '@types/node': 22.9.1
+      '@types/node': 22.5.4
       form-data: 4.0.1
 
   '@types/node@18.19.64':
     dependencies:
       undici-types: 5.26.5
 
-  '@types/node@22.9.1':
+  '@types/node@22.5.4':
     dependencies:
       undici-types: 6.19.8
 
@@ -1915,12 +1861,12 @@ snapshots:
   '@types/send@0.17.4':
     dependencies:
       '@types/mime': 1.3.5
-      '@types/node': 22.9.1
+      '@types/node': 22.5.4
 
   '@types/serve-static@1.15.7':
     dependencies:
       '@types/http-errors': 2.0.4
-      '@types/node': 22.9.1
+      '@types/node': 22.5.4
       '@types/send': 0.17.4
 
   '@types/strip-bom@3.0.0': {}
@@ -1929,9 +1875,9 @@ snapshots:
 
   '@types/uuid@10.0.0': {}
 
-  '@types/ws@8.5.13':
+  '@types/ws@8.5.12':
     dependencies:
-      '@types/node': 22.9.1
+      '@types/node': 22.5.4
 
   '@webassemblyjs/ast@1.14.1':
     dependencies:
@@ -2187,7 +2133,7 @@ snapshots:
 
   cookie-signature@1.0.6: {}
 
-  cookie@0.7.1: {}
+  cookie@0.6.0: {}
 
   cors@2.8.5:
     dependencies:
@@ -2295,14 +2241,14 @@ snapshots:
 
   events@3.3.0: {}
 
-  express@4.21.1:
+  express@4.21.0:
     dependencies:
       accepts: 1.3.8
       array-flatten: 1.1.1
       body-parser: 1.20.3
       content-disposition: 0.5.4
       content-type: 1.0.5
-      cookie: 0.7.1
+      cookie: 0.6.0
       cookie-signature: 1.0.6
       debug: 2.6.9
       depd: 2.0.0
@@ -2500,7 +2446,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 22.9.1
+      '@types/node': 22.5.4
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -2606,7 +2552,7 @@ snapshots:
 
   node-releases@2.0.18: {}
 
-  nodemon@3.1.7:
+  nodemon@3.1.4:
     dependencies:
       chokidar: 3.6.0
       debug: 4.3.7(supports-color@5.5.0)
@@ -2640,15 +2586,17 @@ snapshots:
       is-inside-container: 1.0.0
       is-wsl: 3.1.0
 
-  openai@4.73.0(zod@3.23.8):
+  openai@4.59.0(zod@3.23.8):
     dependencies:
       '@types/node': 18.19.64
       '@types/node-fetch': 2.6.12
+      '@types/qs': 6.9.17
       abort-controller: 3.0.0
       agentkeepalive: 4.5.0
       form-data-encoder: 1.7.2
       formdata-node: 4.4.1
       node-fetch: 2.7.0
+      qs: 6.13.1
     optionalDependencies:
       zod: 3.23.8
     transitivePeerDependencies:
@@ -2684,7 +2632,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 22.9.1
+      '@types/node': 22.5.4
       long: 5.2.3
 
   proxy-addr@2.0.7:
@@ -2913,7 +2861,7 @@ snapshots:
 
   tree-kill@1.2.2: {}
 
-  ts-node-dev@2.0.0(@swc/core@1.9.3)(@types/node@22.9.1)(typescript@5.6.3):
+  ts-node-dev@2.0.0(@swc/core@1.9.3)(@types/node@22.5.4)(typescript@5.6.2):
     dependencies:
       chokidar: 3.6.0
       dynamic-dedupe: 0.3.0
@@ -2923,29 +2871,29 @@ snapshots:
       rimraf: 2.7.1
       source-map-support: 0.5.21
       tree-kill: 1.2.2
-      ts-node: 10.9.2(@swc/core@1.9.3)(@types/node@22.9.1)(typescript@5.6.3)
+      ts-node: 10.9.2(@swc/core@1.9.3)(@types/node@22.5.4)(typescript@5.6.2)
       tsconfig: 7.0.0
-      typescript: 5.6.3
+      typescript: 5.6.2
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
       - '@types/node'
 
-  ts-node@10.9.2(@swc/core@1.9.3)(@types/node@22.9.1)(typescript@5.6.3):
+  ts-node@10.9.2(@swc/core@1.9.3)(@types/node@22.5.4)(typescript@5.6.2):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 22.9.1
+      '@types/node': 22.5.4
       acorn: 8.14.0
       acorn-walk: 8.3.4
       arg: 4.1.3
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 5.6.3
+      typescript: 5.6.2
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     optionalDependencies:
@@ -2960,7 +2908,7 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  twilio@5.3.6:
+  twilio@5.3.0:
     dependencies:
       axios: 1.7.7
       dayjs: 1.11.13
@@ -2980,7 +2928,7 @@ snapshots:
       media-typer: 0.3.0
       mime-types: 2.1.35
 
-  typescript@5.6.3: {}
+  typescript@5.6.2: {}
 
   undefsafe@2.0.5: {}
 
