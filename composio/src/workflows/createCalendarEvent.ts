@@ -12,7 +12,7 @@ export async function createCalendarEventWorkflow({
     taskQueue: "composio",
   }).initiateConnection({
     entityId,
-    appName: "googlecalendar",
+    appName: 'googlecalendar',
   });
 
   if (!connection.authenticated) {

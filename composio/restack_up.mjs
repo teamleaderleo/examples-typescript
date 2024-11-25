@@ -28,6 +28,10 @@ const main = async () => {
         name: "COMPOSIO_API_KEY",
         value: process.env.COMPOSIO_API_KEY,
       },
+      {
+        name: "OPENAI_API_KEY",
+        value: process.env.OPENAI_API_KEY,
+      },
       ...restackEngineEnvs,
     ],
   };
@@ -48,18 +52,7 @@ const main = async () => {
       },
     ],
     environmentVariables: [
-      {
-        name: 'RESTACK_ENGINE_ID',
-        value: process.env.RESTACK_ENGINE_ID,
-      },
-      {
-        name: 'RESTACK_ENGINE_ADDRESS',
-        value: process.env.RESTACK_ENGINE_ADDRESS_WITHOUT_PORT,
-      },
-      {
-        name: 'RESTACK_ENGINE_API_KEY',
-        value: process.env.RESTACK_ENGINE_API_KEY,
-      },
+      ...restackEngineEnvs,
     ],
   };
   await restackCloudClient.stack({

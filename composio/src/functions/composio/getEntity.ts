@@ -11,9 +11,9 @@ export async function getEntity({
   entityId: string;
 }): Promise<Entity> {
   const client = composioClient({ composioApiKey });
-
+  console.log("client", client);
   try {
-    const entity = await client.getEntity(entityId);
+    const entity = client.getEntity(entityId);
     return entity;
   } catch (error) {
     throw FunctionFailure.nonRetryable(`Error getting entity: ${error}`);

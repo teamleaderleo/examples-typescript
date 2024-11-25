@@ -1,4 +1,4 @@
-import { createCalendarEvent } from "./functions";
+import { createCalendarEvent, initiateConnection, getExpectedParamsForUser, getEntityConnections, getEntity } from "./functions";
 import { client } from "./client";
 
 async function services() {
@@ -14,6 +14,10 @@ async function services() {
         taskQueue: "composio",
         functions: {
           createCalendarEvent,
+          initiateConnection,
+          getExpectedParamsForUser,
+          getEntityConnections,
+          getEntity,
         },
       }),
     ]);
