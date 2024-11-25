@@ -31,7 +31,7 @@ docker run -d --pull always --name restack -p 5233:5233 -p 6233:6233 -p 7233:723
 pnpm schedule-workflow
 ```
 
-This will trigger a demo Workflow - a _greeting_, which is a simple function and _goodbye_, which uses [@restackio/integration-openai](https://www.npmjs.com/package/@restackio/integrations-openai).
+This will trigger a demo Workflow - a _greeting_, which is a simple function and _goodbye_, which uses Open AI Node.js SDK.
 
 ## Deploy on Restack Cloud
 
