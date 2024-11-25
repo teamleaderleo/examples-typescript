@@ -108,9 +108,9 @@ export async function roomWorkflow({ address }: { address?: string }) {
         twilioEncoding: true,
       });
 
-      const transcript = result.results.channels[0].alternatives[0].transcript;
+      const transcript = result?.results.channels[0].alternatives[0].transcript;
 
-      if (!transcript.length) {
+      if (!transcript?.length) {
         const input: StreamEvent = {
           response: "Sorry i didn't understand. Can you repeat?",
           assistantName,
@@ -153,7 +153,7 @@ export async function roomWorkflow({ address }: { address?: string }) {
             {
               assistantName,
               userName: media.trackId,
-              message: transcript,
+              message: transcript!,
             },
           ],
           workflowId: `${streamSid}-conversationWorkflow`,
@@ -162,7 +162,7 @@ export async function roomWorkflow({ address }: { address?: string }) {
       } else {
         const input: UserEvent = {
           userName: media.trackId,
-          message: transcript,
+          message: transcript!,
         };
         step<typeof functions>({
           taskQueue: `restack`,
@@ -207,7 +207,7 @@ export async function roomWorkflow({ address }: { address?: string }) {
               input: {
                 streamSid: currentstreamSid,
                 media: {
-                  trackId: assistantName,
+                  trackId: assistantName!,
                   payload: audio,
                 },
               },
@@ -221,7 +221,7 @@ export async function roomWorkflow({ address }: { address?: string }) {
             name: roomMessageEvent.name,
             input: {
               streamSid: currentstreamSid,
-              data: { trackId: assistantName, text: response },
+              data: { trackId: assistantName!, text: response },
             },
             address,
           });

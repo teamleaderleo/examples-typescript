@@ -7,8 +7,8 @@ export function twilioClient({
   accountSid = process.env.TWILIO_ACCOUNT_SID,
   authToken = process.env.TWILIO_AUTH_TOKEN,
 }: {
-  accountSid: string;
-  authToken: string;
+  accountSid?: string;
+  authToken?: string;
 }) {
   if (!accountSid || !authToken) {
     throw new Error(

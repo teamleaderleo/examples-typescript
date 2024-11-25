@@ -42,7 +42,7 @@ export async function deepgramSpeak({
   }
 
   try {
-    const deepgram = deepgramClient({ apiKey });
+    const deepgram = deepgramClient();
     const response = await deepgram.speak.request(
       { text },
       {

@@ -13,12 +13,10 @@ export async function deepgramListen({
     utterance_end_ms: 2000,
   },
   twilioEncoding,
-  apiKey,
 }: {
   base64Payload: string;
   options?: PrerecordedSchema;
   twilioEncoding?: boolean;
-  apiKey?: string;
 }) {
   if (!base64Payload) {
     throw FunctionFailure.nonRetryable("No audio file");
@@ -27,7 +25,7 @@ export async function deepgramListen({
   try {
     const decodedBuffer = Buffer.from(base64Payload, "base64");
 
-    const deepgram = deepgramClient({ apiKey });
+    const deepgram = deepgramClient();
 
     const response = await deepgram.listen.prerecorded.transcribeFile(
       decodedBuffer,
@@ -45,13 +43,13 @@ export async function deepgramListen({
     }
 
     const result = response.result;
-    const firstChannel = result.results?.channels?.[0];
+    const firstChannel = result?.results?.channels?.[0];
 
     const transcript = firstChannel?.alternatives?.[0]?.transcript;
 
     let language = "";
     if (options.detect_language) {
-      language = firstChannel?.detected_language;
+      language = firstChannel?.detected_language!;
     }
 
     return {

@@ -9,7 +9,7 @@ export function websocketConnect({
 }): Promise<WebSocket> {
   return new Promise((resolve, reject) => {
     try {
-      const ws = new WebSocket(address);
+      const ws = new WebSocket(address!);
 
       ws.on("open", () => {
         resolve(ws);

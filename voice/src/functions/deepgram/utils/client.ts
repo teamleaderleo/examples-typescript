@@ -3,11 +3,8 @@ import "dotenv/config";
 
 let clientDeepgram: DeepgramClient;
 
-export function deepgramClient({
-  apiKey = process.env.DEEPGRAM_API_KEY,
-}: {
-  apiKey: string;
-}) {
+export function deepgramClient() {
+  const apiKey = process.env.DEEPGRAM_API_KEY;
   if (!apiKey) {
     throw new Error("API key is required to create Deepgram client.");
   }
