@@ -25,10 +25,30 @@ const main = async () => {
     dockerBuildContext: "posthog",
     environmentVariables: [
       ...restackEngineEnvs,
-      ...Object.keys(process.env).map((key) => ({
-        name: key,
-        value: process.env[key],
-      })),
+      {
+        name: "POSTHOG_API_KEY",
+        value: process.env.POSTHOG_API_KEY,
+      },
+      {
+        name: "POSTHOG_PROJECT_ID",
+        value: process.env.POSTHOG_PROJECT_ID,
+      },
+      {
+        name: "POSTHOG_HOST",
+        value: process.env.POSTHOG_HOST,
+      },
+      {
+        name: "OPENAI_API_KEY",
+        value: process.env.OPENAI_API_KEY,
+      },
+      {
+        name: "LINEAR_API_KEY",
+        value: process.env.LINEAR_API_KEY,
+      },
+      {
+        name: "LINEAR_TEAM_ID",
+        value: process.env.LINEAR_TEAM_ID,
+      },
     ],
   };
 
