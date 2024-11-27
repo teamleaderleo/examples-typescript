@@ -1,6 +1,6 @@
 # Overview
 
-The gemini example showcases how you can use the Restack AI Composio integration. A workflow has been created that will create an even on the google calendar of the provided entity.
+The Composio example showcases how you can use the Restack AI together with [Composio](https://composio.dev). A workflow has been created that will create an even on the google calendar of the provided entity.
 
 # Requirements
 

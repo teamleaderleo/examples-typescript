@@ -1,4 +1,4 @@
-import { createCalendarEvent, initiateConnection, getExpectedParamsForUser, getEntityConnections, getEntity } from "./functions";
+import { getMessagesAfterId, postMessageToChannel, postReplyToMessage } from "./functions";
 import { client } from "./client";
 
 async function services() {
@@ -8,17 +8,7 @@ async function services() {
       // Start service with current workflows and functions
       client.startService({
         workflowsPath,
-      }),
-      // Start the composio service
-      client.startService({
-        taskQueue: "composio",
-        functions: {
-          createCalendarEvent,
-          initiateConnection,
-          getExpectedParamsForUser,
-          getEntityConnections,
-          getEntity,
-        },
+        functions: { postMessageToChannel, getMessagesAfterId, postReplyToMessage },
       }),
     ]);
 
