@@ -8,6 +8,6 @@ export async function getEntityConnections({
   composioApiKey?: string;
 }) {
   const toolSetClient = openAiToolsetClient({ composioApiKey, entityId });
-  const connections = await toolSetClient.client.connectedAccounts.list();
+  const connections = await toolSetClient.client.connectedAccounts.list({});
   return connections;
 }

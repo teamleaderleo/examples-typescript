@@ -26,5 +26,5 @@ export async function createCalendarEvent({
     toolChoice: "auto",
   });
 
-  await composioOpenAiClient.handleToolCall(result);
+  return composioOpenAiClient.handleToolCall(result);
 }

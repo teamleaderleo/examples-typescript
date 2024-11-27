@@ -22,12 +22,12 @@ export async function createCalendarEventWorkflow({
     return connection;
   }
 
-  await step<typeof functions>({
+  const calendarEvent = await step<typeof functions>({
     taskQueue: "composio",
   }).createCalendarEvent({
     entityId,
     calendarInstruction,
   });
 
-  return true;
+  return calendarEvent;
 }
