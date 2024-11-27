@@ -1,6 +1,5 @@
 import { step, log } from "@restackio/ai/workflow";
-import * as composioFunctions from "@restackio/integrations-composio/functions";
-import { composioTaskQueue } from "@restackio/integrations-composio/taskQueue";
+import * as functions from "../functions";
 
 export async function createCalendarEventWorkflow({
   entityId,
@@ -9,11 +8,11 @@ export async function createCalendarEventWorkflow({
   entityId: string;
   calendarInstruction: string;
 }) {
-  const connection = await step<typeof composioFunctions>({
-    taskQueue: composioTaskQueue,
+  const connection = await step<typeof functions>({
+    taskQueue: "composio",
   }).initiateConnection({
     entityId,
-    appName: "googlecalendar",
+    appName: 'googlecalendar',
   });
 
   if (!connection.authenticated) {
@@ -23,12 +22,12 @@ export async function createCalendarEventWorkflow({
     return connection;
   }
 
-  await step<typeof composioFunctions>({
-    taskQueue: composioTaskQueue,
+  const calendarEvent = await step<typeof functions>({
+    taskQueue: "composio",
   }).createCalendarEvent({
     entityId,
     calendarInstruction,
   });
 
-  return true;
+  return calendarEvent;
 }
