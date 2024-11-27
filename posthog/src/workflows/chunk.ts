@@ -1,7 +1,5 @@
 import { log, step } from "@restackio/ai/workflow";
 import * as functions from "../functions";
-import * as openaiFunctions from "@restackio/integrations-openai/functions";
-import { openaiTaskQueue } from "@restackio/integrations-openai/taskQueue";
 import z from "zod";
 import zodToJsonSchema from "zod-to-json-schema";
 
@@ -43,8 +41,8 @@ export async function chunkWorkflow({
     schema: zodToJsonSchema(chunkSummarySchema),
   };
 
-  const { cost, result } = await step<typeof openaiFunctions>({
-    taskQueue: openaiTaskQueue,
+  const { cost, result } = await step<typeof functions>({
+    taskQueue: "openai",
   }).openaiChatCompletionsBase({
     systemContent:
       "You are a helpful assistant that summarizes posthog recordings. Here is the snapshot blob of it",

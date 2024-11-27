@@ -6,16 +6,16 @@ const main = async () => {
 
   const restackEngineEnvs = [
     {
-      name: "RESTACK_ENGINE_ENV_ID",
-      value: process.env.RESTACK_ENGINE_ENV_ID,
+      name: "RESTACK_ENGINE_ID",
+      value: process.env.RESTACK_ENGINE_ID,
     },
     {
-      name: "RESTACK_ENGINE_ENV_ADDRESS",
-      value: process.env.RESTACK_ENGINE_ENV_ADDRESS,
+      name: "RESTACK_ENGINE_ADDRESS",
+      value: process.env.RESTACK_ENGINE_ADDRESS,
     },
     {
-      name: "RESTACK_ENGINE_ENV_API_KEY",
-      value: process.env.RESTACK_ENGINE_ENV_API_KEY,
+      name: "RESTACK_ENGINE_API_KEY",
+      value: process.env.RESTACK_ENGINE_API_KEY,
     },
   ];
 
@@ -25,17 +25,55 @@ const main = async () => {
     dockerBuildContext: "posthog",
     environmentVariables: [
       ...restackEngineEnvs,
-      ...Object.keys(process.env).map((key) => ({
-        name: key,
-        value: process.env[key],
-      })),
+      {
+        name: "POSTHOG_API_KEY",
+        value: process.env.POSTHOG_API_KEY,
+      },
+      {
+        name: "POSTHOG_PROJECT_ID",
+        value: process.env.POSTHOG_PROJECT_ID,
+      },
+      {
+        name: "POSTHOG_HOST",
+        value: process.env.POSTHOG_HOST,
+      },
+      {
+        name: "OPENAI_API_KEY",
+        value: process.env.OPENAI_API_KEY,
+      },
+      {
+        name: "LINEAR_API_KEY",
+        value: process.env.LINEAR_API_KEY,
+      },
+      {
+        name: "LINEAR_TEAM_ID",
+        value: process.env.LINEAR_TEAM_ID,
+      },
     ],
+  };
+
+  const engine = {
+    name: 'restack_engine',
+    image: 'ghcr.io/restackio/restack:main',
+    portMapping: [
+      {
+        port: 5233,
+        path: '/',
+        name: 'engine-frontend',
+      },
+      {
+        port: 6233,
+        path: '/api',
+        name: 'engine-api',
+      },
+    ],
+    environmentVariables: [...restackEngineEnvs],
   };
 
   await restackCloudClient.stack({
     name: "posthog-example",
     previewEnabled: false,
-    applications: [servicesApp],
+    applications: [servicesApp, engine],
   });
 
   await restackCloudClient.up();
