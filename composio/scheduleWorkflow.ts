@@ -28,6 +28,6 @@ async function scheduleWorkflow(input: InputSchedule) {
 }
 
 scheduleWorkflow({
-  entityId: "jessicai",
+  entityId: "default",
   calendarInstruction: `Create a 1 hour meeting event at 5:30PM tomorrow. Today's date is ${today}`,
 });

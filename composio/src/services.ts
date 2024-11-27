@@ -1,5 +1,4 @@
-import { composioService } from "@restackio/integrations-composio";
-
+import { createCalendarEvent, initiateConnection, getExpectedParamsForUser, getEntityConnections, getEntity } from "./functions";
 import { client } from "./client";
 
 async function services() {
@@ -11,7 +10,16 @@ async function services() {
         workflowsPath,
       }),
       // Start the composio service
-      composioService({ client }),
+      client.startService({
+        taskQueue: "composio",
+        functions: {
+          createCalendarEvent,
+          initiateConnection,
+          getExpectedParamsForUser,
+          getEntityConnections,
+          getEntity,
+        },
+      }),
     ]);
 
     console.log("Services running successfully.");

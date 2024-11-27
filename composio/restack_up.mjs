@@ -28,14 +28,37 @@ const main = async () => {
         name: "COMPOSIO_API_KEY",
         value: process.env.COMPOSIO_API_KEY,
       },
+      {
+        name: "OPENAI_API_KEY",
+        value: process.env.OPENAI_API_KEY,
+      },
       ...restackEngineEnvs,
     ],
   };
 
+  const engine = {
+    name: "restack_engine",
+    image: "ghcr.io/restackio/restack:main",
+    portMapping: [
+      {
+        port: 5233,
+        path: '/',
+        name: 'engine-frontend',
+      },
+      {
+        port: 6233,
+        path: '/api',
+        name: 'engine-api',
+      },
+    ],
+    environmentVariables: [
+      ...restackEngineEnvs,
+    ],
+  };
   await restackCloudClient.stack({
     name: "composio development environment",
     previewEnabled: false,
-    applications: [servicesApp],
+    applications: [servicesApp, engine],
   });
 
   await restackCloudClient.up();

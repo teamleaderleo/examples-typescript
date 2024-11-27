@@ -5,10 +5,12 @@ import {
   posthogBlobChunks,
   posthogSessionEvents,
   workflowSendEvent,
+  linearCreateComment,
+  linearCreateIssue,
+  openaiChatCompletionsBase,
+  openaiChatCompletionsStream,
 } from "./functions";
-import { openaiService } from "@restackio/integrations-openai";
 import { client } from "./client";
-import { linearService } from "@restackio/integrations-linear";
 
 async function services() {
   const workflowsPath = require.resolve("./workflows");
@@ -36,9 +38,36 @@ async function services() {
           rateLimit: 240 * 60,
         },
       }),
-      openaiService({ client }),
-      openaiService({ client, taskQueueSuffix: "-beta" }),
-      linearService({ client }),
+      client.startService({
+        taskQueue: "openai",
+        functions: {
+          openaiChatCompletionsBase,
+          openaiChatCompletionsStream,
+        },
+        options: {
+          rateLimit: 240 * 60,
+        },
+      }),
+      client.startService({
+        taskQueue: "openai-beta",
+        functions: {
+          openaiChatCompletionsBase,
+          openaiChatCompletionsStream,
+        },
+        options: {
+          rateLimit: 240 * 60,
+        },
+      }),
+      client.startService({
+        taskQueue: "linear",
+        functions: {
+          linearCreateComment,
+          linearCreateIssue,
+        },
+        options: {
+          rateLimit: 240 * 60,
+        },
+      }),
     ]);
 
     console.log("Services running successfully.");
