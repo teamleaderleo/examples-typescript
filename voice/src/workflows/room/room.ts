@@ -34,6 +34,7 @@ export async function roomWorkflow({ address }: { address?: string }) {
 
     const assistantName = "agent";
 
+    console.log("address", address);
     // Start long running websocket and stream welcome message to websocket.
     onEvent(streamInfoEvent, async ({ streamSid }: RoomInfo) => {
       log.info(`Workflow update with streamSid: ${streamSid}`);
