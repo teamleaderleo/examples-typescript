@@ -53,8 +53,8 @@ importers:
         version: 4.0.8
     devDependencies:
       '@restackio/cloud':
-        specifier: 1.0.21
-        version: 1.0.21
+        specifier: 1.0.23
+        version: 1.0.23
       '@types/cors':
         specifier: 2.8.17
         version: 2.8.17
@@ -335,8 +335,8 @@ packages:
     resolution: {integrity: sha512-i4krGAb6mGRhk+5+H81uUK+mfu8DDBGtqb+HaSDq2uXDflrmbO+CrNbMfv5WMQKH6GMjM/RNw5CO7f6be48CsA==}
     engines: {node: '>=20'}
 
-  '@restackio/cloud@1.0.21':
-    resolution: {integrity: sha512-KZTl9vww0eGoAVf7TKmOIk9fJ+OIlLzwjLzJb2tILFsye08nvmEvVM5KW8oCxyeXxtAyATYsysqs626XND5p1g==}
+  '@restackio/cloud@1.0.23':
+    resolution: {integrity: sha512-f2vjpTBQi0ecW4gzvcQp8saUNtVCUc1wsZrQ0A2X4tbysHujx4IOcdN+NI+s5IDvzq1qMJDyxkjTDjd/wjRp2g==}
     engines: {node: '>=18'}
 
   '@swc/core-darwin-arm64@1.9.3':
@@ -1906,7 +1906,7 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@restackio/cloud@1.0.21':
+  '@restackio/cloud@1.0.23':
     dependencies:
       chalk: 4.1.2
       dotenv: 16.4.5

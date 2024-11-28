@@ -32,10 +32,11 @@ const main = async () => {
       },
       {
         name: "SERVER_HOST",
-        value: "0.0.0.0",
+        value: "localhost:80",
       },
       ...restackEngineEnvs,
     ],
+    healthCheckPath: "/"
   };
 
   const servicesApp = {
@@ -95,6 +96,7 @@ const main = async () => {
       },
     ],
     environmentVariables: [...restackEngineEnvs],
+    healthCheckPath: "/",
   };
 
   await restackCloudClient.stack({
