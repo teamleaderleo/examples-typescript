@@ -32,7 +32,7 @@ const main = async () => {
       },
       {
         name: "SERVER_HOST",
-        value: "localhost:80",
+        linkTo: serverName,
       },
       ...restackEngineEnvs,
     ],
