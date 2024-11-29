@@ -36,6 +36,4 @@ COPY --from=builder /app .
 
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 
-EXPOSE 80
-
 CMD ["node", "dist/server"]

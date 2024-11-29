@@ -27,14 +27,17 @@ const main = async () => {
     dockerBuildContext: "voice",
     environmentVariables: [
       {
-        name: "PORT",
-        value: "80",
-      },
-      {
         name: "SERVER_HOST",
         linkTo: serverName,
       },
       ...restackEngineEnvs,
+    ],
+    portMapping: [
+      {
+        port: 4000,
+        path: "/",
+        name: "server",
+      },
     ],
     healthCheckPath: "/"
   };
