@@ -1,4 +1,4 @@
-import { client } from "../hello/src/client";
+import { client } from "./src/client";
 
 async function scheduleWorkflow() {
   try {

@@ -1,6 +1,5 @@
 import { log, step } from "@restackio/ai/workflow";
-import * as twilioFunctions from "@restackio/integrations-twilio/functions";
-import { twilioTaskQueue } from "@restackio/integrations-twilio/taskQueue";
+import * as functions from "../functions";
 interface Output {
   sid: string;
 }
@@ -14,8 +13,8 @@ export async function twilioCallWorkflow({
   from: string;
   url: string;
 }): Promise<Output> {
-  const { sid } = await step<typeof twilioFunctions>({
-    taskQueue: twilioTaskQueue,
+  const { sid } = await step<typeof functions>({
+    taskQueue: "twilio",
     scheduleToCloseTimeout: "1 minute",
   }).twilioCall({
     options: {

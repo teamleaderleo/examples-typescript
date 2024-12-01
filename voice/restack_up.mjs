@@ -8,16 +8,16 @@ const main = async () => {
 
   const restackEngineEnvs = [
     {
-      name: "RESTACK_ENGINE_ENV_ID",
-      value: process.env.RESTACK_ENGINE_ENV_ID,
+      name: "RESTACK_ENGINE_ID",
+      value: process.env.RESTACK_ENGINE_ID,
     },
     {
-      name: "RESTACK_ENGINE_ENV_ADDRESS",
-      value: process.env.RESTACK_ENGINE_ENV_ADDRESS,
+      name: "RESTACK_ENGINE_ADDRESS",
+      value: process.env.RESTACK_ENGINE_ADDRESS,
     },
     {
-      name: "RESTACK_ENGINE_ENV_API_KEY",
-      value: process.env.RESTACK_ENGINE_ENV_API_KEY,
+      name: "RESTACK_ENGINE_API_KEY",
+      value: process.env.RESTACK_ENGINE_API_KEY,
     },
   ];
 
@@ -27,21 +27,25 @@ const main = async () => {
     dockerBuildContext: "voice",
     environmentVariables: [
       {
-        name: "PORT",
-        value: "80",
-      },
-      {
         name: "SERVER_HOST",
         linkTo: serverName,
       },
       ...restackEngineEnvs,
     ],
+    portMapping: [
+      {
+        port: 4000,
+        path: "/",
+        name: "server",
+      },
+    ],
+    healthCheckPath: "/"
   };
 
   const servicesApp = {
     name: "services",
-    dockerFilePath: "posthog/Dockerfile",
-    dockerBuildContext: "posthog",
+    dockerFilePath: "voice/Dockerfile.services",
+    dockerBuildContext: "voice",
     environmentVariables: [
       {
         name: "OPENAI_API_KEY",
@@ -79,10 +83,29 @@ const main = async () => {
     ],
   };
 
+  const engine = {
+    name: 'restack_engine',
+    image: 'ghcr.io/restackio/restack:main',
+    portMapping: [
+      {
+        port: 5233,
+        path: '/',
+        name: 'engine-frontend',
+      },
+      {
+        port: 6233,
+        path: '/api',
+        name: 'engine-api',
+      },
+    ],
+    environmentVariables: [...restackEngineEnvs],
+    healthCheckPath: "/",
+  };
+
   await restackCloudClient.stack({
     name: "development environment",
     previewEnabled: false,
-    applications: [serverApp, servicesApp],
+    applications: [serverApp, servicesApp, engine],
   });
 
   await restackCloudClient.up();

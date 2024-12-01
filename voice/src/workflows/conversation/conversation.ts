@@ -2,18 +2,18 @@ import { step, log, workflowInfo, condition } from "@restackio/ai/workflow";
 import * as functions from "../../functions";
 import { onEvent } from "@restackio/ai/event";
 import { streamEvent, toolCallEvent, conversationEndEvent } from "./events";
-import { openaiTaskQueue } from "@restackio/integrations-openai/taskQueue";
-import * as openaiFunctions from "@restackio/integrations-openai/functions";
 import { UserEvent, userEvent } from "../room/events";
 
 import {
   StreamEvent,
   ToolCallEvent,
-} from "@restackio/integrations-openai/types";
+} from "../../functions/openai/types";
 import { agentPrompt } from "../../functions/openai/prompt";
 import {
   ChatModel,
   ChatCompletionAssistantMessageParam,
+  ChatCompletionMessageParam,
+  ChatCompletionTool,
 } from "openai/resources/index";
 
 export async function conversationWorkflow({
@@ -29,9 +29,7 @@ export async function conversationWorkflow({
     const parentWorkflow = workflowInfo().parent;
     if (!parentWorkflow) throw "no parent Workflow";
 
-    let openaiChatMessages: any[] = [];
-
-    // Get tools definition and start conversation.
+    let openaiChatMessages: ChatCompletionMessageParam[] = [];
 
     const tools = await step<typeof functions>({
       taskQueue: "erp",
@@ -53,8 +51,8 @@ export async function conversationWorkflow({
       },
     };
 
-    const { result } = await step<typeof openaiFunctions>({
-      taskQueue: openaiTaskQueue,
+    const response = await step<typeof functions>({
+      taskQueue: "openai",
     }).openaiChatCompletionsStream({
       userName,
       newMessage: message,
@@ -62,15 +60,13 @@ export async function conversationWorkflow({
       ...commonOpenaiOptions,
     });
 
-    if (result.messages) {
-      openaiChatMessages = result.messages;
+    if (response?.result?.messages) {
+      openaiChatMessages = response.result.messages;
     }
 
-    // On user event, send it to AI chat with previous messages to continue conversation.
-
     onEvent(userEvent, async ({ message, userName }: UserEvent) => {
-      const { result } = await step<typeof openaiFunctions>({
-        taskQueue: openaiTaskQueue,
+      const response = await step<typeof functions>({
+        taskQueue: "openai",
       }).openaiChatCompletionsStream({
         newMessage: message,
         userName,
@@ -78,12 +74,12 @@ export async function conversationWorkflow({
         ...commonOpenaiOptions,
       });
 
-      if (result.messages) {
-        openaiChatMessages = result.messages;
+      if (response?.result?.messages) {
+        openaiChatMessages = response.result.messages;
       }
 
-      if (result.toolCalls) {
-        result.toolCalls.map(async (toolCall) => {
+      if (response?.result?.toolCalls) {
+        response.result.toolCalls.map(async (toolCall) => {
           const toolResponse = `Sure, let me ${toolCall?.function?.name}...`;
           const toolMessage: ChatCompletionAssistantMessageParam = {
             content: toolResponse,
@@ -111,8 +107,6 @@ export async function conversationWorkflow({
 
       return { message };
     });
-
-    // When AI answer is a tool call, execute function and push results to conversation.
 
     onEvent(
       toolCallEvent,
@@ -152,22 +146,20 @@ export async function conversationWorkflow({
           name: toolFunction.name,
         });
 
-        const { result } = await step<typeof openaiFunctions>({
-          taskQueue: openaiTaskQueue,
+        const response = await step<typeof functions>({
+          taskQueue: "openai",
         }).openaiChatCompletionsStream({
           messages: openaiChatMessages,
           ...commonOpenaiOptions,
         });
 
-        if (result.messages) {
-          openaiChatMessages = result.messages;
+        if (response?.result?.messages) {
+          openaiChatMessages = response.result.messages;
         }
 
         return { function: toolFunction };
       }
     );
-
-    // Terminate conversation workflow.
 
     let ended = false;
     onEvent(conversationEndEvent, async () => {

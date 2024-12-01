@@ -11,41 +11,44 @@
     "build": "tsc --build",
     "clean": "rm -rf node_modules",
     "call": "ts-node ./callWorkflow.ts",
-    "ngrok": "ngrok http 4000"
+    "ngrok": "ngrok http 4000",
+    "restack-up": "dotenv -e .env -- tsx restack_up.mjs",
+    "docker:build:server": "docker build -f Dockerfile.server -t voice .",
+    "docker:run:server": "docker run -d -p 4000:4000 voice",
+    "docker:build:services": "docker build -f Dockerfile.services -t voice .",
+    "docker:run:services": "docker run -d -p 4000:4000 voice"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@deepgram/sdk": "^3.6.0",
-    "@restackio/ai": "^0.0.85",
-    "@restackio/integrations-deepgram": "^0.0.13",
-    "@restackio/integrations-openai": "^0.0.34",
-    "@restackio/integrations-twilio": "^0.0.10",
-    "@restackio/integrations-websocket": "^0.0.17",
-    "@temporalio/workflow": "1.11.1",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.21.0",
-    "openai": "^4.59.0",
-    "ts-node": "^10.9.2",
-    "twilio": "^5.3.0",
-    "typescript": "^5.6.2",
-    "uuid": "^10.0.0",
-    "ws": "^8.18.0",
-    "zod": "^3.23.8"
+    "@restackio/ai": "0.0.86",
+    "@temporalio/workflow": "1.11.5",
+    "cors": "2.8.5",
+    "dotenv": "16.4.5",
+    "express": "4.21.0",
+    "openai": "4.59.0",
+    "ts-node": "10.9.2",
+    "twilio": "5.3.0",
+    "@deepgram/sdk": "3.6.0",
+    "typescript": "5.6.2",
+    "uuid": "10.0.0",
+    "ws": "8.18.0",
+    "zod": "3.23.8"
   },
   "devDependencies": {
-    "@restackio/cloud": "^1.0.19",
-    "@types/cors": "^2.8.17",
-    "@types/express": "^4.17.21",
-    "@types/node": "^22.5.4",
-    "@types/uuid": "^10.0.0",
-    "@types/ws": "^8.5.12",
-    "nodemon": "^3.1.4",
-    "ts-node-dev": "^2.0.0"
+    "@restackio/cloud": "1.0.23",
+    "@types/cors": "2.8.17",
+    "@types/express": "4.17.21",
+    "@types/node": "22.5.4",
+    "@types/uuid": "10.0.0",
+    "@types/ws": "8.5.12",
+    "nodemon": "3.1.4",
+    "ts-node-dev": "2.0.0",
+    "tsx": "4.19.2",
+    "dotenv-cli": "7.4.4"
   },
   "optionalDependencies": {
-    "bufferutil": "^4.0.8"
+    "bufferutil": "4.0.8"
   }
 }
