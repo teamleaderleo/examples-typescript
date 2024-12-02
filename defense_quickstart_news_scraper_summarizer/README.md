@@ -1,4 +1,4 @@
-# Quickstart: War news scraper & summarizer - USS Hornet Defense Tech Hackathon 
+# Quickstart: War news scraper & summarizer - USS Hornet Defense Tech Hackathon
 
 This project demonstrates how to build a Next.js application that scrapes and summarizes defense news articles using OpenBabylon AI. Built for the USS Hornet Defense Tech Hackathon, it features a Next.js frontend for displaying summarized news and a backend service that handles RSS feed scraping, content translation, and AI-powered summarization of defense-related articles.
 
@@ -12,7 +12,7 @@ OPENBABYLON_API_URL=64.139.222.109:80/v1
 
 ## Functions
 
-A core feature of Restack is the ability to build [TypeScript functions](https://docs.restack.io/libraries/typescript/reference/functions) that can be executed as workflow steps. Each function supports rate limiting, retries, error handling and replay capabilities.
+A core feature of Restack is the ability to build [TypeScript functions](https://docs.restack.io/libraries/typescript/functions) that can be executed as workflow steps. Each function supports rate limiting, retries, error handling and replay capabilities.
 
 1. **rssPull**: Fetches and parses RSS feeds with encoding detection, supporting multiple RSS formats and character encodings
 2. **crawlWebsite**: Extracts clean article content from web pages using Mozilla's Readability
@@ -51,7 +51,6 @@ Functions can be executed as steps in a [workflow](https://docs.restack.io/featu
 - OpenBabylon AI API URL (No API KEY NEEDED)
 - Restack Engine local
 
-
 ## Getting Started
 
 ### 1. Install Restack Web UI & Engine on local
@@ -66,7 +65,6 @@ docker run -d --pull always --name restack -p 5233:5233 -p 6233:6233 -p 7233:723
 - Access the Web UI at http://localhost:5233 to monitor workflow runs, view logs, and manage functions
 
 ![Restack Engine UI](./restack-engine-ui.png)
-
 
 ### 2. Set Up Backend with Restack AI
 
@@ -92,7 +90,7 @@ OPENBABYLON_API_URL=<OPENBABYLON_API_URL>
 # (Optional) Restack Cloud - You only need to set these if you are using Restack Cloud.
 
 # Do not forget to add the port :433
-RESTACK_ENGINE_ADDRESS=<RESTACK_ENGINE_ADDRESS:443>  
+RESTACK_ENGINE_ADDRESS=<RESTACK_ENGINE_ADDRESS:443>
 RESTACK_ENGINE_ID=<RESTACK_ENGINE_ID>
 RESTACK_ENGINE_API_KEY=<RESTACK_ENGINE_API_KEY>
 RESTACK_CLOUD_TOKEN=<RESTACK_CLOUD_TOKEN>
@@ -128,11 +126,12 @@ OPENBABYLON_API_URL=<OPENBABYLON_API_URL>
 # (Optional) Restack Cloud - You only need to set these if you are using Restack Cloud.
 
 # Do not forget to add the port :433
-RESTACK_ENGINE_ADDRESS=<RESTACK_ENGINE_ADDRESS:443>  
+RESTACK_ENGINE_ADDRESS=<RESTACK_ENGINE_ADDRESS:443>
 RESTACK_ENGINE_ID=<RESTACK_ENGINE_ID>
 RESTACK_ENGINE_API_KEY=<RESTACK_ENGINE_API_KEY>
 RESTACK_CLOUD_TOKEN=<RESTACK_CLOUD_TOKEN>
 ```
+
 4. Start the development server:
 
 ```bash
@@ -149,11 +148,12 @@ To deploy the example on Restack Cloud, follow these steps:
 
 1. [Sign-up to restack cloud](https:console.restack.io)
 2. Go to `Workspace > Settings > Token` and generate an API token
-3. Create a new cloud engine. 
+3. Create a new cloud engine.
 
---- Back in your IDE --- 
+--- Back in your IDE ---
+
 4. Copy the env variables from `env.example` into your `.env` file at the root of the example folder.
-Ensure to set the values correctly.
+   Ensure to set the values correctly.
 
 ```
 # (Required) Example-specific environment variables
@@ -163,7 +163,7 @@ OPENBABYLON_API_URL=<OPENBABYLON_API_URL>
 # (Optional) Restack Cloud - You only need to set these if you are using Restack Cloud.
 
 # Do not forget to add the port :433
-RESTACK_ENGINE_ADDRESS=<RESTACK_ENGINE_ADDRESS:443>  
+RESTACK_ENGINE_ADDRESS=<RESTACK_ENGINE_ADDRESS:443>
 RESTACK_ENGINE_ID=<RESTACK_ENGINE_ID>
 RESTACK_ENGINE_API_KEY=<RESTACK_ENGINE_API_KEY>
 RESTACK_CLOUD_TOKEN=<RESTACK_CLOUD_TOKEN>
@@ -184,6 +184,7 @@ const engine = {
   name: 'restack_engine', // IMPORTANT: This must match the name of the engine in the Restack Cloud console.
   ...
 ```
+
 7. Run the restack:up command
 
 ```bash
@@ -195,12 +196,13 @@ pnpm restack:up
 For detailed deployment information, see the [Restack Cloud documentation](https://docs.restack.io/restack-cloud/deployrepo).
 
 --- In your browser ---
+
 8. Go back to [Restack Cloud](https://console.restack.io)
 
 Your deployment will include:
 
 - A frontend application
-- A backend service 
+- A backend service
 - A Restack Engine instance connected to your cloud engine
 
 ![Restack Engine UI](./restack-cloud-overview.png)
