@@ -150,8 +150,10 @@ To deploy the example on Restack Cloud, follow these steps:
 2. Go to `Workspace > Settings > Token` and generate an API token
 3. Create a new cloud engine.
 
---- Back in your IDE --- 4. Copy the env variables from `env.example` into your `.env` file at the root of the example folder.
-Ensure to set the values correctly.
+--- Back in your IDE ---
+
+4. Copy the env variables from `env.example` into your `.env` file at the root of the example folder.
+   Ensure to set the values correctly.
 
 ```
 # (Required) Example-specific environment variables
