@@ -193,7 +193,9 @@ pnpm restack:up
 
 For detailed deployment information, see the [Restack Cloud documentation](https://docs.restack.io/restack-cloud/deployrepo).
 
---- In your browser --- 8. Go back to [Restack Cloud](https://console.restack.io)
+--- In your browser ---
+
+8. Go back to [Restack Cloud](https://console.restack.io)
 
 Your deployment will include:
 
