@@ -2,7 +2,7 @@
 
 A sample repository, demonstrating how to use child workflows with Restack AI.
 
-For a full Typescript documentation refer to <https://docs.restack.io/libraries/typescript/reference>
+For a full Typescript documentation refer to <https://docs.restack.io/libraries/typescript>
 
 ## Requirements
 
