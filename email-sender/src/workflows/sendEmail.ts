@@ -36,4 +36,5 @@ export async function sendEmailWorkflow({
   });
 
   log.info('Email sent successfully');
+  return 'Email sent successfully';
 }
