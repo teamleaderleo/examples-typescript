@@ -1,16 +1,16 @@
 {
-  "name": "sdk-example-ts",
+  "name": "ts-example-openai",
   "version": "1.0.0",
-  "description": "Basic OpenAI example",
+  "description": "Basic OpenAI example with Restack TypeScript library",
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/services.ts",
     "start.watch": "nodemon src/services.ts",
-    "dev": "pnpm start.watch",
+    "dev": "npm run start.watch",
     "build": "tsc --build",
     "clean": "rm -rf node_modules",
     "schedule": "ts-node ./scheduleWorkflow.ts",
-    "restack-up": "node restack_up.mjs"
+    "restack-up": "node up.mjs"
   },
   "nodemonConfig": {
     "execMap": {
