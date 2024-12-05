@@ -2,12 +2,10 @@
 
 - Node 20 or higher
 
+```bash
 brew install nvm
 nvm use 20
-
-- pnpm
-
-brew install pnpm
+```
 
 # Install Restack Web UI 
 
@@ -23,19 +21,23 @@ Where all your code is defined, including workflow steps.
 add OPENAI_API_KEY in .env
 
 ```bash
-pnpm i
-
-pnpm dev
+npm i
+npm run build
+npm run dev
 ```
 Your code will be running and syncing with Restack engine to execute workflows or functions.
+
+This will start a 'restack' service for workflows and functions, and an 'openai' service for OpenAI functions.
 
 # Schedule a workflow
 
 In another shell:
 
-pnpm schedule
+```bash
+npm schedule
+```
 
-Will schedule to start example workflow immediately.
+Will schedule to start example workflow immediately. Learn more about [workflows](https://docs.restack.io/features/workflows)
 
 # Architecture
 
@@ -54,9 +56,10 @@ flowchart TD
 
 ## Deploy on Restack
 
-pnpm restack-up
-
-To deploy the application on Restack, you can use the provided `restack_up.mjs` script. This script utilizes the Restack Cloud SDK to define and deploy your application stack. It sets up the necessary environment variables and configures the application for deployment. 
+```bash
+npm restack-up
+```
+To deploy the application on Restack, you can use the provided `up.mjs` script. This script utilizes the Restack Cloud SDK to define and deploy your application stack. It sets up the necessary environment variables and configures the application for deployment. 
 
 To get started, ensure you have the required Restack Cloud credentials and environment variables set up. Then, run the script to initiate the deployment process. 
 
