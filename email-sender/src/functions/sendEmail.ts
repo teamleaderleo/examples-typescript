@@ -36,4 +36,6 @@ export async function sendEmail({ text, subject, to }: EmailInput) {
   } catch (error) {
     throw FunctionFailure.nonRetryable('Failed to send email');
   }
+
+  return 'Email sent successfully';
 }

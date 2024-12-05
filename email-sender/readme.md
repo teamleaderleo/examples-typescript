@@ -55,4 +55,4 @@ In another shell:
 npm run schedule-retries
 ```
 
-Will schedule to start example workflow immediately. The code for this is on `scheduleWorkflowRetries.ts`. In here you can see how the sendEmailWorkflow is scheduled to be exectuted and the step to generate email content is force to have a failure and show how Restack will handle retries automatically for you. Step will fail once and be successfull on the next retry, then rest of steps defined on workflow will be exectuted correctly
+This will schedule the example workflow to start immediately. The code for this is in `scheduleWorkflowRetries.ts`. In this file, you can see how the `sendEmailWorkflow` is scheduled for execution. The step to generate email content is intentionally set to fail once, demonstrating how Restack automatically handles retries. After the first failure, the step will succeed on the next retry, and the remaining steps in the workflow will execute as expected.
