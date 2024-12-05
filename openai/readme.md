@@ -27,6 +27,8 @@ npm run dev
 ```
 Your code will be running and syncing with Restack engine to execute workflows or functions.
 
+This will start a 'restack' service for workflows and functions, and an 'openai' service for OpenAI functions.
+
 # Schedule a workflow
 
 In another shell:
