@@ -25,7 +25,7 @@
   "license": "ISC",
   "dependencies": {
     "@ai-sdk/openai": "^1.0.6",
-    "@restackio/ai": "^0.0.86",
+    "@restackio/ai": "^0.0.90",
     "@stripe/agent-toolkit": "^0.1.21",
     "dotenv": "^16.4.6"
   },

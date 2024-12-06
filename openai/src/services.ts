@@ -1,4 +1,8 @@
-import { goodbye, openaiChatCompletionsBase, openaiChatCompletionsStream } from "./functions";
+import {
+  goodbye,
+  openaiChatCompletionsBase,
+  openaiChatCompletionsStream,
+} from "./functions";
 import { client } from "./client";
 
 async function services() {

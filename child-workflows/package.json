@@ -13,7 +13,7 @@
     "docker:run": "docker run -d --name restack-child-workflows -p 3000:3000 restack-child-workflows"
   },
   "dependencies": {
-    "@restackio/ai": "0.0.86",
+    "@restackio/ai": "0.0.90",
     "@temporalio/workflow": "1.11.2",
     "dotenv": "16.4.5",
     "zod": "3.23.8",

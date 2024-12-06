@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@restackio/ai':
-        specifier: 0.0.85
-        version: 0.0.85
+        specifier: 0.0.90
+        version: 0.0.90
       '@temporalio/workflow':
         specifier: 1.11.2
         version: 1.11.2
@@ -325,8 +325,8 @@ packages:
     resolution: {integrity: sha512-IlfnMo8c6qHBRag2K6OnUwP6OflQYuzDk1XlocpvnbwPwDnni8Zgzz1f4xRJvcfxpJETKIHCscWXSGMjVLNfvg==}
     engines: {node: '>=20'}
 
-  '@restackio/ai@0.0.85':
-    resolution: {integrity: sha512-UWDcywhNjcTn7TbgqJL1ahzpf722RZV57rnR/b5s48eMgUHZNNxMJWDvCYIW5IZKEvzLp124iu0FNrV9UbKTpA==}
+  '@restackio/ai@0.0.90':
+    resolution: {integrity: sha512-eUhIChOdSRlzYjyjucQUg8oSAS1W7y53Wb2HJtOsv13ABMSfbtwqeSICrafGUT1z3ot8sQpFmw9JXEK/M+Sutg==}
     engines: {node: '>=20'}
 
   '@restackio/cloud@1.0.19':
@@ -1622,7 +1622,7 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@restackio/ai@0.0.85':
+  '@restackio/ai@0.0.90':
     dependencies:
       '@temporalio/activity': 1.11.3
       '@temporalio/client': 1.11.3
