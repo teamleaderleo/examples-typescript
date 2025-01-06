@@ -34,11 +34,13 @@ You can run workflows from the UI by clicking the "Run" button.
 
 ### from API
 
-You can run workflows from the API by using the `POST http://localhost:6233/api/workflows/greetingWorkflow` endpoint.
+You can run workflows from the API by using the generated endpoint:
 
-### from a script
+`POST http://localhost:6233/api/workflows/greetingWorkflow`
 
-You can run workflows from a script, for example:
+### from any client
+
+You can run workflows with any client connected to Restack, for example:
 
 ```bash
 npm schedule-workflow
