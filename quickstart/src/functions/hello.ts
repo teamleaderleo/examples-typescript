@@ -1,10 +1,10 @@
-interface Input {
+type Input = {
   name: string;
-}
+};
 
-interface Output {
+type Output = {
   message: string;
-}
+};
 
 export async function hello(input: Input): Promise<Output> {
   return { message: `Hello, ${input.name}!` };
