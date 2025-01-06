@@ -1,19 +1,14 @@
 {
-  "name": "get-started",
+  "name": "quickstart",
   "version": "0.0.1",
-  "description": "Restack Get started example",
+  "description": "Restack Quickstart example",
   "scripts": {
     "dev": "tsx watch --include src src/services.ts",
     "build": "tsc --build",
-    "schedule-workflow": "tsx scheduleWorkflow.ts",
-    "restack-up": "tsx restackUp.ts",
-    "restack-web-ui": "docker run -d --pull always --name restack -p 5233:5233 -p 6233:6233 -p 7233:7233 ghcr.io/restackio/restack:main",
-    "restack:up": "dotenv -e .env node restack_up.mjs",
-    "docker:build": "docker build -t restack-get-started .",
-    "docker:run": "docker run -d --name restack-get-started -p 3000:3000 restack-get-started"
+    "schedule-workflow": "tsx scheduleWorkflow.ts"
   },
   "dependencies": {
-    "@restackio/ai": "^0.0.93",
+    "@restackio/ai": "^0.0.94",
     "@temporalio/workflow": "1.11.3"
   },
   "devDependencies": {
