@@ -1,1 +1,1 @@
-export * from './transcribeAndTranslate';
+export * from "./transcribeAndTranslate";

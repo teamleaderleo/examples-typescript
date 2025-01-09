@@ -9,7 +9,6 @@ async function services() {
       client.startService({
         workflowsPath,
         functions: { hello },
-        endpoints: true,
       }),
     ]);
 
