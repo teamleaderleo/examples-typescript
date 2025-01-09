@@ -1,13 +1,16 @@
-import { step } from '@restackio/ai/workflow';
+import { step } from "@restackio/ai/workflow";
 
-import * as functions from '../functions';
+import * as functions from "../functions";
 
 type TranscribeAndTranslateInput = {
   filePath: string;
   targetLanguage: string;
 };
 
-export async function transcribeAndTranslateWorkflow({ filePath, targetLanguage }: TranscribeAndTranslateInput) {
+export async function transcribeAndTranslate({
+  filePath,
+  targetLanguage,
+}: TranscribeAndTranslateInput) {
   const transcription = await step<typeof functions>({}).transcribeAudio({
     filePath,
   });
