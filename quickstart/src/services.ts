@@ -8,7 +8,7 @@ async function services() {
       // Start service with current workflows and functions
       client.startService({
         workflowsPath,
-        functions: { hello }
+        functions: { hello },
       }),
     ]);
 
