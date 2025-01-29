@@ -10,7 +10,7 @@ async function eventWorkflow(input: EventInput) {
     await client.sendWorkflowEvent({
       event: {
         name: "message",
-        input: { content: "Telle ma another one" },
+        input: { content: "Tell me a joke" },
       },
       workflow: {
         workflowId: input.workflowId,
