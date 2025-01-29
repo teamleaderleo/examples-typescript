@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@restackio/ai':
-        specifier: ^0.0.97
-        version: 0.0.97
+        specifier: ^0.0.99
+        version: 0.0.99
       '@temporalio/workflow':
         specifier: 1.11.3
         version: 1.11.3
@@ -264,8 +264,8 @@ packages:
   '@protobufjs/utf8@1.1.0':
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
 
-  '@restackio/ai@0.0.97':
-    resolution: {integrity: sha512-mTRACMM7gWd2DFdvywbkU0jf2dFH6ArZB+DblAckktivFtlfGmZYspz0W+F+Llmk0EPb9fxo9kBrtHWR1CfGBg==}
+  '@restackio/ai@0.0.99':
+    resolution: {integrity: sha512-qxLidh2blqUgBiAeR7DnsFclSIX1I7JPmKzgWRue7RuXTw9AypzOx9QTOogLx7bpOGTlooTAWLpRngvBsiF3dA==}
     engines: {node: '>=20'}
 
   '@swc/core-darwin-arm64@1.10.11':
@@ -1251,7 +1251,7 @@ snapshots:
 
   '@protobufjs/utf8@1.1.0': {}
 
-  '@restackio/ai@0.0.97':
+  '@restackio/ai@0.0.99':
     dependencies:
       '@temporalio/activity': 1.11.6
       '@temporalio/client': 1.11.6
