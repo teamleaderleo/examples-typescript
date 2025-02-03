@@ -10,7 +10,7 @@
     "event-workflow": "tsx eventWorkflow.ts"
   },
   "dependencies": {
-    "@restackio/ai": "^0.0.99",
+    "@restackio/ai": "^0.0.101",
     "@temporalio/workflow": "1.11.3",
     "openai": "^4.80.1"
   },
