@@ -1,41 +1,41 @@
 import { client } from "./src/client";
 
 export type EventInput = {
-  workflowId: string;
+  agentId: string;
   runId: string;
 };
 
-async function eventWorkflow(input: EventInput) {
+async function eventAgent(input: EventInput) {
   try {
-    await client.sendWorkflowEvent({
+    await client.sendAgentEvent({
       event: {
         name: "message",
         input: { content: "Tell me a joke" },
       },
-      workflow: {
-        workflowId: input.workflowId,
+      agent: {
+        agentId: input.agentId,
         runId: input.runId,
       },
     });
 
-    await client.sendWorkflowEvent({
+    await client.sendAgentEvent({
       event: {
         name: "end",
       },
-      workflow: {
-        workflowId: input.workflowId,
+      agent: {
+        agentId: input.agentId,
         runId: input.runId,
       },
     });
 
     process.exit(0); // Exit the process successfully
   } catch (error) {
-    console.error("Error sending event to workflow:", error);
+    console.error("Error sending event to agent:", error);
     process.exit(1); // Exit the process with an error code
   }
 }
 
-eventWorkflow({
-  workflowId: "your-workflow-id",
+eventAgent({
+  agentId: "your-agent-id",
   runId: "your-run-id",
 });

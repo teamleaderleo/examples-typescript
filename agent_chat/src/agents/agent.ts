@@ -1,6 +1,11 @@
-import { condition, log, step } from "@restackio/ai/workflow";
+import {
+  defineEvent,
+  onEvent,
+  condition,
+  log,
+  step,
+} from "@restackio/ai/agent";
 import * as functions from "../functions";
-import { defineEvent, onEvent } from "@restackio/ai/event";
 
 export type EndEvent = {
   end: boolean;

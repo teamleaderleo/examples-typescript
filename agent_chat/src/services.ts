@@ -2,12 +2,11 @@ import { llmChat } from "./functions";
 import { client } from "./client";
 
 async function services() {
-  const workflowsPath = require.resolve("./workflows");
+  const agentsPath = require.resolve("./agents");
   try {
     await Promise.all([
-      // Start service with current workflows and functions
       client.startService({
-        workflowsPath,
+        agentsPath: agentsPath,
         functions: { llmChat },
       }),
     ]);
