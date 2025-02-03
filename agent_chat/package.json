@@ -6,11 +6,11 @@
     "dev": "open-cli http://localhost:5233 && tsx watch --include src src/services.ts",
     "build": "tsc --build",
     "clean": "rm -rf node_modules",
-    "schedule-workflow": "tsx scheduleWorkflow.ts",
-    "event-workflow": "tsx eventWorkflow.ts"
+    "schedule-agent": "tsx scheduleAgent.ts",
+    "event-agent": "tsx eventAgent.ts"
   },
   "dependencies": {
-    "@restackio/ai": "^0.0.101",
+    "@restackio/ai": "^0.0.102",
     "@temporalio/workflow": "1.11.3",
     "openai": "^4.80.1"
   },
