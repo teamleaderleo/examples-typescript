@@ -5,8 +5,6 @@ interface Input {
   name: string;
 }
 export async function parentWorkflow({ name }: Input) {
-
-
   const startedChild = await startChild(childWorkflow, {
     workflowId: `startChild-workflow`,
     args: [{ name }],
