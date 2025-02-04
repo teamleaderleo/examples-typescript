@@ -16,7 +16,7 @@ export type OpenAIChatInput = {
 
 export const llmChat = async ({
   systemContent = "",
-  model = "restack-c1",
+  model = "deepseek-chat",
   messages,
 }: OpenAIChatInput): Promise<Message> => {
   try {

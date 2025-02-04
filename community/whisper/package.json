@@ -12,7 +12,7 @@
   "description": "",
   "dependencies": {
     "@restackio/ai": "^0.0.96",
-    "@temporalio/workflow": "^1.11.3",
+    "@temporalio/workflow": "^1.11.6",
     "dotenv": "^16.4.7",
     "openai": "^4.76.0"
   },
