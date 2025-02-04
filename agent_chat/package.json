@@ -10,7 +10,7 @@
     "event-agent": "tsx eventAgent.ts"
   },
   "dependencies": {
-    "@restackio/ai": "^0.0.102",
+    "@restackio/ai": "^0.0.103",
     "@temporalio/workflow": "1.11.3",
     "openai": "^4.80.1"
   },
