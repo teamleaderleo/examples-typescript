@@ -1,7 +1,14 @@
 import { z } from "zod";
 
-export const LookupSalesInput = z.object({
-  category: z.enum(["snowboard", "apparel", "boots", "accessories", "any"]),
+export const CreateTodoInput = z.object({
+  todoTitle: z.string(),
 });
 
-export type LookupSalesInputType = z.infer<typeof LookupSalesInput>;
+export type CreateTodoInputType = z.infer<typeof CreateTodoInput>;
+
+export const ExecuteTodoInput = z.object({
+  todoId: z.string(),
+  todoTitle: z.string(),
+});
+
+export type ExecuteTodoInputType = z.infer<typeof ExecuteTodoInput>;

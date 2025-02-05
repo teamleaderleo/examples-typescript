@@ -6,6 +6,8 @@ import {
   step,
 } from "@restackio/ai/agent";
 import * as functions from "../functions";
+import { childExecute } from "@restackio/ai/workflow";
+import { executeTodoWorkflow } from "../workflows/executeTodo";
 
 export type EndEvent = {
   end: boolean;
@@ -36,8 +38,8 @@ export async function agentTodo(): Promise<agentTodoOutput> {
     if (result.tool_calls) {
       for (const toolCall of result.tool_calls) {
         switch (toolCall.function.name) {
-          case "lookupSales":
-            const toolResult = await step<typeof functions>({}).lookupSales(
+          case "createTodo":
+            const toolResult = await step<typeof functions>({}).createTodo(
               JSON.parse(toolCall.function.arguments)
             );
 
@@ -55,6 +57,33 @@ export async function agentTodo(): Promise<agentTodoOutput> {
             messages.push({
               role: "assistant",
               content: toolChatResult.content,
+            });
+
+            break;
+          case "executeTodoWorkflow":
+            const workflowId = `executeTodoWorkflow-${new Date().getTime()}`;
+            const workflowResult = await childExecute({
+              child: executeTodoWorkflow,
+              childId: workflowId,
+              input: JSON.parse(toolCall.function.arguments),
+            });
+
+            messages.push({
+              role: "tool",
+              tool_call_id: toolCall.id,
+              content: JSON.stringify(workflowResult),
+            });
+
+            const toolWorkflowResult = await step<typeof functions>({}).llmChat(
+              {
+                messages,
+                tools,
+              }
+            );
+
+            messages.push({
+              role: "assistant",
+              content: toolWorkflowResult.content,
             });
 
             break;

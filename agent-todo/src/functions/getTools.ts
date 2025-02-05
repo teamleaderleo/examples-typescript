@@ -1,12 +1,17 @@
 import { zodFunction } from "openai/helpers/zod";
-import { lookupSales } from "./lookupSales";
-import { LookupSalesInput } from "./toolTypes";
+import { executeTodoWorkflow } from "../workflows/executeTodo";
+import { createTodo } from "./createTodo";
+import { CreateTodoInput, ExecuteTodoInput } from "./toolTypes";
 
 export const getTools = async () => {
   const tools = [
     zodFunction({
-      name: lookupSales.name,
-      parameters: LookupSalesInput,
+      name: createTodo.name,
+      parameters: CreateTodoInput,
+    }),
+    zodFunction({
+      name: executeTodoWorkflow.name,
+      parameters: ExecuteTodoInput,
     }),
   ];
   return tools;
