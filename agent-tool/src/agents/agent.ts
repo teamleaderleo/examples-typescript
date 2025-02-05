@@ -22,24 +22,24 @@ export async function agentChatTool(): Promise<AgentChatOutput> {
   let endReceived = false;
   let messages: functions.Message[] = [];
 
-  const tools = await step<typeof functions.getTools>({}).getTools();
+  const tools = await step<typeof functions>({}).getTools();
 
   onEvent(messageEvent, async ({ content }: functions.Message) => {
-    messages.push({ role: "user", content });
-    const result = await step<typeof functions.llmChat>({}).llmChat({
+    messages.push({ role: "user", content: content?.toString() ?? "" });
+    const result = await step<typeof functions>({}).llmChat({
       messages,
       tools,
     });
 
-    messages.push(result);
+    messages.push({ role: "assistant", content: result.content });
 
     if (result.tool_calls) {
       for (const toolCall of result.tool_calls) {
         switch (toolCall.function.name) {
           case "lookupSales":
-            const toolResult = await step<typeof functions.lookupSales>(
-              {}
-            ).lookupSales(JSON.parse(toolCall.function.arguments));
+            const toolResult = await step<typeof functions>({}).lookupSales(
+              JSON.parse(toolCall.function.arguments)
+            );
 
             messages.push({
               role: "tool",
@@ -47,14 +47,15 @@ export async function agentChatTool(): Promise<AgentChatOutput> {
               content: JSON.stringify(toolResult),
             });
 
-            const toolChatResult = await step<typeof functions.llmChat>(
-              {}
-            ).llmChat({
+            const toolChatResult = await step<typeof functions>({}).llmChat({
               messages,
               tools,
             });
 
-            messages.push(toolChatResult);
+            messages.push({
+              role: "assistant",
+              content: toolChatResult.content,
+            });
 
             break;
           default:

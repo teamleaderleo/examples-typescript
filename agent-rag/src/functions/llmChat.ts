@@ -2,11 +2,8 @@ import { FunctionFailure, log } from "@restackio/ai/function";
 import {
   ChatCompletionCreateParamsNonStreaming,
   ChatCompletionSystemMessageParam,
-  ChatCompletionTool,
-  ChatCompletionToolMessageParam,
   ChatCompletionUserMessageParam,
   ChatCompletionAssistantMessageParam,
-  ChatCompletionMessage,
 } from "openai/resources/chat/completions";
 
 import { openaiClient } from "../utils/client";
@@ -14,22 +11,19 @@ import { openaiClient } from "../utils/client";
 export type Message =
   | ChatCompletionSystemMessageParam
   | ChatCompletionUserMessageParam
-  | ChatCompletionAssistantMessageParam
-  | ChatCompletionToolMessageParam;
+  | ChatCompletionAssistantMessageParam;
 
 export type OpenAIChatInput = {
   systemContent?: string;
   model?: string;
   messages: Message[];
-  tools?: ChatCompletionTool[];
 };
 
 export const llmChat = async ({
   systemContent = "",
   model = "gpt-4o-mini",
   messages,
-  tools,
-}: OpenAIChatInput): Promise<ChatCompletionMessage> => {
+}: OpenAIChatInput): Promise<string> => {
   try {
     const openai = openaiClient({});
 
@@ -41,7 +35,6 @@ export const llmChat = async ({
         ...(messages ?? []),
       ],
       model,
-      tools,
     };
 
     log.debug("OpenAI chat completion params", {
@@ -52,7 +45,7 @@ export const llmChat = async ({
 
     const message = completion.choices[0].message;
 
-    return message;
+    return message.content ?? "";
   } catch (error) {
     throw FunctionFailure.nonRetryable(`Error OpenAI chat: ${error}`);
   }
