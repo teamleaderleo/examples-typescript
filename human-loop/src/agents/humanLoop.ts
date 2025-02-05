@@ -1,10 +1,10 @@
-import { log, step, condition } from "@restackio/ai/workflow";
-import { onEvent } from "@restackio/ai/event";
+import { log, step, condition } from "@restackio/ai/agent";
+import { onEvent } from "@restackio/ai/agent";
 
 import { feedbackEvent, FeedbackEvent, endEvent, EndEvent } from "../events";
 import * as functions from "../functions";
 
-export async function humanLoopWorkflow() {
+export async function humanLoopAgent() {
   let endWorkflow = false;
 
   onEvent(feedbackEvent, async (event: FeedbackEvent) => {
