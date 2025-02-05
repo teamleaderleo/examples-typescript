@@ -6,8 +6,6 @@ import {
   step,
 } from "@restackio/ai/agent";
 import * as functions from "../functions";
-import { zodFunction } from "openai/helpers/zod";
-import { LookupSalesInput } from "../functions/toolTypes";
 
 export type EndEvent = {
   end: boolean;
@@ -20,16 +18,11 @@ type AgentChatOutput = {
   messages: functions.Message[];
 };
 
-export async function agentChat(): Promise<AgentChatOutput> {
+export async function agentChatTool(): Promise<AgentChatOutput> {
   let endReceived = false;
   let messages: functions.Message[] = [];
 
-  const tools = [
-    zodFunction({
-      name: functions.lookupSales.name,
-      parameters: LookupSalesInput,
-    }),
-  ];
+  const tools = await step<typeof functions.getTools>({}).getTools();
 
   onEvent(messageEvent, async ({ content }: functions.Message) => {
     messages.push({ role: "user", content });
@@ -38,26 +31,36 @@ export async function agentChat(): Promise<AgentChatOutput> {
       tools,
     });
 
-    if (result.role === "tool") {
-      const toolResult = await step<typeof functions.lookupSales>(
-        {}
-      ).lookupSales({
-        category: result.content,
-      });
-      messages.push({
-        role: "tool",
-        content: toolResult,
-        tool_call_id: result.tool_call_id,
-      });
+    messages.push(result);
 
-      const toolChatResult = await step<typeof functions.llmChat>({}).llmChat({
-        messages,
-        tools,
-      });
+    if (result.tool_calls) {
+      for (const toolCall of result.tool_calls) {
+        switch (toolCall.function.name) {
+          case "lookupSales":
+            const toolResult = await step<typeof functions.lookupSales>(
+              {}
+            ).lookupSales(JSON.parse(toolCall.function.arguments));
 
-      messages.push(toolChatResult);
-    } else {
-      messages.push(result);
+            messages.push({
+              role: "tool",
+              tool_call_id: toolCall.id,
+              content: JSON.stringify(toolResult),
+            });
+
+            const toolChatResult = await step<typeof functions.llmChat>(
+              {}
+            ).llmChat({
+              messages,
+              tools,
+            });
+
+            messages.push(toolChatResult);
+
+            break;
+          default:
+            break;
+        }
+      }
     }
     return messages;
   });
@@ -66,7 +69,6 @@ export async function agentChat(): Promise<AgentChatOutput> {
     endReceived = true;
   });
 
-  // We use the `condition` function to wait for the event goodbyeReceived to return `True`.
   await condition(() => endReceived);
 
   log.info("end condition met");
