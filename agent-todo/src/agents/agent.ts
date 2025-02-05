@@ -33,12 +33,14 @@ export async function agentTodo(): Promise<agentTodoOutput> {
       tools,
     });
 
-    messages.push({ role: "assistant", content: result.content });
+    messages.push(result);
 
     if (result.tool_calls) {
+      log.info("result.tool_calls", { result });
       for (const toolCall of result.tool_calls) {
         switch (toolCall.function.name) {
           case "createTodo":
+            log.info("createTodo", { toolCall });
             const toolResult = await step<typeof functions>({}).createTodo(
               JSON.parse(toolCall.function.arguments)
             );
@@ -46,7 +48,7 @@ export async function agentTodo(): Promise<agentTodoOutput> {
             messages.push({
               role: "tool",
               tool_call_id: toolCall.id,
-              content: JSON.stringify(toolResult),
+              content: toolResult,
             });
 
             const toolChatResult = await step<typeof functions>({}).llmChat({
@@ -54,13 +56,11 @@ export async function agentTodo(): Promise<agentTodoOutput> {
               tools,
             });
 
-            messages.push({
-              role: "assistant",
-              content: toolChatResult.content,
-            });
+            messages.push(toolChatResult);
 
             break;
           case "executeTodoWorkflow":
+            log.info("executeTodoWorkflow", { toolCall });
             const workflowId = `executeTodoWorkflow-${new Date().getTime()}`;
             const workflowResult = await childExecute({
               child: executeTodoWorkflow,
@@ -81,10 +81,7 @@ export async function agentTodo(): Promise<agentTodoOutput> {
               }
             );
 
-            messages.push({
-              role: "assistant",
-              content: toolWorkflowResult.content,
-            });
+            messages.push(toolWorkflowResult);
 
             break;
           default:
