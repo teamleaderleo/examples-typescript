@@ -25,7 +25,7 @@ export type OpenAIChatInput = {
 
 export const llmChat = async ({
   systemContent = "",
-  model = "deepseek-chat",
+  model = "gpt-4o-mini",
   messages,
   tools,
 }: OpenAIChatInput): Promise<ChatCompletionMessage> => {

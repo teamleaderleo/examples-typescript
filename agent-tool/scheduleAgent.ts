@@ -1,14 +1,14 @@
 import { client } from "./src/client";
-
+import { agentChatTool } from "./src/agents/agent";
 export type InputSchedule = {
   name: string;
 };
 
 async function scheduleAgent(input: InputSchedule) {
   try {
-    const agentId = `${Date.now()}-AgentChat`;
+    const agentId = `${Date.now()}-${agentChatTool.name}`;
     const runId = await client.scheduleAgent({
-      agentName: "agentChat",
+      agentName: agentChatTool.name,
       agentId,
       input,
     });

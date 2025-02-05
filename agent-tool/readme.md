@@ -36,17 +36,17 @@ You can run agents from the UI by clicking the "Run" button.
 
 You can run agents from the API by using the generated endpoint:
 
-`POST http://localhost:6233/api/agents/agentChat`
+`POST http://localhost:6233/api/agents/agentChatTool`
 
 ### from any client
 
 You can run agents with any client connected to Restack, for example:
 
 ```bash
-npm schedule-agent
+npm run schedule
 ```
 
-executes `scheduleAgent.ts` which will connect to Restack and execute the `agentChat` agent.
+executes `scheduleAgent.ts` which will connect to Restack and execute the `agentChatTool` agent.
 
 ## Send events to the Agent
 
@@ -64,14 +64,14 @@ And see the events in the run:
 
 You can send events to the agent by using the following endpoint:
 
-`PUT http://localhost:6233/api/agents/AgentChat/:agentId/:runId`
+`PUT http://localhost:6233/api/agents/agentChatTool/:agentId/:runId`
 
 with the payload:
 
 ```json
 {
   "eventName": "message",
-  "eventInput": { "content": "tell me another joke" }
+  "eventInput": { "content": "Sales on boots?" }
 }
 ```
 
@@ -94,7 +94,7 @@ You can send event to the agent with any client connected to Restack, for exampl
 Modify agentId and runId in eventAgent.ts and then run:
 
 ```bash
-pnpm event-agent
+npm run event
 ```
 
 It will connect to Restack and send 2 events to the agent, one to generate another agent and another one to end the conversation.

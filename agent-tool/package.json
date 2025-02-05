@@ -6,8 +6,8 @@
     "dev": "open-cli http://localhost:5233 && tsx watch --include src src/services.ts",
     "build": "tsc --build",
     "clean": "rm -rf node_modules",
-    "schedule-agent": "tsx scheduleAgent.ts",
-    "event-agent": "tsx eventAgent.ts"
+    "schedule": "tsx scheduleAgent.ts",
+    "event": "tsx eventAgent.ts"
   },
   "dependencies": {
     "@restackio/ai": "^0.0.104",
