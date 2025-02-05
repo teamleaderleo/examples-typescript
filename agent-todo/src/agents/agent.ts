@@ -4,9 +4,9 @@ import {
   condition,
   log,
   step,
+  childExecute,
 } from "@restackio/ai/agent";
 import * as functions from "../functions";
-import { childExecute } from "@restackio/ai/workflow";
 import { executeTodoWorkflow } from "../workflows/executeTodo";
 
 export type EndEvent = {
