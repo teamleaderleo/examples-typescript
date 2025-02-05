@@ -1,4 +1,4 @@
-import { defineEvent } from "@restackio/ai/event";
+import { defineEvent } from "@restackio/ai/agent";
 
 export type EndEvent = {
   end: boolean;
