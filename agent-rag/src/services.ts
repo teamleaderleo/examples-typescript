@@ -1,4 +1,4 @@
-import { llmChat, lookupSales, getTools } from "./functions";
+import { llmChat, lookupSales } from "./functions";
 import { client } from "./client";
 
 async function services() {
@@ -7,7 +7,7 @@ async function services() {
     await Promise.all([
       client.startService({
         agentsPath: agentsPath,
-        functions: { llmChat, lookupSales, getTools },
+        functions: { llmChat, lookupSales },
       }),
     ]);
 
