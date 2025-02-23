@@ -1,6 +1,5 @@
-import { FunctionFailure, log } from "@restackio/ai/function";
+import { FunctionFailure, log, streamToWebsocket } from "@restackio/ai/function";
 import { ChatCompletionCreateParamsStreaming } from "openai/resources/chat/completions";
-import { streamToWebsocket } from "./stream";
 
 import { openaiClient } from "../utils/client";
 import { apiAddress } from "../client";
@@ -45,7 +44,10 @@ export const llmChat = async ({
       completion,
     });
 
-    const assistantContent = await streamToWebsocket(apiAddress, completion);
+    const assistantContent = await streamToWebsocket({
+      apiAddress,
+      data: completion,
+    });
 
     log.debug("Assistant content", {
       assistantContent,

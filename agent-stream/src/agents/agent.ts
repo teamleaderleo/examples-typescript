@@ -14,11 +14,11 @@ export type EndEvent = {
 export const messagesEvent = defineEvent<functions.Message[]>("messages");
 export const endEvent = defineEvent("end");
 
-type AgentChatOutput = {
+type AgentStreamOutput = {
   messages: functions.Message[];
 };
 
-export async function agentChat(): Promise<AgentChatOutput> {
+export async function agentStream(): Promise<AgentStreamOutput> {
   let endReceived = false;
   let messages: functions.Message[] = [];
 
