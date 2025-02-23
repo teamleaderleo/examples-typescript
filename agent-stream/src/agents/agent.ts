@@ -22,9 +22,10 @@ export async function agentStream(): Promise<AgentStreamOutput> {
   let endReceived = false;
   let messages: functions.Message[] = [];
 
-  onEvent(messagesEvent, async ({ messages }: { messages: functions.Message[] }) => {
+  onEvent(messagesEvent, async ({ messages, stream = true }: { messages: functions.Message[], stream?: boolean }) => {
     const result = await step<typeof functions>({}).llmChat({
       messages,
+      stream
     });
     messages.push(result);
     return messages;

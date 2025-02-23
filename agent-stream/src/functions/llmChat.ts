@@ -1,5 +1,5 @@
 import { FunctionFailure, log, streamToWebsocket } from "@restackio/ai/function";
-import { ChatCompletionCreateParamsStreaming } from "openai/resources/chat/completions";
+import { ChatCompletionCreateParamsNonStreaming, ChatCompletionCreateParamsStreaming } from "openai/resources/chat/completions";
 
 import { openaiClient } from "../utils/client";
 import { apiAddress } from "../client";
@@ -13,50 +13,80 @@ export type OpenAIChatInput = {
   systemContent?: string;
   model?: string;
   messages: Message[];
+  stream?: boolean;
 };
 
 export const llmChat = async ({
   systemContent = "",
   model = "gpt-4o-mini",
   messages,
+  stream = true,
 }: OpenAIChatInput): Promise<Message> => {
   try {
     const openai = openaiClient({});
 
-    const chatParams: ChatCompletionCreateParamsStreaming = {
-      messages: [
-        ...(systemContent
-          ? [{ role: "system" as const, content: systemContent }]
-          : []),
-        ...(messages ?? []),
-      ],
-      model,
-      stream: true,
-    };
+    if (stream) {
 
-    log.debug("OpenAI chat completion params", {
-      chatParams,
-    });
+      const chatParams: ChatCompletionCreateParamsStreaming = {
+        messages: [
+          ...(systemContent
+            ? [{ role: "system" as const, content: systemContent }]
+            : []),
+          ...(messages ?? []),
+        ],
+        model,
+        stream,
+      };
+  
+      log.debug("OpenAI chat completion params", {
+        chatParams,
+      });
 
-    const completion = await openai.chat.completions.create(chatParams);
+      const completion = await openai.chat.completions.create(chatParams);
 
-    log.debug("OpenAI chat completion", {
-      completion,
-    });
+      log.debug("OpenAI chat completion", {
+        completion,
+      });
 
-    const assistantContent = await streamToWebsocket({
-      apiAddress,
-      data: completion,
-    });
 
-    log.debug("Assistant content", {
-      assistantContent,
-    });
+      const assistantContent = await streamToWebsocket({
+        apiAddress,
+        data: completion,
+      });
 
-    return {
-      role: "assistant",
-      content: assistantContent,
-    };
+      log.debug("Assistant content", {
+        assistantContent,
+      });
+
+      return {
+        role: "assistant",
+        content: assistantContent,
+      };
+      
+    } else {
+      const chatParams: ChatCompletionCreateParamsNonStreaming = {
+        messages: [
+          ...(systemContent
+            ? [{ role: "system" as const, content: systemContent }]
+            : []),
+          ...(messages ?? []),
+        ],
+        model,
+      };
+
+      log.debug("OpenAI chat completion params", {
+        chatParams,
+      });
+
+      const completion = await openai.chat.completions.create(chatParams);
+
+      const message = completion.choices[0].message;
+
+      return {
+        role: message.role,
+        content: message.content ?? "",
+      };
+    }
   } catch (error) {
     throw FunctionFailure.nonRetryable(`Error OpenAI chat: ${error}`);
   }
