@@ -11,7 +11,7 @@ export type EndEvent = {
   end: boolean;
 };
 
-export const messageEvent = defineEvent<functions.Message[]>("message");
+export const messagesEvent = defineEvent<functions.Message[]>("messages");
 export const endEvent = defineEvent("end");
 
 type AgentChatOutput = {
@@ -20,18 +20,19 @@ type AgentChatOutput = {
 
 export async function agentChatTool(): Promise<AgentChatOutput> {
   let endReceived = false;
-  let messages: functions.Message[] = [];
+  let agentMessages: functions.Message[] = [];
 
   const tools = await step<typeof functions>({}).getTools();
 
-  onEvent(messageEvent, async ({ content }: functions.Message) => {
-    messages.push({ role: "user", content: content?.toString() ?? "" });
+  onEvent(messagesEvent, async ({ messages }: { messages: functions.Message[] }) => {
+    agentMessages.push(...messages);
+
     const result = await step<typeof functions>({}).llmChat({
-      messages,
+      messages: agentMessages,
       tools,
     });
 
-    messages.push({ role: "assistant", content: result.content });
+    agentMessages.push({ role: "assistant", content: result.content });
 
     if (result.tool_calls) {
       for (const toolCall of result.tool_calls) {
@@ -41,7 +42,7 @@ export async function agentChatTool(): Promise<AgentChatOutput> {
               JSON.parse(toolCall.function.arguments)
             );
 
-            messages.push({
+            agentMessages.push({
               role: "tool",
               tool_call_id: toolCall.id,
               content: JSON.stringify(toolResult),
@@ -52,7 +53,7 @@ export async function agentChatTool(): Promise<AgentChatOutput> {
               tools,
             });
 
-            messages.push({
+            agentMessages.push({
               role: "assistant",
               content: toolChatResult.content,
             });
@@ -63,7 +64,7 @@ export async function agentChatTool(): Promise<AgentChatOutput> {
         }
       }
     }
-    return messages;
+    return agentMessages;
   });
 
   onEvent(endEvent, async () => {
@@ -73,5 +74,5 @@ export async function agentChatTool(): Promise<AgentChatOutput> {
   await condition(() => endReceived);
 
   log.info("end condition met");
-  return { messages };
+  return { messages: agentMessages };
 }

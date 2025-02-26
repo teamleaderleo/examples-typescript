@@ -13,7 +13,7 @@ export type EndEvent = {
   end: boolean;
 };
 
-export const messageEvent = defineEvent<functions.Message[]>("message");
+export const messagesEvent = defineEvent<functions.Message[]>("messages");
 export const endEvent = defineEvent("end");
 
 type agentTodoOutput = {
@@ -22,18 +22,19 @@ type agentTodoOutput = {
 
 export async function agentTodo(): Promise<agentTodoOutput> {
   let endReceived = false;
-  let messages: functions.Message[] = [];
+  let agentMessages: functions.Message[] = [];
 
   const tools = await step<typeof functions>({}).getTools();
 
-  onEvent(messageEvent, async ({ content }: functions.Message) => {
-    messages.push({ role: "user", content: content?.toString() ?? "" });
+  onEvent(messagesEvent, async ({ messages }: { messages: functions.Message[] }) => {
+    agentMessages.push(...messages);
+
     const result = await step<typeof functions>({}).llmChat({
-      messages,
+      messages: agentMessages,
       tools,
     });
 
-    messages.push(result);
+    agentMessages.push(result);
 
     if (result.tool_calls) {
       log.info("result.tool_calls", { result });
@@ -45,18 +46,18 @@ export async function agentTodo(): Promise<agentTodoOutput> {
               JSON.parse(toolCall.function.arguments)
             );
 
-            messages.push({
+            agentMessages.push({
               role: "tool",
               tool_call_id: toolCall.id,
               content: toolResult,
             });
 
             const toolChatResult = await step<typeof functions>({}).llmChat({
-              messages,
+              messages: agentMessages,
               tools,
             });
 
-            messages.push(toolChatResult);
+            agentMessages.push(toolChatResult);
 
             break;
           case "executeTodoWorkflow":
@@ -68,7 +69,7 @@ export async function agentTodo(): Promise<agentTodoOutput> {
               input: JSON.parse(toolCall.function.arguments),
             });
 
-            messages.push({
+            agentMessages.push({
               role: "tool",
               tool_call_id: toolCall.id,
               content: JSON.stringify(workflowResult),
@@ -76,12 +77,12 @@ export async function agentTodo(): Promise<agentTodoOutput> {
 
             const toolWorkflowResult = await step<typeof functions>({}).llmChat(
               {
-                messages,
+                messages: agentMessages,
                 tools,
               }
             );
 
-            messages.push(toolWorkflowResult);
+            agentMessages.push(toolWorkflowResult);
 
             break;
           default:
@@ -89,7 +90,7 @@ export async function agentTodo(): Promise<agentTodoOutput> {
         }
       }
     }
-    return messages;
+    return agentMessages;
   });
 
   onEvent(endEvent, async () => {
@@ -99,5 +100,5 @@ export async function agentTodo(): Promise<agentTodoOutput> {
   await condition(() => endReceived);
 
   log.info("end condition met");
-  return { messages };
+  return { messages: agentMessages };
 }
