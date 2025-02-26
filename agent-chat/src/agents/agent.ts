@@ -11,7 +11,7 @@ export type EndEvent = {
   end: boolean;
 };
 
-export const messageEvent = defineEvent<functions.Message[]>("message");
+export const messagesEvent = defineEvent<functions.Message[]>("messages");
 export const endEvent = defineEvent("end");
 
 type AgentChatOutput = {
@@ -22,8 +22,7 @@ export async function agentChat(): Promise<AgentChatOutput> {
   let endReceived = false;
   let messages: functions.Message[] = [];
 
-  onEvent(messageEvent, async ({ content }: functions.Message) => {
-    messages.push({ role: "user", content });
+  onEvent(messagesEvent, async ({ messages }: { messages: functions.Message[] }) => {
     const result = await step<typeof functions>({}).llmChat({
       messages,
     });
