@@ -4,7 +4,7 @@ import {
 } from '@livekit/protocol';
 import { FunctionFailure, log } from "@restackio/ai/function";
 
-type LivekitCallParams = {
+export type LivekitCallParams = {
   sipTrunkId: string;
   phoneNumber: string;
   roomId: string;
