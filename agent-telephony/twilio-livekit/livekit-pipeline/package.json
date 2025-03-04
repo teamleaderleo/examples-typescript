@@ -39,5 +39,10 @@
     "@livekit/agents-plugin-silero": "^0.5.4",
     "@livekit/rtc-node": "^0.13.6",
     "dotenv": "^16.4.7"
+  },
+  "overrides": {
+    "@livekit/agents-plugin-elevenlabs": {
+      "@livekit/agents": "^0.7.0"
+    }
   }
 }
