@@ -32,7 +32,7 @@ docker run -d --pull always --name studio -p 5233:5233 -p 6233:6233 -p 7233:7233
 Go to this directory and run
 
 ```bash
-DISCORD_BOT_TOKEN=<your-bot-token> npm run service
+DISCORD_BOT_TOKEN=<bot-token> npm run service
 ```
 
 Your code will be running and syncing with Restack engine to execute workflows or functions.
@@ -42,7 +42,7 @@ Your code will be running and syncing with Restack engine to execute workflows o
 In another shell run following command:
 
 ```bash
-DISCORD_BOT_TOKEN=<your-bot-token> DISCORD_BOT_ID=<your-bot-id> DISCORD_CHANNEL_ID=<your-channel-id> npm run schedule
+DISCORD_BOT_TOKEN=<bot-token> DISCORD_BOT_ID=<bot-id> DISCORD_CHANNEL_ID=<channel-id> npm run schedule
 ```
 
 Will schedule to start example workflow immediately. This runs the `scheduleWorkflow` file.

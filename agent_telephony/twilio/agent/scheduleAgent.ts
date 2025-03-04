@@ -6,9 +6,9 @@ export type InputSchedule = {
 
 async function scheduleAgent(input: InputSchedule) {
   try {
-    const agentId = `${Date.now()}-agentStream`;
+    const agentId = `${Date.now()}-agentVoice`;
     const runId = await client.scheduleAgent({
-      agentName: "agentStream",
+      agentName: "agentVoice",
       agentId,
       input,
     });

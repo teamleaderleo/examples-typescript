@@ -36,6 +36,6 @@ async function eventAgent(input: EventInput) {
 }
 
 eventAgent({
-  agentId: "your-agent-id",
-  runId: "your-run-id",
+  agentId: "agent-id",
+  runId: "run-id",
 });
