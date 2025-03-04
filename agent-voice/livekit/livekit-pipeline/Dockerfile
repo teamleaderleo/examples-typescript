@@ -27,4 +27,4 @@ COPY package.json ./
 RUN npm install
 
 EXPOSE 8081
-CMD ["node", "./dist/agent.js", "start"]
+CMD ["node", "./dist/pipeline.js", "start"]
