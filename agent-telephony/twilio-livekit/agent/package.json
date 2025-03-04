@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "open-cli http://localhost:5233 && tsx watch --include src src/services.ts",
     "build": "tsc --build",
+    "start": "node dist/services.js", 
     "clean": "rm -rf node_modules",
     "schedule-agent": "tsx scheduleAgent.ts",
     "event-agent": "tsx eventAgent.ts"
