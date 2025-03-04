@@ -7,9 +7,7 @@ import {
   agentInfo
 } from "@restackio/ai/agent";
 import * as functions from "../functions";
-import { 
-  SIPParticipantInfo,
-} from '@livekit/protocol';
+
 export type EndEvent = {
   end: boolean;
 };
@@ -20,7 +18,7 @@ export type CallEvent = {
 
 export const messagesEvent = defineEvent<functions.Message[]>("messages");
 export const endEvent = defineEvent("end");
-export const callEvent = defineEvent<SIPParticipantInfo>("call");
+export const callEvent = defineEvent<string>("call");
 
 type agentTwilioOutput = {
   messages: functions.Message[];
@@ -54,7 +52,7 @@ export async function agentTwilio(): Promise<agentTwilioOutput> {
 
     const call = await step<typeof functions>({}).livekitCall({sipTrunkId, phoneNumber, roomId, agentName, agentId, runId});
 
-    return call
+    return call.sipCallId
   });
 
   onEvent(endEvent, async () => {
