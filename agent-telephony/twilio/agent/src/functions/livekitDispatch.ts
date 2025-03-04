@@ -15,9 +15,9 @@ export const livekitDispatch = async ({roomId}: {roomId: string}): Promise<Agent
 
     const dispatch = await client.createDispatch(roomName, agentName, {
       metadata: JSON.stringify({
-        agentName,
-        agentId,
-        runId
+        agent_name: agentName,
+        agent_id: agentId,
+        run_id: runId
       })
     });
     log.info('dispatch created', dispatch);

@@ -87,4 +87,4 @@ export default defineAgent({
 });
 
 // agentName is to manually dispatch the agent
-cli.runApp(new WorkerOptions({ agentName:'AgentStream', agent: fileURLToPath(import.meta.url) }));
+cli.runApp(new WorkerOptions({ agentName:'agentTwilio', agent: fileURLToPath(import.meta.url) }));

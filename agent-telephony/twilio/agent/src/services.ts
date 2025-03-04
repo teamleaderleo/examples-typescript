@@ -1,5 +1,6 @@
 import { llmChat } from "./functions";
 import { client } from "./client";
+import { livekitRoom, livekitDispatch, livekitCall, livekitOutboundTrunk } from "./functions";
 
 async function services() {
   const agentsPath = require.resolve("./agents");
@@ -7,7 +8,13 @@ async function services() {
     await Promise.all([
       client.startService({
         agentsPath: agentsPath,
-        functions: { llmChat },
+        functions: {
+          llmChat,
+          livekitRoom,
+          livekitDispatch,
+          livekitCall,
+          livekitOutboundTrunk
+        },
       }),
     ]);
 
