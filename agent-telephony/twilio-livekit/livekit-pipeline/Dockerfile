@@ -22,7 +22,6 @@ WORKDIR /app
 
 COPY --from=build /app/dist /app/dist
 COPY package.json ./
-COPY .env ./
 
 # Install all dependencies
 RUN npm install
