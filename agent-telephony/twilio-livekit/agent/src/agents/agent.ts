@@ -31,12 +31,15 @@ export async function agentTwilio(): Promise<agentTwilioOutput> {
     content: "You are a sales assistant making outbound calls to potential customers. Your answers are used in a text to speech, be concise and natural."
   }];
   let roomId: string;
-  
+  let recordingApproved= true
 
   onEvent(messagesEvent, async ({ messages, stream = true }: { messages: functions.Message[], stream?: boolean }) => {
     const result = await step<typeof functions>({}).llmChat({
       messages,
     });
+
+    log.info("result", { result });
+    
     messages.push(result);
     return messages;
   });
