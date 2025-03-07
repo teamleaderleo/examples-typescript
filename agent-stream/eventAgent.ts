@@ -9,18 +9,8 @@ async function eventAgent(input: EventInput) {
   try {
     await client.sendAgentEvent({
       event: {
-        name: "messages",
-        input: { messages: [{ role: "user", content: "Tell me a joke" }] },
-      },
-      agent: {
-        agentId: input.agentId,
-        runId: input.runId,
-      },
-    });
-
-    await client.sendAgentEvent({
-      event: {
-        name: "end",
+        name: "call",
+        input: { phoneNumber: "+XXXXXXX" },
       },
       agent: {
         agentId: input.agentId,
