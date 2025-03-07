@@ -4,7 +4,8 @@ import {
   condition,
   log,
   step,
-  agentInfo
+  agentInfo,
+  AgentError
 } from "@restackio/ai/agent";
 import * as functions from "../functions";
 
@@ -18,11 +19,12 @@ export type CallEvent = {
 
 export const messagesEvent = defineEvent<functions.Message[]>("messages");
 export const endEvent = defineEvent("end");
-export const callEvent = defineEvent<string>("call");
+export const callEvent = defineEvent<{ phoneNumber: string; sipCallId: string }>("call");
 
 type agentTwilioOutput = {
   messages: functions.Message[];
 };
+
 
 export async function agentTwilio(): Promise<agentTwilioOutput> {
   let endReceived = false;
@@ -31,9 +33,9 @@ export async function agentTwilio(): Promise<agentTwilioOutput> {
     content: "You are a sales assistant making outbound calls to potential customers. Your answers are used in a text to speech, be concise and natural."
   }];
   let roomId: string;
-  let recordingApproved= true
 
   onEvent(messagesEvent, async ({ messages, stream = true }: { messages: functions.Message[], stream?: boolean }) => {
+    try {
     const result = await step<typeof functions>({}).llmChat({
       messages,
     });
@@ -42,20 +44,32 @@ export async function agentTwilio(): Promise<agentTwilioOutput> {
     
     messages.push(result);
     return messages;
+    } catch (error) {
+      log.error("error", { error });
+      throw AgentError.nonRetryable("Error messagesEvent:", null, {error});
+    }
   });
 
   onEvent(callEvent, async ({ phoneNumber }: CallEvent) => {
-    const agentName = agentInfo().workflowType
-    const agentId = agentInfo().workflowId
-    const runId = agentInfo().runId
-
-    const trunk = await step<typeof functions>({}).livekitOutboundTrunk();
-
-    const sipTrunkId = trunk.sipTrunkId
-
-    const call = await step<typeof functions>({}).livekitCall({sipTrunkId, phoneNumber, roomId, agentName, agentId, runId});
-
-    return call.sipCallId
+    try {
+      const agentName = agentInfo().workflowType
+      const agentId = agentInfo().workflowId
+      const runId = agentInfo().runId
+  
+      const trunk = await step<typeof functions>({}).livekitOutboundTrunk();
+  
+      const sipTrunkId = trunk.sipTrunkId
+  
+      const call = await step<typeof functions>({}).livekitCall({sipTrunkId, phoneNumber, roomId, agentName, agentId, runId});
+  
+      return {
+        phoneNumber,
+        sipCallId: call.sipCallId
+      }
+    } catch (error) {
+      log.error("error", { error });
+      throw AgentError.nonRetryable("Error callEvent: ", null, {error});
+    }   
   });
 
   onEvent(endEvent, async () => {
