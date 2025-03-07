@@ -34,75 +34,40 @@ In all subfolders, duplicate the `env.example` file and rename it to `.env`.
 Obtain a Restack API Key to interact with the 'gpt-4o-mini' model at no cost from [Restack Cloud](https://console.restack.io/starter)
 
 
-## Start Restack Agent with Twilio
+## Install dependencies and start services
 
-### Start python shell
-
-If using uv:
+In /agent, open a terminal and run
 
 ```bash
-uv venv && source .venv/bin/activate
+npm install
+npm run dev
 ```
 
-If using pip:
+or with pnpm
 
 ```bash
-python -m venv .venv && source .venv/bin/activate
+pnpm install
+pnpm run dev
 ```
 
-### Install dependencies
+This will start a Node.js app with Restack Services.
+Your code will be running and syncing with Restack to execute agents.
 
-If using uv:
+In /livekit-pipeline, open a terminal and run
 
 ```bash
-uv sync
-uv run dev
+npm install
+npm run dev
 ```
 
-If using pip:
+or with pnpm
 
 ```bash
-pip install -e .
-python -c "from src.services import watch_services; watch_services()"
+pnpm install
+pnpm run dev
 ```
 
-## Start Livekit voice pipeline
-
-### Start python shell
-
-If using uv:
-
-```bash
-uv venv && source .venv/bin/activate
-```
-
-If using pip:
-
-```bash
-python -m venv .venv && source .venv/bin/activate
-```
-
-### Install dependencies
-
-If using uv:
-
-```bash
-uv sync
-uv run python src/pipeline.py dev
-```
-
-If using pip:
-
-```bash
-pip install -e .
-python src/pipeline.py dev
-```
-
-## Configure Your Environment Variables
-
-Duplicate the `env.example` file and rename it to `.env`.
-
-Obtain a Restack API Key to interact with the 'gpt-4o-mini' model at no cost from [Restack Cloud](https://console.restack.io/starter)
+This will start a Node.js app with Livekit Pipeline.
 
 ## Create a new Agent
 
@@ -134,7 +99,7 @@ with the payload:
 {
   "eventName": "call",
   "eventInput": {
-    "phone_number": "+XXXXXXX"
+    "phoneNumber": "+XXXXXXX"
   }
 }
 ```
@@ -155,19 +120,13 @@ to end the conversation with the agent.
 
 You can send event to the agent workflows with any client connected to Restack, for example:
 
-Modify agent_id and run_id in event_agent.py and then run:
-
-If using uv:
+Modify agentId and runId in eventAgent.ts and then run:
 
 ```bash
-uv run event
+pnpm event-agent
 ```
 
-If using pip:
-
-```bash
-python -c "from src.event_agent import run_event_agent; run_event_agent()"
-```
+It will also trigger an outbound call to the phone number specified in the eventInput.
 
 ![Trigger outbound call](./agent_call.png)
 
