@@ -8,7 +8,7 @@ import { FunctionFailure, log, functionInfo } from "@restackio/ai/function";
 export const livekitOutboundTrunk = async (): Promise<SIPOutboundTrunkInfo> => {
   try {
    const name = functionInfo().workflowExecution.runId
-   const address = process.env.LIVEKIT_SIP_ADDRESS
+   const address = process.env.TWILIO_TRUNK_TERMINATION_SIP_URL
    const numbers = [process.env.TWILIO_PHONE_NUMBER ?? ""]
    const authUsername = process.env.TWILIO_TRUNK_AUTH_USERNAME
    const authPassword = process.env.TWILIO_TRUNK_AUTH_PASSWORD

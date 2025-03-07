@@ -43,7 +43,7 @@ export default defineAgent({
     const agentId = metadata.agent_id
     const runId = metadata.run_id
 
-    const agentBackendHost = process.env.AGENT_BACKEND_HOST || 'http://host.docker.internal:9233';
+    const agentBackendHost = process.env.AGENT_BACKEND_HOST || 'http://localhost:9233';
 
     const agentUrl = `${agentBackendHost}/stream/agents/${agentName}/${agentId}/${runId}`;
 
