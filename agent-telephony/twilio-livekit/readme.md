@@ -9,7 +9,7 @@ For a complete documentation on how the agent works and how to setup the service
 ## Prerequisites
 
 - Docker (for running Restack)
-- Python 3.10 or higher
+- **Node 20+**
 - Twilio account (for outbound calls)
 - Livekit account (for WebRTC pipeline)
 - Deepgram account (for transcription)
