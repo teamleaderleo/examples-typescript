@@ -2,18 +2,17 @@ import { livekitDispatchClient } from '../utils/livekitDispatchClient';
 import { AgentDispatch } from '@livekit/protocol';
 import { FunctionFailure, log, functionInfo } from "@restackio/ai/function";
 
-export const livekitDispatch = async ({roomId}: {roomId: string}): Promise<AgentDispatch> => {
+export const livekitDispatch = async ({roomName}: {roomName: string}): Promise<AgentDispatch> => {
   try {
     
 
-   const roomName = roomId;
    const agentName = functionInfo().workflowType
    const agentId = functionInfo().workflowExecution.workflowId
    const runId = functionInfo().workflowExecution.runId
 
     const client = livekitDispatchClient({});
 
-    const dispatch = await client.createDispatch(roomName, agentName, {
+    const dispatch = await client.createDispatch(roomName, 'livekit_pipeline', {
       metadata: JSON.stringify({
         agent_name: agentName,
         agent_id: agentId,

@@ -2,14 +2,14 @@ import { EncodedFileType, GCPUpload, EgressInfo, EncodedFileOutput } from 'livek
 import { livekitEgressClient } from '../utils/livekitEgressClient';
 import { FunctionFailure, log } from "@restackio/ai/function";
 
-export const livekitRecording = async ({roomId}: {roomId: string}): Promise<EgressInfo> => {
+export const livekitRecording = async ({roomName}: {roomName: string}): Promise<EgressInfo> => {
   try {
     
     const client = livekitEgressClient({});
 
     const fileOutput = {
       fileType: EncodedFileType.MP4,
-      filepath: `${roomId}-audio.mp4`,
+      filepath: `${roomName}-audio.mp4`,
       output: {
         case: "gcp" as const,
         value: new GCPUpload({
@@ -19,7 +19,7 @@ export const livekitRecording = async ({roomId}: {roomId: string}): Promise<Egre
       }
     } as unknown as EncodedFileOutput;
 
-    const egressInfo = await client.startRoomCompositeEgress(roomId, { file: fileOutput }, {
+    const egressInfo = await client.startRoomCompositeEgress(roomName, { file: fileOutput }, {
       layout: 'grid',
       audioOnly: true,
     });

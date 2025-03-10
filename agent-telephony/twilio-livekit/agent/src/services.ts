@@ -1,14 +1,14 @@
-import { fetchDocsContent, llmTalk, llmLogic, livekitCreateRoom, livekitDeleteRoom, livekitSendData, livekitToken, livekitDispatch, livekitCall, livekitOutboundTrunk, livekitRecording } from "./functions";
+import { fetchDocsContent, llmTalk, llmLogic, livekitCreateRoom, livekitDeleteRoom, livekitSendData, livekitToken, livekitDispatch, livekitCall, livekitOutboundTrunk, livekitRecording, sendAgentEvent } from "./functions";
 import { client } from "./client";
 
 async function services() {
   const agentsPath = require.resolve("./agents");
+  const workflowsPath = require.resolve("./workflows");
   try {
     await Promise.all([
       client.startService({
         agentsPath: agentsPath,
         functions: {
-          fetchDocsContent,
           livekitCall,
           livekitCreateRoom,
           livekitDeleteRoom,
@@ -18,8 +18,14 @@ async function services() {
           livekitSendData,
           livekitToken,
           llmTalk,
+          fetchDocsContent,
           llmLogic,
+          sendAgentEvent,
         },
+      }),
+      client.startService({
+        workflowsPath: workflowsPath,
+        taskQueue: "logic-workflow",
       }),
     ]);
 

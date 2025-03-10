@@ -4,12 +4,12 @@ import { Message } from "../functions/llmTalk";
 
 interface LogicWorkflowInput {
   messages: Message[];
-  roomId: string;
+  roomName: string;
   context: string;
 }
 
 
-export async function logicWorkflow({ messages, roomId, context }: LogicWorkflowInput) {
+export async function logicWorkflow({ messages, roomName, context }: LogicWorkflowInput) {
 
   const agentId = workflowInfo().parent?.workflowId!
   const runId = workflowInfo().parent?.runId!
@@ -41,7 +41,7 @@ export async function logicWorkflow({ messages, roomId, context }: LogicWorkflow
     });
 
     await step<typeof functions>({}).livekitSendData({
-      roomName: roomId,
+      roomName,
       text: interruptResponse.content,
     });
   }
@@ -57,7 +57,7 @@ export async function logicWorkflow({ messages, roomId, context }: LogicWorkflow
     });
 
     await step<typeof functions>({}).livekitSendData({
-      roomName: roomId,
+      roomName,
       text: goodbyeResponse.content,
     });
 

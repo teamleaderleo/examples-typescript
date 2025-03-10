@@ -26,6 +26,10 @@ export type SayEvent = {
   text: string;
 };
 
+export type ContextEvent = {
+  context: string;
+};
+
 export type PipelineMetricsEvent = {
   metrics: any,
   latencies: string
@@ -36,9 +40,13 @@ export const endEvent = defineEvent("end");
 export const callEvent = defineEvent<{ phoneNumber: string; sipCallId: string }>("call");
 export const sayEvent = defineEvent<SayEvent>("say");
 export const pipelineMetricsEvent = defineEvent<PipelineMetricsEvent>("pipeline_metrics");
+export const contextEvent = defineEvent<ContextEvent>("context");
 
 type agentTwilioOutput = {
+  recordingUrl?: string;
+  livekitRoomId?: string;
   messages: functions.Message[];
+  context: string;
 };
 
 type agentTwilioInput = {
@@ -48,8 +56,9 @@ type agentTwilioInput = {
 export async function agentTwilio({ phoneNumber }: agentTwilioInput): Promise<agentTwilioOutput> {
   let endReceived = false;
   let messages: functions.Message[] = [];
-  let context: string = ""
-  let roomId: string;
+  let context: string = "";
+  let roomId: string = "";
+  let roomName: string = "";
   
 
   onEvent(messagesEvent, async ({ messages}: { messages: functions.Message[] }) => {
@@ -58,7 +67,8 @@ export async function agentTwilio({ phoneNumber }: agentTwilioInput): Promise<ag
     await childStart({
       child: logicWorkflow,
       childId:  `${uuid()}-logic`,
-      input: {messages, roomId, context }
+      input: {messages, roomName, context },
+      taskQueue: "logic-workflow",
     })
 
     const fastResponse = await step<typeof functions>({}).llmTalk({
@@ -99,14 +109,20 @@ export async function agentTwilio({ phoneNumber }: agentTwilioInput): Promise<ag
     }   
   });
 
+  onEvent(contextEvent, async ({ context }: { context: string }) => {
+    log.info("contextEvent", { context });
+    context = context;
+    return { context };
+  });
+
   onEvent(sayEvent, async ({ text }: { text: string }) => {
     log.info("sayEvent", { text });
-    await step<typeof functions>({}).livekitSendData({roomId, text});
+    await step<typeof functions>({}).livekitSendData({roomName, text});
     return { text };
   });
 
   onEvent(endEvent, async () => {
-    await step<typeof functions>({}).livekitSendData({roomId, text: "Thank you for calling restack. Goodbye!"});
+    await step<typeof functions>({}).livekitSendData({roomName, text: "Thank you for calling restack. Goodbye!"});
     await sleep(8000);
     await step<typeof functions>({}).livekitDeleteRoom();
     endReceived = true;
@@ -120,10 +136,13 @@ export async function agentTwilio({ phoneNumber }: agentTwilioInput): Promise<ag
   const room = await step<typeof functions>({}).livekitCreateRoom();
 
   roomId = room.sid;
+  roomName = room.name;
 
-  const recording =await step<typeof functions>({}).livekitRecording({roomId});
+  await step<typeof functions>({}).livekitToken({roomName});
 
-  await step<typeof functions>({}).livekitDispatch({roomId});
+  const recording =await step<typeof functions>({}).livekitRecording({roomName});
+
+  await step<typeof functions>({}).livekitDispatch({roomName});
 
   if (phoneNumber) {
       const agentName = agentInfo().workflowType
