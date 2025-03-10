@@ -1,6 +1,5 @@
-import { llmChat } from "./functions";
+import { fetchDocsContent, llmTalk, llmLogic, livekitCreateRoom, livekitDeleteRoom, livekitSendData, livekitToken, livekitDispatch, livekitCall, livekitOutboundTrunk, livekitRecording } from "./functions";
 import { client } from "./client";
-import { livekitRoom, livekitDispatch, livekitCall, livekitOutboundTrunk } from "./functions";
 
 async function services() {
   const agentsPath = require.resolve("./agents");
@@ -9,11 +8,17 @@ async function services() {
       client.startService({
         agentsPath: agentsPath,
         functions: {
-          llmChat,
-          livekitRoom,
-          livekitDispatch,
+          fetchDocsContent,
           livekitCall,
-          livekitOutboundTrunk
+          livekitCreateRoom,
+          livekitDeleteRoom,
+          livekitDispatch,
+          livekitOutboundTrunk,
+          livekitRecording,
+          livekitSendData,
+          livekitToken,
+          llmTalk,
+          llmLogic,
         },
       }),
     ]);
