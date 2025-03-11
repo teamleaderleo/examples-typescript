@@ -4,19 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start.watch": "nodemon src/pipeline.ts dev",
-    "dev": "pnpm start.watch",
+    "dev": "tsx watch src/worker dev",
     "build": "tsc",
+    "start": "node dist/worker.js start",
     "lint": "eslint -f unix \"**/*.ts\""
   },
-  "packageManager": "pnpm@9.15.5",
-  "nodemonConfig": {
-    "exec": "node --loader ts-node/esm",
-    "ext": "ts",
-    "watch": [
-      "src"
-    ]
-  },
+  "packageManager": "pnpm@10.6.1",
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.20.0",
@@ -27,8 +20,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.3",
-    "nodemon": "^3.1.9",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.19.3",
     "typescript": "^5.7.3"
   },
   "dependencies": {
