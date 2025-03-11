@@ -140,7 +140,7 @@ export async function agentTwilio({ phoneNumber }: agentTwilioInput): Promise<ag
 
   await step<typeof functions>({}).livekitToken({roomName});
 
-  const recording =await step<typeof functions>({}).livekitRecording({roomName});
+  const {recordingUrl} = await step<typeof functions>({}).livekitRecording({roomName});
 
   await step<typeof functions>({}).livekitDispatch({roomName});
 
@@ -158,9 +158,7 @@ export async function agentTwilio({ phoneNumber }: agentTwilioInput): Promise<ag
   
   // We use the `condition` function to wait for the event goodbyeReceived to return `True`.
   await condition(() => endReceived);
-
-  const recordingUrl = `https://storage.googleapis.com/${recording.room_composite.file_outputs[0].gcp.bucket}/${recording.room_composite.file_outputs[0].filepath}`
-
+  
   log.info("end condition met");
   return {
     recordingUrl,

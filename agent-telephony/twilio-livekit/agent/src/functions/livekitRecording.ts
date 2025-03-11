@@ -2,7 +2,7 @@ import { EncodedFileType, GCPUpload, EgressInfo, EncodedFileOutput } from 'livek
 import { livekitEgressClient } from '../utils/livekitEgressClient';
 import { FunctionFailure, log } from "@restackio/ai/function";
 
-export const livekitRecording = async ({roomName}: {roomName: string}): Promise<EgressInfo> => {
+export const livekitRecording = async ({roomName}: {roomName: string}): Promise<{recordingUrl: string, egressInfo: EgressInfo}> => {
   try {
     
     const client = livekitEgressClient({});
@@ -25,7 +25,14 @@ export const livekitRecording = async ({roomName}: {roomName: string}): Promise<
     });
 
     log.info('livekitRecording started', egressInfo);
-    return egressInfo
+
+    const composite = egressInfo as any;
+    const recordingUrl = `https://storage.googleapis.com/${composite.roomComposite.fileOutputs[0].gcp.bucket}/${composite.roomComposite.fileOutputs[0].filepath}`;
+
+    return {
+      recordingUrl,
+      egressInfo
+    }
   } catch (error) {
     throw FunctionFailure.nonRetryable(`Error livekitRecording: ${error}`);
   }
