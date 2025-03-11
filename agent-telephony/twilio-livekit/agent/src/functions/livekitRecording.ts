@@ -27,7 +27,17 @@ export const livekitRecording = async ({roomName}: {roomName: string}): Promise<
     log.info('livekitRecording started', egressInfo);
 
     const composite = egressInfo as any;
-    const recordingUrl = `https://storage.googleapis.com/${composite.roomComposite.fileOutputs[0].gcp.bucket}/${composite.roomComposite.fileOutputs[0].filepath}`;
+
+    let recordingUrl = "";
+    if (composite.roomComposite && composite.roomComposite.fileOutputs && composite.roomComposite.fileOutputs.length > 0) {
+      log.info('livekitRecording found roomComposite', composite.roomComposite);
+      recordingUrl = `https://storage.googleapis.com/${composite.roomComposite.fileOutputs[0].gcp.bucket}/${composite.roomComposite.fileOutputs[0].filepath}`;
+    } else if (composite.fileResults && composite.fileResults.length > 0) {
+      log.info('livekitRecording falling back to fileResults', composite.fileResults);
+      recordingUrl = `https://storage.googleapis.com/livekit-local-recordings/${composite.fileResults[0].filename}`;
+    } else {
+      throw new Error("Recording URL could not be determined from egress information.");
+    }
 
     return {
       recordingUrl,
