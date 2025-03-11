@@ -1,5 +1,5 @@
 import {
-  pipeline
+  pipeline,
 } from '@livekit/agents';
 import * as deepgram from '@livekit/agents-plugin-deepgram';
 import * as elevenlabs from '@livekit/agents-plugin-elevenlabs';
@@ -9,12 +9,11 @@ import { llm } from '@livekit/agents';
 import {
   type JobContext,
 } from '@livekit/agents';
-export function livekitPipeline(ctx: JobContext, agentId: string, agentUrl: string): any {
+export function livekitPipeline(ctx: JobContext, agentId: string, agentUrl: string): pipeline.VoicePipelineAgent {
   try {
-
     const vad = ctx.proc.userData.vad as silero.VAD;
-    console.log('agentId', agentId);
-    console.log('agentUrl', agentUrl);
+
+    console.log("Creating pipeline for agent:", agentId, agentUrl)
     const livekitPipeline = new pipeline.VoicePipelineAgent(
       vad,
       new deepgram.STT(),
@@ -35,7 +34,8 @@ export function livekitPipeline(ctx: JobContext, agentId: string, agentUrl: stri
         }
       }
     );
-    console.log('livekitPipeline', livekitPipeline);
+
+
     return livekitPipeline;
   } catch (error) {
     console.error('Error creating pipeline agent:', error);
