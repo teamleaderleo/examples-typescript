@@ -19,6 +19,14 @@ export const livekitOutboundTrunk = async (): Promise<SIPOutboundTrunkInfo> => {
 
     const client = livekitSipClient({});
 
+    const existing_trunks = await client.listSipOutboundTrunk()
+    const existing_trunk = existing_trunks.find(trunk => trunk.name === name)
+
+    if (existing_trunk) {
+      log.info('livekitOutboundTrunk already exists', existing_trunk);
+      return existing_trunk
+    }
+
     const trunkInfo = await client.createSipOutboundTrunk(name, address, numbers, {
       authUsername,
       authPassword,
