@@ -1,6 +1,6 @@
-# Restack Agent with Tool Calling
+# Restack Agent with Retrievel-Augmented-Generation (RAG)
 
-A sample repository with an agent using tool calling.
+A sample repository with an agent using rag to retrieve sales information and answer user queries. 
 
 ## Requirements
 
@@ -36,7 +36,7 @@ You can run agents from the UI by clicking the "Run" button.
 
 You can run agents from the API by using the generated endpoint:
 
-`POST http://localhost:6233/api/agents/agentChatTool`
+`POST http://localhost:6233/api/agents/agentChatRAG`
 
 ### from any client
 
@@ -46,7 +46,7 @@ You can run agents with any client connected to Restack, for example:
 npm run schedule
 ```
 
-executes `scheduleAgent.ts` which will connect to Restack and execute the `agentChatTool` agent.
+executes `scheduleAgent.ts` which will connect to Restack and execute the `agentChatRAG` agent.
 
 ## Send events to the Agent
 
@@ -64,7 +64,7 @@ And see the events in the run:
 
 You can send events to the agent by using the following endpoint:
 
-`PUT http://localhost:6233/api/agents/agentChatTool/:agentId/:runId`
+`PUT http://localhost:6233/api/agents/agentChatRAG/:agentId/:runId`
 
 with the payload:
 
