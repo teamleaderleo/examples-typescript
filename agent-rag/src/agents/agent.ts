@@ -18,7 +18,7 @@ type AgentChatOutput = {
   messages: functions.Message[];
 };
 
-export async function agentChatTool(): Promise<AgentChatOutput> {
+export async function agentChatRAG(): Promise<AgentChatOutput> {
   let endReceived = false;
   
   const salesData = await step<typeof functions>({}).lookupSales();
