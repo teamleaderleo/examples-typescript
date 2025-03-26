@@ -29,3 +29,9 @@ pnpm run dev
 
 Leveraging turborepo, this will start both frontend and backend.
 Your code will be running and syncing with Restack to execute agents.
+
+## Run agents
+
+### from frontend
+
+![Run agents from frontend](./agent-reactflow.png)
