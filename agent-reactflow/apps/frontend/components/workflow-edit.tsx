@@ -5,7 +5,6 @@ import { X } from "lucide-react"
 import { Button } from "./ui/button"
 import { getWorkflowResult, runWorkflow } from "../app/actions/workflow"
 import { ReactFlowInstance, Node } from "@xyflow/react"
-import z from "zod";
 
 interface WorkflowEditPanelProps {
   onClose: () => void

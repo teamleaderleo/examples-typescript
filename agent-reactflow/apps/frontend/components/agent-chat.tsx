@@ -128,7 +128,21 @@ function ChatMessages({ agentId, runId, currentFlow, workflowData, setNodes, set
         </div>
       </ScrollArea>
 
-      <div className="sticky bottom-0 border-t p-4">
+      <div className="sticky bottom-0 border-t p-4 space-y-4">
+        <div className="flex items-end gap-2">
+          <Button onClick={() => {
+            append({ content: "create an agent to verify user's identity. first step id verification, if success end the flow, if person under 35 second step manual verification", role: 'user' })
+            setInput("")
+          }} className="text-xs w-full bg-muted text-muted-ackground">
+            <Sparkles className="h-2 w-2" /> Verify young users
+          </Button>
+          <Button onClick={() => {
+            append({ content: "create an agent to verify user's identity. first step id verification, if user is german end the flow, if person from switzerland second step manual verification", role: 'user' })
+            setInput("")
+          }} className="text-xs w-full bg-muted text-muted-background">
+            <Sparkles className="h-2 w-2" /> Verify german users
+          </Button>
+        </div>
         <div className="flex items-end gap-2">
           <Textarea
             placeholder="Ask the assistant..."
