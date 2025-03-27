@@ -39,7 +39,7 @@ export const llmResponse = async ({
 
     const completionResponse = completion.choices[0].message.parsed;
 
-    return completionResponse;
+    return completionResponse ?? [];
   } catch (error) {
     throw FunctionFailure.nonRetryable(`Error LLM response: ${error}`);
   }

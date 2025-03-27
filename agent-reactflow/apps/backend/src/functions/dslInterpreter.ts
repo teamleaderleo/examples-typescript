@@ -1,5 +1,4 @@
 import { ReactFlowJsonObject } from "reactflow";
-import z from "zod";
 
 export function parseReactFlowJson(reactflowJson: ReactFlowJsonObject) {
   return {
