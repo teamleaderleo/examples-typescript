@@ -12,7 +12,6 @@ import { ReactFlow,
   type Connection,
   type Edge,
   NodeTypes,
-  Panel,
 } from "@xyflow/react"
 import "@xyflow/react/dist/style.css"
 import { Button } from "./ui/button"

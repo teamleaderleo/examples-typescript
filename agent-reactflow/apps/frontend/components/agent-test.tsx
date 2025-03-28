@@ -5,6 +5,7 @@ import { X, CheckCircle, AlertCircle, Clock } from "lucide-react"
 import { Button } from "./ui/button"
 import { runAgent, sendAgentEvent, getAgentResult } from "../app/actions/agent"
 import { ReactFlowInstance, Node } from "@xyflow/react"
+import Link from "next/link"
 
 interface AgentTestPanelProps {
   onClose: () => void
@@ -215,14 +216,13 @@ export default function AgentTestPanel({ onClose, workflowData, reactFlowInstanc
             {isRunning ? "Running..." : "Run agent"}
           </Button>
 
-          {/* {runId && (
-            <textarea
-              readOnly={true}
-              rows={5}
-              className="w-full rounded-md border bg-background p-2 font-mono text-xs opacity-50"
-              value={JSON.stringify({agentId, runId}, null, 2)}
-            />
-          )} */}
+          {runId && <div className="p-4 text-xs bg-muted-foreground/10 rounded-md overflow-hidden space-y-2">
+            <div className="flex items-center justify-between gap-2">
+              <p className="text-xs uppercase text-muted-foreground">Dev debug info</p>
+              <Link href={`http://localhost:5233/runs/${agentId}/${runId}?scheduledEventId=1`} target="_blank" className="text-xs underline text-muted-foreground hover:text-foreground">Open on Restack</Link>
+            </div>
+            <pre>{JSON.stringify({agentId, runId}, null, 2)}</pre>
+          </div>}
 
           <div>
             <label className="mb-2 block text-sm font-medium">Event input</label>

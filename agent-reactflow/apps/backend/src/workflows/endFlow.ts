@@ -10,16 +10,24 @@ export type EndFlowInput = {
 
 export type EndFlowOutput = {
   response: "success" | "failure";
-  rawResponse: {};
+  rawResponse: any;
 };
 
 export async function endFlow(input: EndFlowInput): Promise<EndFlowOutput> {
 
+
+  const agentId = workflowInfo().parent?.workflowId;
+  const runId = workflowInfo().parent?.runId;
+
+  if (!agentId || !runId) {
+    throw new Error("Workflow ID or run ID is not available");
+  }
+
   await step<typeof functions>({}).sendAgentEvent({
     eventName: 'end',
     eventInput: {},
-    agentId: workflowInfo().parent?.workflowId!,
-    runId: workflowInfo().parent?.runId!,
+    agentId,
+    runId,
   });
 
   if (input.eventData.response === "success") {

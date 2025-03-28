@@ -10,7 +10,8 @@ import { ScrollArea } from "./ui/scroll-area"
 import { useChat } from '@ai-sdk/react'
 import { Node, Edge, ReactFlowInstance } from "@xyflow/react"
 import { workflowData } from "../lib/workflowData"
-// import { runAgent } from "../app/actions/agent"
+import { runAgent } from "../app/actions/agent"
+import Link from "next/link"
 
 interface AgentChatProps {
   onClose: () => void
@@ -168,17 +169,17 @@ export default function AgentChat({ onClose, reactFlowInstance, setNodes, setEdg
   const [agentId, setAgentId] = useState<string>("");
   const [runId, setRunId] = useState<string>("");
 
-  // useEffect(() => {
-  //   const createAgentChat = async () => {
-  //     const { agentId, runId } = await runAgent({
-  //       agentName: "agentChat",
-  //       input: {  },
-  //     })
-  //     setAgentId(agentId);  
-  //     setRunId(runId);
-  //   }
-  //   createAgentChat();
-  // }, []);
+  useEffect(() => {
+    const createAgentChat = async () => {
+      const { agentId, runId } = await runAgent({
+        agentName: "agentChat",
+        input: {  },
+      })
+      setAgentId(agentId);  
+      setRunId(runId);
+    }
+    createAgentChat();
+  }, []);
 
 
   const currentFlow = reactFlowInstance?.toObject();
@@ -194,8 +195,13 @@ export default function AgentChat({ onClose, reactFlowInstance, setNodes, setEdg
           <X className="h-4 w-4" />
         </Button>
       </div>
-      {runId && <div className="m-4 p-4 text-xs bg-muted-foreground/10 rounded-md overflow-hidden">
+      {runId && <div className="m-4 p-4 text-xs bg-muted-foreground/10 rounded-md overflow-hidden space-y-2">
+        <div className="flex items-center justify-between gap-2">
+          <p className="text-xs uppercase text-muted-foreground">Dev debug info</p>
+          <Link href={`http://localhost:5233/runs/${agentId}/${runId}?scheduledEventId=1`} target="_blank" className="text-xs underline text-muted-foreground hover:text-foreground">Open on Restack</Link>
+        </div>
         <pre>{JSON.stringify({agentId, runId}, null, 2)}</pre>
+        
       </div>}
       <ChatMessages agentId={agentId} runId={runId} currentFlow={currentFlow} workflowData={workflowData} setNodes={setNodes} setEdges={setEdges} />
     </div>

@@ -1,7 +1,7 @@
 "use client"
 
 import { memo } from "react"
-import { BaseEdge, EdgeLabelRenderer, type EdgeProps, getBezierPath, getSmoothStepPath, getStraightPath } from "@xyflow/react"
+import { BaseEdge, EdgeLabelRenderer, type EdgeProps, getSmoothStepPath } from "@xyflow/react"
 
 const WorkflowEdge = memo(
   ({

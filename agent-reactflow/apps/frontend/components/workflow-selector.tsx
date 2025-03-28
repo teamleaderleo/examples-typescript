@@ -3,7 +3,7 @@
 import React from "react"
 
 import { useState } from "react"
-import { X, Search, Workflow } from "lucide-react"
+import { X, Search, Workflow, StepForward } from "lucide-react"
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
 import { ScrollArea } from "./ui/scroll-area"

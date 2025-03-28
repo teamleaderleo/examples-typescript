@@ -4,7 +4,6 @@ import {
   condition,
   log,
   step,
-  sleep,
 } from "@restackio/ai/agent";
 import * as functions from "../functions";
 
@@ -17,11 +16,12 @@ type AgentChatOutput = {
 
 export async function agentChat(): Promise<AgentChatOutput> {
   let endReceived = false;
-  let messages: functions.Message[] = [];
+  const messages: functions.Message[] = [];
 
-  onEvent(messagesEvent, async ({ messages, stream = true }: { messages: functions.Message[], stream?: boolean }) => {
+  onEvent(messagesEvent, async ({ messages, tools, stream = true }: { messages: functions.Message[], tools: any, stream?: boolean }) => {
     const result = await step<typeof functions>({}).llmChat({
       messages,
+      tools,
       stream
     });
     messages.push(result);
