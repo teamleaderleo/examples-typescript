@@ -18,7 +18,7 @@ export async function POST(req: Request) {
     messages,
     tools: {
       updateFlow: tool({
-        description: 'Update flow',
+        description: 'Create or update flow',
         parameters: z.object({
           flow: z.any()
         }),
