@@ -1,8 +1,6 @@
 import { FunctionFailure } from "@restackio/ai/function";
 import { ReactFlowJsonObject } from "reactflow";
 import { endFlow, idVerification, manualVerification } from "../workflows";
-import z from "zod";
-import { zodResponseFormat } from "openai/helpers/zod.mjs";
 
 export const mockFlow = async (): Promise<ReactFlowJsonObject> => {
   try {

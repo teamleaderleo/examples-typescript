@@ -26,6 +26,7 @@ import { nodes as initialNodes, edges as initialEdges } from "../lib/agent-init"
 import AgentTestPanel from "./agent-test"
 import { createNode, getLayoutedElements } from "./flow/autoLayout"
 import WorkflowEditPanel from "./workflow-edit"
+import { validateNodeIds, getWorkflowTypes } from "@restackio/react/hook"
 
 export default function WorkflowBuilder() {
   const reactFlowWrapper = useRef<HTMLDivElement>(null)
@@ -40,6 +41,7 @@ export default function WorkflowBuilder() {
   const [agentVersion, setAgentVersion] = useState("v1.2")
   const [isLayouting, setIsLayouting] = useState(false)
   const [viewMode, setViewMode] = useState<'flow' | 'json'>('flow')
+  const [workflowTypes, setWorkflowTypes] = useState<Record<string, string>>({})
 
   // Apply layout when nodes or edges change
   const applyLayout = useCallback(async () => {
@@ -79,6 +81,26 @@ export default function WorkflowBuilder() {
 
     return () => clearTimeout(timer)
   }, [nodes.length, edges.length, applyLayout])
+
+  useEffect(() => {
+    const fetchAndValidateWorkflowTypes = async () => {
+      try {
+        const types = await getWorkflowTypes()
+        setWorkflowTypes(types)
+        const validationError = validateNodeIds(nodes, types)
+        if (validationError) {
+          console.error(validationError)
+        }
+      } catch (error) {
+        console.error("Error fetching or validating workflow types:", error)
+      }
+    }
+
+    // Only fetch and validate if nodes have changed
+    if (nodes.length > 0) {
+      fetchAndValidateWorkflowTypes()
+    }
+  }, [nodes])
 
   const onConnect = useCallback((params: Connection | Edge) => setEdges((eds) => addEdge(params, eds)), [setEdges])
 
