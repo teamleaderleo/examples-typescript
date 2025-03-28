@@ -29,11 +29,91 @@ pnpm i
 pnpm run dev
 ```
 
-Leveraging turborepo, this will start both frontend and backend.
+Leveraging TurboRepo, this will start both frontend and backend.
 Your code will be running and syncing with Restack to execute agents.
 
 ## Run agents
 
-### from frontend
+### From frontend
 
 ![Run agents from frontend](./agent-reactflow.png)
+
+### from UI
+
+You can run agents from the UI by clicking the "Run" button.
+
+![Run agents from UI](./agent-post.png)
+
+### from API
+
+You can run agents from the API by using the generated endpoint:
+
+`POST http://localhost:6233/api/agents/agentFlow`
+
+### from any client
+
+You can run agents with any client connected to Restack, for example:
+
+```bash
+pnpm schedule-agent
+```
+
+executes `scheduleAgent.ts` which will connect to Restack and execute the `agentFlow` agent.
+
+## Send events to the Agent
+
+### from Backend Developer UI
+
+You can send events like or end from the UI.
+
+![Send events from UI](./agent-event.png)
+
+And see the events in the run:
+
+![See events in UI](./agent-run.png)
+
+### from API
+
+You can send events to the agent by using the following endpoint:
+
+`PUT http://localhost:6233/api/agents/agentFlow/:agentId/:runId`
+
+with the payload:
+
+```json
+{
+  "name": "idVerification",
+  "input": {
+    "type": "id",
+    "documentNumber": "1234567890"
+  }
+}
+```
+
+to send messages to the agent.
+
+or
+
+```json
+{
+  "eventName": "end"
+}
+```
+
+to end the conversation with the agent.
+
+### from any client
+
+You can send event to the agent with any client connected to Restack, for example:
+
+Modify agentId and runId in eventAgent.ts and then run:
+
+```bash
+pnpm event-agent
+```
+
+It will connect to Restack and send an events to the agent.
+
+## Deploy on Restack Cloud
+
+To deploy the application on Restack, you can create an account at [https://console.restack.io](https://console.restack.io)
