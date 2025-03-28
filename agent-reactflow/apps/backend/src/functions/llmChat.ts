@@ -19,7 +19,7 @@ export type OpenAIChatInput = {
 
 export const llmChat = async ({
   systemContent = "",
-  model = "gpt-4o-mini",
+  model = "gpt-4o",
   messages,
   stream = true,
   tools,
@@ -37,28 +37,6 @@ export const llmChat = async ({
           ...(messages ?? []),
         ],
         tools,
-        // tools: [
-        //   {
-        //     type: "function",
-        //     function: {
-        //       name: "reactflow",
-        //       description: "Update flow",
-        //       parameters: {
-        //         type: "object",
-        //         properties: {
-        //           flow: {
-        //             type: "object",
-        //             description: "The json object of the flow to update"
-        //           }
-        //         },
-        //         required: [
-        //           "flow"
-        //         ],
-        //         additionalProperties: false,
-        //         },
-        //     },
-        //   },
-        // ],
         model,
         stream,
       };
