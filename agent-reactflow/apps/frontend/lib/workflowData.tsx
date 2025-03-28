@@ -18,7 +18,7 @@ export const workflowData: Node[] = [
   },
   {
     id: "endFlow",
-    type: "default",
+    type: "workflow",
     position: { x: 0, y: 0 },
     data: {
       label: "End",

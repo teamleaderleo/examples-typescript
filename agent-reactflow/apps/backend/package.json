@@ -14,7 +14,7 @@
     "restack-up": "node restack_up.mjs"
   },
   "dependencies": {
-    "@restackio/ai": "^0.0.115",
+    "@restackio/ai": "^0.0.119",
     "@temporalio/workflow": "1.11.6",
     "dotenv": "^16.4.5",
     "node-fetch": "^3.3.2",

@@ -9,8 +9,11 @@ import {
   AgentError,
   agentInfo,
   sleep
+
 } from "@restackio/ai/agent";
+import { nextEvent, getFlow } from "@restackio/ai/flow";
 import { Workflow } from "@temporalio/workflow";
+import * as flowFunctions from "@restackio/ai/flow";
 import * as functions from "../functions";
 
 export type EndEvent = {
@@ -52,14 +55,14 @@ export async function agentFlow({flowJson}: AgentFlowInput): Promise<AgentFlowOu
       flowJson = await step<typeof functions>({}).mockFlow();
     }
 
-    const {flowMap} = await step<typeof functions>({}).dslInterpreter({
+    const {flowMap} = await step<typeof flowFunctions>({}).dslInterpreter({
       reactflowJson: flowJson,
     });
 
     onEvent(flowEvent, async ({ name, input }: FlowEvent) => {
       log.info(`Received event: ${name}`);
       log.info(`Received event data: ${input}`);
-      const flow = flowMap.find((flow) => flow.eventName === name);
+      const flow = getFlow({flowMap, name})
 
       if (!flow) {
         throw new AgentError(`No workflow found for event: ${name}`);
@@ -86,20 +89,15 @@ export async function agentFlow({flowJson}: AgentFlowInput): Promise<AgentFlowOu
         response: childOutput.response,
       });
 
-      // Evaluate the output against edge conditions
-      const nextEvent = flow.edgeConditions.find((condition) => {
-        // Access the correct property within childOutput
-        const outputCondition = childOutput.response.response;
-        return outputCondition === condition.condition;
-      });
+      const nextFlowEvent = nextEvent({flow, childOutput});
 
-      if (nextEvent) {
+      if (nextFlowEvent) {
 
         await sleep(1000);
         step<typeof functions>({}).sendAgentEvent({
           eventName: 'flowEvent',
           eventInput: {
-            name: nextEvent.targetNodeId,
+            name: nextFlowEvent.eventName,
             input: childOutput.response,
           },
           agentId: agentInfo().workflowId,
@@ -108,7 +106,7 @@ export async function agentFlow({flowJson}: AgentFlowInput): Promise<AgentFlowOu
       }
       return {
         ...childOutput,
-        nextEvent: nextEvent?.targetNodeId,
+        nextEvent: nextFlowEvent?.eventName,
       }
 
     });
@@ -118,7 +116,6 @@ export async function agentFlow({flowJson}: AgentFlowInput): Promise<AgentFlowOu
       endReceived = true;
     });
 
-    // We use the `condition` function to wait for the event goodbyeReceived to return `True`.
     await condition(() => endReceived);
 
     log.info("end condition met");
