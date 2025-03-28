@@ -7,11 +7,11 @@
     "start": "tsx src/services.ts",
     "start.watch": "nodemon src/services.ts",
     "dev": "open-cli http://localhost:5233 && tsx watch --include src src/services.ts",
+    "lint": "eslint src --fix --max-warnings 0 --cache",
     "build": "tsc --build",
     "clean": "rm -rf node_modules",
     "workflow": "tsx ./scheduleWorkflow.ts",
-    "event": "tsx ./eventAgent.ts",
-    "restack-up": "node restack_up.mjs"
+    "event": "tsx ./eventAgent.ts"
   },
   "dependencies": {
     "@restackio/ai": "^0.0.119",

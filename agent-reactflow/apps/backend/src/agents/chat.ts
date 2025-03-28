@@ -16,7 +16,7 @@ type AgentChatOutput = {
 
 export async function agentChat(): Promise<AgentChatOutput> {
   let endReceived = false;
-  let messages: functions.Message[] = [];
+  const messages: functions.Message[] = [];
 
   onEvent(messagesEvent, async ({ messages, tools, stream = true }: { messages: functions.Message[], tools: any, stream?: boolean }) => {
     const result = await step<typeof functions>({}).llmChat({

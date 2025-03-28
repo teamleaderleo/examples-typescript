@@ -44,7 +44,7 @@ export type AgentFlowOutput = {
 }
 export async function agentFlow({flowJson}: AgentFlowInput): Promise<AgentFlowOutput> {
   let endReceived = false;
-  let eventResults: AgentFlowOutput['results'] = []
+  const eventResults: AgentFlowOutput['results'] = []
 
   try {
 
