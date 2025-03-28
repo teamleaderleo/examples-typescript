@@ -1,4 +1,4 @@
-import { createOpenAI, openai } from '@ai-sdk/openai';
+import { createOpenAI } from '@ai-sdk/openai';
 import { streamText, tool } from 'ai';
 import { z } from 'zod';
 
@@ -8,42 +8,13 @@ export async function POST(req: Request) {
   const { messages, agentId, runId } = await req.json();
   try {
 
-  // TODO: use restack agent chat
-  // const openaiClient = createOpenAI({
-  //   apiKey: 'next-flow-frontend',
-  //   baseURL: `http://localhost:9233/stream/agents/agentChat/${agentId}/${runId}`,
-  // })
-
-  // const zodObject = z.object({
-  //   nodes: z.array(z.object({
-  //     id: z.string(),
-  //     type: z.string(),
-  //     position: z.object({
-  //       x: z.number(),
-  //       y: z.number(),
-  //     }),
-  //     data: z.object({
-  //       label: z.string(),
-  //       description: z.string(),
-  //       // icon: z.any(),
-  //       handles: z.array(z.object({
-  //         id: z.string(),
-  //         type: z.string(),
-  //         position: z.string(),
-  //       })),
-  //       status: z.string(),
-  //     }),
-  //   })),
-  //   edges: z.array(z.object({
-  //     id: z.string(),
-  //     source: z.string(),
-  //     target: z.string(),
-  //     sourceHandle: z.string(),
-  //   })),
-  // });
+  const openaiClient = createOpenAI({
+    apiKey: 'next-flow-frontend',
+    baseURL: `http://localhost:9233/stream/agents/agentChat/${agentId}/${runId}`,
+  })
 
   const result = streamText({
-    model: openai('gpt-4o'),
+    model: openaiClient('gpt-4o'),
     messages,
     tools: {
       updateFlow: tool({
@@ -52,7 +23,6 @@ export async function POST(req: Request) {
           flow: z.any()
         }),
         execute: async ({ flow }) => {
-          console.log("updated flow", flow);
           return {
             flow,
           };

@@ -10,7 +10,7 @@ import { ScrollArea } from "./ui/scroll-area"
 import { useChat } from '@ai-sdk/react'
 import { Node, Edge, ReactFlowInstance } from "@xyflow/react"
 import { workflowData } from "../lib/workflowData"
-// import { runAgent } from "../app/actions/agent"
+import { runAgent } from "../app/actions/agent"
 
 interface AgentChatProps {
   onClose: () => void
@@ -168,17 +168,17 @@ export default function AgentChat({ onClose, reactFlowInstance, setNodes, setEdg
   const [agentId, setAgentId] = useState<string>("");
   const [runId, setRunId] = useState<string>("");
 
-  // useEffect(() => {
-  //   const createAgentChat = async () => {
-  //     const { agentId, runId } = await runAgent({
-  //       agentName: "agentChat",
-  //       input: {  },
-  //     })
-  //     setAgentId(agentId);  
-  //     setRunId(runId);
-  //   }
-  //   createAgentChat();
-  // }, []);
+  useEffect(() => {
+    const createAgentChat = async () => {
+      const { agentId, runId } = await runAgent({
+        agentName: "agentChat",
+        input: {  },
+      })
+      setAgentId(agentId);  
+      setRunId(runId);
+    }
+    createAgentChat();
+  }, []);
 
 
   const currentFlow = reactFlowInstance?.toObject();

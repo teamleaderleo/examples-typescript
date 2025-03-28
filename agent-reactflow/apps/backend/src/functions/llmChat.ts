@@ -1,10 +1,8 @@
-import { FunctionFailure, log } from "@restackio/ai/function";
-import { ChatCompletionCreateParamsNonStreaming, ChatCompletionCreateParamsStreaming, ChatCompletionTool } from "openai/resources/chat/completions";
+import { FunctionFailure, log, streamToWebsocket } from "@restackio/ai/function";
+import { ChatCompletionCreateParamsNonStreaming, ChatCompletionCreateParamsStreaming } from "openai/resources/chat/completions";
 
 import { openaiClient } from "../utils/client";
 import { apiAddress } from "../client";
-import { streamToWebsocket } from "./stream";
-import z from "zod";
 
 export type Message = {
   role: "system" | "user" | "assistant";
@@ -16,6 +14,7 @@ export type OpenAIChatInput = {
   model?: string;
   messages: Message[];
   stream?: boolean;
+  tools?: any;
 };
 
 export const llmChat = async ({
@@ -23,6 +22,7 @@ export const llmChat = async ({
   model = "gpt-4o-mini",
   messages,
   stream = true,
+  tools,
 }: OpenAIChatInput): Promise<Message> => {
   try {
     const openai = openaiClient({});
@@ -36,28 +36,29 @@ export const llmChat = async ({
             : []),
           ...(messages ?? []),
         ],
-        tools: [
-          {
-            type: "function",
-            function: {
-              name: "reactflow",
-              description: "Update flow",
-              parameters: {
-                type: "object",
-                properties: {
-                  flow: {
-                    type: "object",
-                    description: "The json object of the flow to update"
-                  }
-                },
-                required: [
-                  "flow"
-                ],
-                additionalProperties: false,
-                },
-            },
-          },
-        ],
+        tools,
+        // tools: [
+        //   {
+        //     type: "function",
+        //     function: {
+        //       name: "reactflow",
+        //       description: "Update flow",
+        //       parameters: {
+        //         type: "object",
+        //         properties: {
+        //           flow: {
+        //             type: "object",
+        //             description: "The json object of the flow to update"
+        //           }
+        //         },
+        //         required: [
+        //           "flow"
+        //         ],
+        //         additionalProperties: false,
+        //         },
+        //     },
+        //   },
+        // ],
         model,
         stream,
       };

@@ -19,8 +19,8 @@ export type NodeData = {
   handles: Handle[];
 }
 
-const DefaultNode = memo(({ id, type, data, isConnectable, selected, zIndex, positionAbsoluteX, positionAbsoluteY, dragging, dragHandle }: NodeProps) => {
-  const { label, description, icon } = data as NodeData;
+const DefaultNode = memo(({ data, isConnectable, selected }: NodeProps) => {
+  const { label, icon } = data as NodeData;
 
   // Use the provided icon or a default icon
   const nodeIcon = typeof icon === 'string' && Icons[icon] ? React.createElement(Icons[icon], { className: "h-4 w-4" }) : <StepForward className="h-4 w-4" />;

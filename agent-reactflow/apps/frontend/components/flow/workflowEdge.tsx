@@ -43,7 +43,7 @@ export const workflowEdge = memo(function WorkflowEdge({
   targetPosition,
   targetX,
   targetY,
-  sourceHandle,
+  sourceHandleId
 }: EdgeProps<WorkflowEdge>) {
   const nodeData = useStore((state) => state.nodeLookup.get(source)?.data);
   const [edgePath, labelX, labelY] = getPath({
@@ -55,40 +55,19 @@ export const workflowEdge = memo(function WorkflowEdge({
     targetY,
     targetPosition,
   });
-
-  console.log("sourceHandle", sourceHandle);
-  console.log("sourceHandle", sourceHandle);
- 
-  // const label = useMemo(() => {
-  //   if (data.key && nodeData) {
-  //     const value = nodeData[data.key];
- 
-  //     switch (typeof value) {
-  //       case "string":
-  //       case "number":
-  //         return value;
- 
-  //       case "object":
-  //         return JSON.stringify(value);
- 
-  //       default:
-  //         return "";
-  //     }
-  //   }
-  // }, [data, nodeData]);
  
   const transform = `translate(${labelX}px,${labelY}px) translate(-50%, -50%)`;
  
   return (
     <>
       <BaseEdge id={id} path={edgePath} markerEnd={markerEnd} style={style} />
-      {sourceHandle && (
+      {sourceHandleId && (
         <EdgeLabelRenderer>
           <div
             className="absolute rounded border bg-background px-1 text-foreground"
             style={{ transform }}
           >
-            <pre className="text-xs">{sourceHandle}</pre>
+            <pre className="text-xs">{sourceHandleId}</pre>
           </div>
         </EdgeLabelRenderer>
       )}
