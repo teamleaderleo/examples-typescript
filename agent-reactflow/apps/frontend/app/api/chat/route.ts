@@ -8,9 +8,11 @@ export async function POST(req: Request) {
   const { messages, agentId, runId } = await req.json();
   try {
 
+  const restackEngineHostname = process.env.RESTACK_ENGINE_ADDRESS ? `https://${process.env.RESTACK_ENGINE_ADDRESS}` : 'http://localhost:9233';
+
   const openaiClient = createOpenAI({
     apiKey: 'next-flow-frontend',
-    baseURL: `http://localhost:9233/stream/agents/agentChat/${agentId}/${runId}`,
+    baseURL: `${restackEngineHostname}/stream/agents/agentChat/${agentId}/${runId}`,
   })
 
   const result = streamText({

@@ -39,5 +39,4 @@ export async function idVerification(input: DocCaptureWorkflowInput): Promise<Id
       response: llmResponse,
       rawResponse: verificationResult,
     }
-
 }
