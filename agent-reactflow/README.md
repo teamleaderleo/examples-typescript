@@ -2,7 +2,7 @@
 
 A sample repository to have low code editor with React Flow of Agents built with Restack.
 
-See the docs on [how to use Agent with React Flow](https://docs.restack.io/blueprints/agent-reactflow)
+See the full documentation on our [Agent with React Flow](https://docs.restack.io/blueprints/agent-reactflow) page.
 
 ### Apps
 
