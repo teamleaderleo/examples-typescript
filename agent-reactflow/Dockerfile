@@ -31,7 +31,8 @@ WORKDIR /app
 # Update the certificate store in this Debian-based stage.
 RUN apt-get update && \
     apt-get install -y ca-certificates && \
-    update-ca-certificates
+    update-ca-certificates  \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN npm install -g pnpm@10.6.1 && \
     npm install -g turbo@2.4.4
@@ -50,7 +51,7 @@ RUN pnpm build
 # ============
 # Final Runner stage
 # ============
-FROM node:20-alpine AS runner
+FROM node:20-bullseye-slim AS runner
 
 WORKDIR /app
 
@@ -59,9 +60,10 @@ COPY --from=installer /app .
 
 # Install only runtime packages. Here we install curl and ca-certificates,
 # then update the certificate store for secure TLS connections.
-RUN npm install -g pnpm@10.6.1 && \
-    apk add --no-cache curl ca-certificates && update-ca-certificates
-
+RUN npm install -g pnpm@10.6.1 \
+    && apt-get update \
+    && apt-get install -y ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 # Start the application using pnpm.
 CMD ["pnpm", "start"]
 
