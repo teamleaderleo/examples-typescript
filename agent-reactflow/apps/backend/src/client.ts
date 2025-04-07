@@ -11,6 +11,8 @@ export const connectionOptions = {
   apiAddress,
 };
 
+console.log('Debug Restack Client connectionOptions:', connectionOptions);
+
 export const client = new Restack(
   process.env.RESTACK_ENGINE_API_KEY ? connectionOptions : undefined
 );
