@@ -114,6 +114,36 @@ pnpm event-agent
 
 It will connect to Restack and send an events to the agent.
 
-## Deploy on Restack Cloud
+
+## Deploy on Cloud
+
+### Deploy frontend on Vercel
+
+Choose root directory as the project root.
+
+Root directory
+
+```
+agent-reactflow/apps/frontend
+```
+
+Build command
+```bash
+turbo run build --filter=@agent-reactflow/frontend
+```
+
+### Deploy backend on Restack Cloud
 
 To deploy the application on Restack, you can create an account at [https://console.restack.io](https://console.restack.io)
+
+Custom Dockerfile path
+
+```
+/agent-reactflow/Dockerfile
+```
+
+Application folder
+
+```
+/agent-reactflow
+```
