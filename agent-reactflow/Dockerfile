@@ -65,7 +65,7 @@ RUN npm install -g pnpm@10.6.1 \
     && apt-get install -y ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 # Start the application using pnpm.
-# CMD ["pnpm", "start"]
+CMD ["pnpm", "start"]
 
 # # Dummy shell for troubleshooting
-CMD ["sh"]
+# CMD ["sh"]
