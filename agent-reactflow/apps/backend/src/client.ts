@@ -3,7 +3,7 @@ import Restack from "@restackio/ai";
 import dotenv from 'dotenv';
 import path from 'path';
 
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
 
 export const apiAddress = process.env.RESTACK_ENGINE_API_ADDRESS!
 
