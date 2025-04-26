@@ -18,6 +18,7 @@ async function services() {
       }),
       client.startService({
         workflowsPath: workflowsPath,
+        taskQueue: "todo-workflows",
         functions: { getRandom, getResult },
       }),
     ]);

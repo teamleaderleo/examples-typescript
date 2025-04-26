@@ -67,6 +67,7 @@ export async function agentTodo(): Promise<agentTodoOutput> {
               child: executeTodoWorkflow,
               childId: workflowId,
               input: JSON.parse(toolCall.function.arguments),
+              taskQueue: "todo-workflows",
             });
 
             agentMessages.push({

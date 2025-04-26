@@ -17,13 +17,13 @@ export async function executeTodoWorkflow({
   todoTitle,
   todoId,
 }: Input): Promise<Output> {
-  const random = await step<typeof functions>({}).getRandom({
+  const random = await step<typeof functions>({taskQueue: "todo-workflows",}).getRandom({
     todoTitle,
   });
 
   await sleep(2000);
 
-  const result = await step<typeof functions>({}).getResult({
+  const result = await step<typeof functions>({taskQueue: "todo-workflows",}).getResult({
     todoTitle,
     todoId,
   });
