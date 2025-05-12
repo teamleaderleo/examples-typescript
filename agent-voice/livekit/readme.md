@@ -51,7 +51,7 @@ Your code will be running and syncing with Restack to execute agents.
 
 Duplicate the `env.example` file and rename it to `.env`.
 
-Obtain a Restack API Key to interact with the 'gpt-4o-mini' model at no cost from [Restack Cloud](https://console.restack.io/starter)
+Obtain a Restack API Key to interact with the 'gpt-4.1-mini' model at no cost from [Restack Cloud](https://console.restack.io/starter)
 
 
 ## Interact in realtime with the agent

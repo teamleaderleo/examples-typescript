@@ -8,7 +8,7 @@ export async function createAssistant({
   apiKey,
   name,
   instructions,
-  model = "gpt-4o-mini",
+  model = "gpt-4.1-mini",
   tools = [],
 }: {
   apiKey: string;

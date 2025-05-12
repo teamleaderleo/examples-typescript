@@ -27,7 +27,7 @@ export const llmResponse = async ({
 
     const chatParams: ChatCompletionCreateParamsNonStreaming = {
       messages: messages,
-      model: "gpt-4o-mini",
+      model: "gpt-4.1-mini",
       response_format: responseFormat,
     };
 

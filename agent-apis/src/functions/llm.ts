@@ -14,7 +14,7 @@ export type OpenAIChatInput = {
 export const llm = async ({
   userContent,
   systemContent = "",
-  model = "gpt-4o-mini",
+  model = "gpt-4.1-mini",
 }: OpenAIChatInput): Promise<string> => {
   try {
     const openai = new OpenAI({

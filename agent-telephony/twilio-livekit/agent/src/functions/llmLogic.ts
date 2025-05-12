@@ -47,7 +47,7 @@ export const llmLogic = async ({
 
       const completion = await openai.beta.chat.completions.parse({
         messages,
-        model: "gpt-4o",
+        model: "gpt-4.1-mini",
         response_format: zodResponseFormat(LlmLogicResponse, "logic"),
       });
 

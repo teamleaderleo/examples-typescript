@@ -14,7 +14,7 @@ import { SendWorkflowEvent } from "@restackio/ai/event";
 import { ChatModel } from "openai/resources/index";
 
 export async function openaiChatCompletionsStream({
-  model = "gpt-4o-mini",
+  model = "gpt-4.1-mini",
   userName,
   newMessage,
   assistantName,
