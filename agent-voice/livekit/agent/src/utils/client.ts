@@ -14,7 +14,6 @@ export const openaiClient = ({
 
   if (!openaiInstance) {
     openaiInstance = new OpenAI({
-      // baseURL: "https://ai.restack.io",
       apiKey,
     });
   }

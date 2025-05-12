@@ -18,8 +18,7 @@ export const llm = async ({
 }: OpenAIChatInput): Promise<string> => {
   try {
     const openai = new OpenAI({
-      baseURL: "https://ai.restack.io",
-      apiKey: process.env.RESTACK_API_KEY,
+      apiKey: process.env.OPENAI_API_KEY,
     });
 
     const chatParams: ChatCompletionCreateParamsNonStreaming = {

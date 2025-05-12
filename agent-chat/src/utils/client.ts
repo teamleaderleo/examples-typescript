@@ -4,7 +4,7 @@ import "dotenv/config";
 let openaiInstance: OpenAI | null = null;
 
 export const openaiClient = ({
-  apiKey = process.env.RESTACK_API_KEY,
+  apiKey = process.env.OPENAI_API_KEY,
 }: {
   apiKey?: string;
 }): OpenAI => {
@@ -14,7 +14,6 @@ export const openaiClient = ({
 
   if (!openaiInstance) {
     openaiInstance = new OpenAI({
-      baseURL: "https://ai.restack.io",
       apiKey,
     });
   }
