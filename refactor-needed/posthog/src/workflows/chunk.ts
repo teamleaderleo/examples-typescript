@@ -46,7 +46,7 @@ export async function chunkWorkflow({
   }).openaiChatCompletionsBase({
     systemContent:
       "You are a helpful assistant that summarizes posthog recordings. Here is the snapshot blob of it",
-    model: "gpt-4o-mini",
+    model: "gpt-4.1-mini",
     userContent: `
       Here is a chunk of the recording blob:
       ${chunk}

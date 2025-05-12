@@ -25,7 +25,7 @@ export type OpenAIChatInput = {
 export const openaiChatCompletionsBase = async ({
   userContent,
   systemContent = "",
-  model = "gpt-4o-mini",
+  model = "gpt-4.1-mini",
   jsonSchema,
   price,
   apiKey,

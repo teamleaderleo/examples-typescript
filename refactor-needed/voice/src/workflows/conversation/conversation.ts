@@ -35,7 +35,7 @@ export async function conversationWorkflow({
       taskQueue: "erp",
     }).erpGetTools();
 
-    const model: ChatModel = "gpt-4o-mini";
+    const model: ChatModel = "gpt-4.1-mini";
 
     const commonOpenaiOptions = {
       model,

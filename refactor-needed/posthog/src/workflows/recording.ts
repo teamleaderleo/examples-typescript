@@ -110,7 +110,7 @@ export async function recordingWorkflow({
   }).openaiChatCompletionsBase({
     systemContent:
       "You are a helpful assistant that summarizes posthog recordings.",
-    model: "gpt-4o-mini",
+    model: "gpt-4.1-mini",
     userContent: `
       Here are summaries of each chunk of the recording blob:
       ${summaries}

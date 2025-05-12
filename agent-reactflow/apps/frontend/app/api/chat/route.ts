@@ -16,7 +16,7 @@ export async function POST(req: Request) {
   })
 
   const result = streamText({
-    model: openaiClient('gpt-4o'),
+    model: openaiClient('gpt-4.1-mini'),
     messages,
     tools: {
       updateFlow: tool({

@@ -2,7 +2,7 @@
 
 We built this to autonomous AI to watch Posthog Session Recording and create a digest on Linear (optional)
 
-Its using OpenAI GPT-4o-mini to analyse recordings.
+Its using OpenAI GPT-4.1-mini to analyse recordings.
 And OpenAI O1-preview to reason and create a digest in Markdown.
 
 By default we retrieve all recodings from last 24 hours, so by scheduling the workflow to run every day we get a digest of all new recordings.

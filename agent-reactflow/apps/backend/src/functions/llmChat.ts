@@ -19,7 +19,7 @@ export type OpenAIChatInput = {
 
 export const llmChat = async ({
   systemContent = "",
-  model = "gpt-4o",
+  model = "gpt-4.1-mini",
   messages,
   stream = true,
   tools,
