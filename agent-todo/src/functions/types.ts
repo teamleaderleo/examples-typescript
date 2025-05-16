@@ -1,5 +1,19 @@
 import { z } from "zod";
 
+export const ResponseSchema = z.discriminatedUnion("type", [
+  z.object({
+    type: z.literal("text"),
+    content: z.string()
+  }),
+  z.object({
+    type: z.literal("function_call"),
+    function_name: z.string(),
+    function_arguments: z.record(z.any())
+  })
+]);
+
+export type StructuredResponse = z.infer<typeof ResponseSchema>;
+
 // Todo creation schemas and types
 export const CreateTodoSchema = z.object({
   todoTitle: z.string().min(1).describe("The title of the todo to create"),

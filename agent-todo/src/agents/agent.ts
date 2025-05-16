@@ -9,13 +9,12 @@ import {
 } from "@restackio/ai/agent";
 import * as functions from "../functions";
 import { executeTodoWorkflow } from "../workflows/executeTodo";
-import { CreateTodoSchema, ExecuteTodoSchema } from "../functions/toolTypes";
+import { CreateTodoSchema, ExecuteTodoSchema } from "../functions/types";
 
 export type EndEvent = {
   end: boolean;
 };
 
-// Define events
 export const messagesEvent = defineEvent<functions.Message[]>("messages");
 export const endEvent = defineEvent("end");
 export const createTodoEvent = defineEvent("createTodo");

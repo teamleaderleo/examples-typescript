@@ -7,9 +7,11 @@ import {
   ChatCompletionToolMessageParam,
 } from "openai/resources/chat/completions";
 import { z } from "zod";
+import zodToJsonSchema from "zod-to-json-schema";
 
 import { openaiClient } from "../utils/client";
-import { CreateTodoSchema, ExecuteTodoSchema } from "./toolTypes";
+import { CreateTodoSchema, ExecuteTodoSchema, ResponseSchema } from "./types";
+import { parseAndValidateResponse } from "./utils/responseUtils";
 
 export type Message =
   | ChatCompletionSystemMessageParam
@@ -17,29 +19,12 @@ export type Message =
   | ChatCompletionAssistantMessageParam
   | ChatCompletionToolMessageParam;
 
-// Define schema for structured response format
-export const ResponseSchema = z.discriminatedUnion("type", [
-  z.object({
-    type: z.literal("text"),
-    content: z.string()
-  }),
-  z.object({
-    type: z.literal("function_call"),
-    function_name: z.string(),
-    function_arguments: z.record(z.any())
-  })
-]);
-
-export type StructuredResponse = z.infer<typeof ResponseSchema>;
-
-// Input schema
 export const LLMChatInputSchema = z.object({
   systemContent: z.string().optional().default(""),
   model: z.string().optional().default("gpt-4.1-mini"),
   messages: z.array(z.any()),
 });
 
-// Output schema
 export const LLMChatOutputSchema = z.object({
   role: z.literal("assistant"),
   content: z.string().nullable(),
@@ -49,46 +34,6 @@ export const LLMChatOutputSchema = z.object({
 export type LLMChatInput = z.infer<typeof LLMChatInputSchema>;
 export type LLMChatOutput = z.infer<typeof LLMChatOutputSchema>;
 
-// Convert Zod schema to OpenAI function parameter schema
-function zodToJsonSchema(schema: z.ZodType): any {
-  if (schema instanceof z.ZodObject) {
-    const shape = schema._def.shape();
-    const properties: Record<string, any> = {};
-    const required: string[] = [];
-
-    Object.entries(shape).forEach(([key, value]) => {
-      const zodField = value as z.ZodType;
-      properties[key] = zodToJsonSchema(zodField);
-      
-      if (!zodField.isOptional()) {
-        required.push(key);
-      }
-    });
-
-    return {
-      type: "object",
-      properties,
-      ...(required.length > 0 ? { required } : {}),
-    };
-  } else if (schema instanceof z.ZodString) {
-    return { type: "string" };
-  } else if (schema instanceof z.ZodNumber) {
-    return { type: "number" };
-  } else if (schema instanceof z.ZodBoolean) {
-    return { type: "boolean" };
-  } else if (schema instanceof z.ZodArray) {
-    return {
-      type: "array",
-      items: zodToJsonSchema(schema._def.type),
-    };
-  } else if (schema instanceof z.ZodOptional) {
-    return zodToJsonSchema(schema._def.innerType);
-  } else {
-    return { type: "string" }; // Default fallback
-  }
-}
-
-// Define the available functions
 const availableFunctions = [
   {
     schema: CreateTodoSchema,
@@ -102,18 +47,7 @@ const availableFunctions = [
   }
 ];
 
-// Convert to OpenAI function format
-const functionsForOpenAI = availableFunctions.map(fn => ({
-  name: fn.name,
-  description: fn.description,
-  parameters: zodToJsonSchema(fn.schema),
-}));
-
-// Base system message
-const baseSystemMessage = `You are a helpful assistant that can create and execute todos.
-When a user asks to "do something" or "complete a task", you should:
-1. First create the todo using createTodo
-2. Then execute it using executeTodoWorkflow with the todoId from the previous step`;
+const baseSystemMessage = `You are a helpful assistant that can create and execute todos. When a user asks to "do something" or "complete a task", you should: 1. First create the todo using createTodo2. Then execute it using executeTodoWorkflow with the todoId from the previous step`;
 
 export const llmChat = async ({
   systemContent = "",
@@ -123,53 +57,43 @@ export const llmChat = async ({
   try {
     const openai = openaiClient({});
 
-    // Combine system messages
     const finalSystemContent = systemContent
       ? `${baseSystemMessage}\n\n${systemContent}`
       : baseSystemMessage;
 
-    // Chat parameters with tools
+    const functionSchemas = availableFunctions.map(fn => {
+      const schema = zodToJsonSchema(fn.schema);
+      return {
+        name: fn.name,
+        description: fn.description,
+        schema: JSON.stringify(schema, null, 2)
+      };
+    });
+
+    const functionDocsString = functionSchemas.map(fn => {
+      return `Function: ${fn.name}\nDescription: ${fn.description}\nParameters Schema: \n${fn.schema}`;
+    }).join('\n\n');
+
     const chatParams: ChatCompletionCreateParamsNonStreaming = {
-      messages: [{ role: "system", content: finalSystemContent }, ...messages],
+      messages: [
+        {
+          role: "system",
+          content: `${finalSystemContent}\n\nYou are a JSON-speaking assistant that responds in one of these formats:\nFor executing functions: {"type":"function_call","function_name":"<name>","function_arguments":{<args>}}\nFor text responses: {"type":"text","content":"<text>"}\n\nAvailable functions with their schemas:\n${functionDocsString}`
+        },
+        ...messages
+      ],
       model,
-      tools: functionsForOpenAI.map(fn => ({ type: "function", function: fn })),
-      tool_choice: "auto",
+      response_format: { type: "json_object" },
     };
 
     log.debug("OpenAI chat completion params", { chatParams });
 
     const completion = await openai.chat.completions.create(chatParams);
     const message = completion.choices[0].message;
-    
-    // Ensure we have a string content or default to empty string
+
     const messageContent = message.content || "";
-    
-    // Parse function call if available
-    let structuredData: StructuredResponse | undefined;
-    if (message.tool_calls && message.tool_calls.length > 0) {
-      const toolCall = message.tool_calls[0];
-      if (toolCall.type === "function") {
-        try {
-          const functionArguments = JSON.parse(toolCall.function.arguments);
-          structuredData = {
-            type: "function_call" as const,
-            function_name: toolCall.function.name,
-            function_arguments: functionArguments,
-          };
-          log.debug("Function call detected", { structuredData });
-        } catch (error) {
-          log.error("Failed to parse function arguments", { 
-            arguments: toolCall.function.arguments 
-          });
-        }
-      }
-    } else if (messageContent) {
-      // Handle regular text response
-      structuredData = {
-        type: "text" as const,
-        content: messageContent,
-      };
-    }
+
+    const structuredData = parseAndValidateResponse(messageContent);
 
     return {
       role: "assistant",

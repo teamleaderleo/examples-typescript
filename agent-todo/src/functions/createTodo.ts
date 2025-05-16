@@ -1,5 +1,5 @@
 import { log } from "@restackio/ai/function";
-import { CreateTodoInputType, CreateTodoOutput } from "./toolTypes";
+import { CreateTodoInputType, CreateTodoOutput } from "./types";
 
 export const createTodo = async ({ todoTitle }: CreateTodoInputType): Promise<CreateTodoOutput> => {
   const todo_id = `todo-${Math.floor(Math.random() * 10000)}`;
