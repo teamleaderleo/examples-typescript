@@ -7,13 +7,9 @@ import {
   childExecute,
   agentInfo,
 } from "@restackio/ai/agent";
-import { z } from "zod";
 import * as functions from "../functions";
-import { executeTodoWorkflow, ExecuteTodoSchema } from "../workflows/executeTodo";
-
-const CreateTodoSchema = z.object({
-  todoTitle: z.string().min(1),
-});
+import { executeTodoWorkflow } from "../workflows/executeTodo";
+import { CreateTodoSchema, ExecuteTodoSchema } from "../functions/toolTypes";
 
 export type EndEvent = {
   end: boolean;
@@ -54,7 +50,7 @@ export async function agentTodo(): Promise<agentTodoOutput> {
             agentId: agentInfo().workflowId,
             runId: agentInfo().runId,
             eventName: "createTodo",
-            eventInput: { function_arguments }
+            eventInput: function_arguments
           });
           break;
 
@@ -75,7 +71,7 @@ export async function agentTodo(): Promise<agentTodoOutput> {
 
   onEvent(createTodoEvent, async (data: any) => {
     try {
-      const parsedArgs = CreateTodoSchema.parse(data.function_arguments);
+      const parsedArgs = CreateTodoSchema.parse(data);
       const stepResult = await step<typeof functions>({}).createTodo(parsedArgs);
 
       await step<typeof functions>({}).sendEvent({

@@ -1,21 +1,9 @@
 import { log, sleep, step } from "@restackio/ai/workflow";
 import * as functions from "../functions";
-import { z } from "zod";
+import { ExecuteTodoSchema, ExecuteTodoOutput, ExecuteTodoOutputSchema } from "../functions/toolTypes";
 
-export const ExecuteTodoSchema = z.object({
-  todoTitle: z.string().min(1),
-  todoId: z.string().min(1),
-});
-
-export const ExecuteTodoOutputSchema = z.object({
-  todoId: z.string(),
-  todoTitle: z.string(),
-  details: z.string(),
-  status: z.string(),
-});
-
-export type Input = z.infer<typeof ExecuteTodoSchema>;
-export type Output = z.infer<typeof ExecuteTodoOutputSchema>;
+export type Input = ExecuteTodoOutput;
+export type Output = ExecuteTodoOutput;
 
 export async function executeTodoWorkflow({ todoTitle, todoId }: Input): Promise<Output> {
   try {
