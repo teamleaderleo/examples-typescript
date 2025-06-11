@@ -52,8 +52,8 @@ export default function AgentTestPanel({ onClose, workflowData, reactFlowInstanc
     try {
       const { agentId, runId } = await runAgent({
         agentName: "agentFlow",
-        input: { flowJson: workflowData },
-        // input: {}
+        // input: { flowJson: workflowData },
+        input: {}
       })
 
       setNodes((prevNodes: Node[]) =>
