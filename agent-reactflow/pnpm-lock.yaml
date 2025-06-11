@@ -24,8 +24,8 @@ importers:
         specifier: ^0.0.124
         version: 0.0.124(@swc/helpers@0.5.15)
       '@temporalio/workflow':
-        specifier: 1.11.6
-        version: 1.11.6
+        specifier: 1.11.8
+        version: 1.11.8
       dotenv:
         specifier: ^16.4.5
         version: 16.4.7
@@ -1158,17 +1158,11 @@ packages:
   '@temporalio/client@1.11.8':
     resolution: {integrity: sha512-UpiU+awykWYjQSSJH5NLY5Id/uDdiD9yz5oaardv1YF80rMN7U1Q6W9lgPEbg/b62qOv3Mia1+fE5hrav7ying==}
 
-  '@temporalio/common@1.11.6':
-    resolution: {integrity: sha512-7yjHpJeDbVcqa2rk6spHTVhNob/oCXXrInZPSov9i2Pa0VElquiWpx8d9pJ8sATuxpBpvozNmTEnGWgNEI+G6w==}
-
   '@temporalio/common@1.11.8':
     resolution: {integrity: sha512-hB+TSB/P2Vm8chYyZGcKALdywGvcBSqzSUzFG1lOm/JPDh2d4uK6lvE2S8OneEndlJSdzE++d2Mt5B+iKe2ytA==}
 
   '@temporalio/core-bridge@1.11.8':
     resolution: {integrity: sha512-s1EkihwUHGIOylF31UFnsnntZmVqcKEgVTu8UvAf/J/br4jhs+nEO/mBFexqrzSWnraJhpq9UnzTNAklNHFVKg==}
-
-  '@temporalio/proto@1.11.6':
-    resolution: {integrity: sha512-N9qnyNabiY2LySft4fBrMCBNRoxbmADMdpP9+CX8RSVCHVLlf32FzkTUTFwZX1dOU+g2JsYrUzHFEBOPBpD8dQ==}
 
   '@temporalio/proto@1.11.8':
     resolution: {integrity: sha512-L6QsIAq3PrnQpARAcqLCe4xMpbkpBEvA/9FQGddpzCESvViUOUAIHPwckL1DokYPedEAt19C+uuBGVBMCNx7vw==}
@@ -1176,9 +1170,6 @@ packages:
   '@temporalio/worker@1.11.8':
     resolution: {integrity: sha512-KNUEw8khhFoVLhOy93j9EkA6KfKtOVn7N7+c4kn9AM7QXkcxe73+1AUwNKgFYKZph4i6I26NBxs7MPrgh3GKxQ==}
     engines: {node: '>= 16.0.0'}
-
-  '@temporalio/workflow@1.11.6':
-    resolution: {integrity: sha512-WxPxjTJccP0tD5FwAQjdXZfqx6s5eYaBGgN9+VkMAEeW1KRfYs6dkaUj4qzzu5sN95zr71Euohk/sJG2jd3efQ==}
 
   '@temporalio/workflow@1.11.8':
     resolution: {integrity: sha512-gJy5Rr4WQCejdWskluHY/C20om0Yvx7/cLl9KHCweTyDLRfTu2VtMJRS8LPFQkKzoHBbLaqzPo2XdHh/u4JQoA==}
@@ -4296,13 +4287,6 @@ snapshots:
       long: 5.3.1
       uuid: 9.0.1
 
-  '@temporalio/common@1.11.6':
-    dependencies:
-      '@temporalio/proto': 1.11.6
-      long: 5.3.1
-      ms: 3.0.0-canary.1
-      proto3-json-serializer: 2.0.2
-
   '@temporalio/common@1.11.8':
     dependencies:
       '@temporalio/proto': 1.11.8
@@ -4316,11 +4300,6 @@ snapshots:
       arg: 5.0.2
       cargo-cp-artifact: 0.1.9
       which: 4.0.0
-
-  '@temporalio/proto@1.11.6':
-    dependencies:
-      long: 5.3.1
-      protobufjs: 7.4.0
 
   '@temporalio/proto@1.11.8':
     dependencies:
@@ -4351,11 +4330,6 @@ snapshots:
       - esbuild
       - uglify-js
       - webpack-cli
-
-  '@temporalio/workflow@1.11.6':
-    dependencies:
-      '@temporalio/common': 1.11.6
-      '@temporalio/proto': 1.11.6
 
   '@temporalio/workflow@1.11.8':
     dependencies:
